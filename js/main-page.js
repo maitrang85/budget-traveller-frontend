@@ -14,6 +14,16 @@ logout.style.display = "none";          // profile, logout -> display: inline-bl
 login.style.display = "inline-block";   // login, signup -> display: none
 signup.style.display = "inline-block";
 
+/*
+    Script to create the cards for camping spots
+
+*/
+const cards = document.querySelector('#cards')
+const createCards = (spots) => {
+
+}
+
+
 
 /*
     Placeholder script for filtering - copy paste from

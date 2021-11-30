@@ -20,10 +20,48 @@ signup.style.display = "inline-block";
 */
 const cards = document.querySelector('#cards')
 const createCards = (spots) => {
+    cards.innerHTML = '';
+    for(let i = 0; i<spots.length; i++) {
+        const card_item = document.createElement('div');
+        card_item.className = 'cards_item filter1';
 
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const card_image = document.createElement('div');
+        card_image.className = 'card_image';
+
+        const img = document.createElement('img');
+        img.src = 'https://picsum.photos/500/300/?grayscale'
+
+        const card_content = document.createElement('div');
+        card_content.className = 'card_content';
+
+        const h2 = document.createElement('h2');
+        h2.className = 'card_title';
+        h2.innerHTML = 'Title';
+
+        const p = document.createElement('p');
+        p.className = 'card_text';
+        p.innerHTML = 'Description'
+
+        const btn = document.createElement('button');
+        btn.className = 'btn card_btn';
+        btn.innerHTML = 'Read more'
+
+        card_item.appendChild(card);
+        card.appendChild(card_image);
+        card_image.appendChild(img);
+        card.appendChild(card_content);
+        card_content.appendChild(h2);
+        card_content.appendChild(p);
+        card_content.appendChild(btn);
+        cards.appendChild(card_item);
+    }
 }
 
-
+const spots = [1, 2, 3];
+createCards(spots);
 
 /*
     Placeholder script for filtering - copy paste from

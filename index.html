@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!-- NAVBAR -->
+<header class="header">
+    <nav class="navbar">
+        <a href="#" class="nav-logo">Budget Traveler</a>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Contact</a>
+            </li>
+            <li class="nav-item" id="profile">
+                <a href="#" id="profile-btn">Profile</a>
+            </li>
+            <li class="nav-item" id="logout">
+                <a href="#" id="logout-btn" onclick="">Logout</a>
+            </li>
+            <li class="nav-item" id="login">
+                <a href="#" id="login-btn" onclick="openLoginForm()">Login</a>
+            </li>
+            <li class="nav-item" id="signup">
+                <a href="#" id="signup-btn" onclick="openSignupForm()">Sign up</a>
+            </li>
+        </ul>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+</header>
+
+<!-- BANNER PICTURE + POST BUTTON -->
+<div id="main-banner">
+    <div id="banner-background">
+        <a href=“”>post a camping spot</a>
+    </div>
+</div>
+
+<!-- GALLERY HEADER -->
+<div id="gallery-header">
+    CAMPING SPOTS
+</div>
+
+<!-- FILTERING BUTTONS -->
+<div id="filtering">
+    <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+    <button class="btn" onclick="filterSelection('filter1')"> Most popular</button>
+    <button class="btn" onclick="filterSelection('filter2')"> Filter 2</button>
+    <button class="btn" onclick="filterSelection('filter3')"> Filter 3</button>
+    <select name="regions" id="region-select">
+        <option value="Finland">Finland</option>
+        <option value="Ahvenanmaa">Ahvenanmaa</option>
+        <option value="Etelä-Karjala">Etelä-Karjala</option>
+        <option value="Etelä-Pohjanmaa">Etelä-Pohjanmaa</option>
+        <option value="Etelä-Savo">Etelä-Savo</option>
+    </select>
+</div>
+
+<!-- CAMPING SPOTS GALLERY -->
+<div id="spot-gallery">
+    <div class="cards">
+        <div class="cards_item filter1">
+            <div class="card">
+                <div class="card_image">
+                    <img src="https://picsum.photos/500/300/?grayscale&image=18" alt="">
+                </div>
+
+                <div class="card_content">
+                    <h2 class="card_title">Title</h2>
+                    <p class="card_text">Description</p>
+                    <button class="btn card_btn">Read More</button>
+                </div>
+            </div>
+        </div>
+        <div class="cards_item filter1">
+            <div class="card">
+                <div class="card_image">
+                    <img src="https://picsum.photos/500/300/?grayscale&image=19" alt="">
+                </div>
+
+                <div class="card_content">
+                    <h2 class="card_title">Title</h2>
+                    <p class="card_text">Description</p>
+                    <button class="btn card_btn">Read More</button>
+                </div>
+            </div>
+        </div>
+        <div class="cards_item filter2">
+            <div class="card">
+                <div class="card_image">
+                    <img src="https://picsum.photos/500/300/?grayscale&image=23" alt="">
+                </div>
+
+                <div class="card_content">
+                    <h2 class="card_title">Title</h2>
+                    <p class="card_text">Description</p>
+                    <button class="btn card_btn">Read More</button>
+                </div>
+            </div>
+        </div>
+        <div class="cards_item filter2">
+            <div class="card">
+                <div class="card_image">
+                    <img src="https://picsum.photos/500/300/?grayscale&image=15" alt="">
+                </div>
+
+                <div class="card_content">
+                    <h2 class="card_title">Title</h2>
+                    <p class="card_text">Description</p>
+                    <button class="btn card_btn">Read More</button>
+                </div>
+            </div>
+        </div>
+        <div class="cards_item filter3">
+            <div class="card">
+                <div class="card_image">
+                    <img src="https://picsum.photos/500/300/?grayscale&image=17" alt="">
+                </div>
+
+                <div class="card_content">
+                    <h2 class="card_title">Title</h2>
+                    <p class="card_text">Description</p>
+                    <button class="btn card_btn">Read More</button>
+                </div>
+            </div>
+        </div>
+        <div class="cards_item filter3">
+            <div class="card">
+                <div class="card_image">
+                    <img src="https://picsum.photos/500/300/?grayscale&image=12" alt="">
+                </div>
+
+                <div class="card_content">
+                    <h2 class="card_title">Title</h2>
+                    <p class="card_text">Description</p>
+                    <button class="btn card_btn">Read More</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- LOGIN MODAL POP UP -->
+<div id="login-modal-overlay"></div>
+<div id="login-modal">
+    <div class="login-modal-close" onclick="closeLoginForm()">×</div>
+    <div class="form">
+        <div class="form-header">User login</div>
+        <form id="login-form" action="" method="post">
+            <div class="form-element">
+                <label>Email:</label>
+                <input type="text" name="email" />
+            </div>
+            <div class="form-element">
+                <label>Password:</label>
+                <input type="password" name="password" />
+            </div>
+            <div class="form-element">
+                <button id="login-form-button" type="submit">Log In</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- SIGN UP MODAL POP UP -->
+<div id="signup-modal-overlay"></div>
+<div id="signup-modal">
+    <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
+
+    <div class="form-wrapper">
+        <div class="form-header">Sign up</div>
+        <form action="" method="post" id="signup-form">
+            <div class="form-element">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Username">
+            </div>
+            <div class="form-element">
+                <label>Email</label>
+                <input type="text" name="email" placeholder="Email">
+            </div>
+            <div class="form-element">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password">
+            </div>
+            <div class="form-element">
+                <button id="signup-form-button" type="submit">Sign up</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/main-page.js"></script>
+</body>
+</html>

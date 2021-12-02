@@ -277,14 +277,14 @@ body.showSignupForm #signup-modal {
     flex-wrap: wrap;
     justify-content: center;
 }
-#region-select {
+.dropdown-select {
     border: none;
     outline: none;
     padding: 12px 16px;
     background-color: white;
     cursor: pointer;
 }
-#region-select:hover {
+.dropdown-select:hover {
     background-color: #ddd;
 }
 .btn {
@@ -398,6 +398,30 @@ body.showSignupForm #signup-modal {
 }
 .show {
     display: flex;
+}
+
+/* ADD POST FORM */
+.post-form-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+
+.form-element label {
+    display:block;
+    font-size:14px;
+    color:#222;
+    margin-bottom:5px;
+}
+.form-element input {
+    width:100%;
+    padding:8px 10px;
+    box-sizing:border-box;
+    outline:none;
+    border:1px solid #aaa;
+    background:#eee;
+    border-radius:5px;
 }
 
 @media (min-width: 40rem) {

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add a post</title>
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <header class="header">
+      <nav class="navbar">
+        <a href="#" class="nav-logo">Budget Traveler</a>
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="#" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Contact</a>
+          </li>
+          <li class="nav-item" id="profile">
+            <a href="#" id="profile-btn">Profile</a>
+          </li>
+          <li class="nav-item" id="logout">
+            <a href="#" id="logout-btn" onclick="">Logout</a>
+          </li>
+          <li class="nav-item" id="login">
+            <a href="#" id="login-btn" onclick="openLoginForm()">Login</a>
+          </li>
+          <li class="nav-item" id="signup">
+            <a href="#" id="signup-btn" onclick="openSignupForm()">Sign up</a>
+          </li>
+        </ul>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </header>
+    <hr />
+
+    <!-- FORM to add a camping post -->
+    <div class="container">
+      <div class="forms">
+        <div class="form-wrapper">
+          <h3>Post a camping spot</h3>
+          <form
+            action="http://localhost:3000/post"
+            method="post"
+            class="border"
+            id="addPostForm"
+          >
+            <input
+              class="border"
+              type="text"
+              name="title"
+              required
+              placeholder="Title"
+            />
+            <input
+              class="border"
+              type="text"
+              name="address"
+              placeholder="Address"
+            />
+            <input
+              class="border"
+              type="text"
+              name="content"
+              required
+              placeholder="Content"
+            />
+            <select class="border choose-region" name="regionId" required>
+              <option value="">Choose your region</option>
+              <option value="Finland">Finland</option>
+              <option value="Ahvenanmaa">Ahvenanmaa</option>
+              <option value="Etelä-Karjala">Etelä-Karjala</option>
+              <option value="Etelä-Pohjanmaa">Etelä-Pohjanmaa</option>
+              <option value="Etelä-Savo">Etelä-Savo</option>
+              <option value="Kainuu">Kainuu</option>
+              <option value="Kanta-Häme">Kanta-Häme</option>
+              <option value="Keski-Pohjanmaa">Keski-Pohjanmaa</option>
+              <option value="Keski-Suomi">Keski-Suomi</option>
+              <option value="Kymenlaakso">Kymenlaakso</option>
+              <option value="Lappi">Lappi</option>
+              <option value="Pirkanmaa">Pirkanmaa</option>
+              <option value="Pohjanmaa">Pohjanmaa</option>
+              <option value="Pohjois-Karjala">Pohjois-Karjala</option>
+              <option value="Pohjois-Pohjanmaa">Pohjois-Pohjanmaa</option>
+              <option value="Pohjois-Savo">Pohjois-Savo</option>
+              <option value="Päijät-Häme">Päijät-Häme</option>
+              <option value="Satakunta">Satakunta</option>
+              <option value="Uusimaa">Uusimaa</option>
+              <option value="Varsinais-Suomi">Varsinais-Suomi</option>
+            </select>
+            <select class="border freeOrNot" name="freeOrNot" required>
+              <option value="free">Free</option>
+              <option value="paid">Paid</option>
+            </select>
+            <input
+              class="border"
+              type="number"
+              name="price"
+              placeholder="Price"
+            />
+            <input
+              class="border"
+              type="number"
+              name="userId"
+              placeholder="userId"
+            />
+            <input
+              class="border"
+              type="file"
+              name="post"
+              accept="image/*"
+              placeholder="Choose file"
+            />
+            <button class="border" type="submit">Upload your post</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--<script src="js/check-login.js"></script>-->
+    <script src="js/add-post.js"></script>
+  </body>
+</html>

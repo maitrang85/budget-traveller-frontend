@@ -52,6 +52,7 @@
             action="http://localhost:3000/post"
             method="post"
             class="border"
+            enctype="multipart/form-data"
             id="addPostForm"
           >
             <input
@@ -118,6 +119,7 @@
               type="file"
               name="post"
               accept="image/*"
+              required
               placeholder="Choose file"
             />
             <button class="border" type="submit">Upload your post</button>

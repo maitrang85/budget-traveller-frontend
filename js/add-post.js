@@ -7,14 +7,15 @@ const addForm = document.querySelector('#addPostForm');
 addForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
   const fd = new FormData(addForm);
-  const data = Object.fromEntries(fd);
+  //const data = Object.fromEntries(fd);
   const fetchOptions = {
     method: 'POST',
     headers: {
       Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-      'Content-Type': 'application/json',
+      //'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data),
+    body: fd,
+    //body: JSON.stringify(data),
   };
   const response = await fetch(url + '/post', fetchOptions);
   console.log(response);
@@ -22,3 +23,4 @@ addForm.addEventListener('submit', async (evt) => {
   alert(json.message);
   location.href = 'main-page.html';
 });
+git;

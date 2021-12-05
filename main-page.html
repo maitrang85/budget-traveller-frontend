@@ -5,7 +5,7 @@
   <title>Title</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body id="main-page-body">
 <!-- NAVBAR -->
 <header class="header">
   <nav class="navbar">
@@ -53,15 +53,11 @@
 
 <!-- FILTERING BUTTONS -->
 <div id="filtering">
-  <button class="btn active" onclick="filterSelection('all')">
-    Show all
-  </button>
-  <button class="btn" onclick="filterSelection('filter1')">
-    Most popular
-  </button>
-  <button class="btn" onclick="filterSelection('filter2')">Filter 2</button>
-  <button class="btn" onclick="filterSelection('filter3')">Filter 3</button>
-  <select name="regions" class="dropdown-select">
+  <button id="show_all_btn" class="btn active">Show all</button>
+  <button id="most_recent_btn" class="btn">Most recent</button>
+  <button id="free_btn" class="btn">Free</button>
+  <button id="paid_btn" class="btn">Paid</button>
+  <select id="region_select" name="regions" class="dropdown-select">
     <option value="">Choose your region</option>
     <option value="Finland">Finland</option>
     <option value="Ahvenanmaa">Ahvenanmaa</option>

@@ -20,10 +20,55 @@ signup.style.display = 'inline-block';
 */
 const cards = document.querySelector('#cards');
 const createCards = (posts) => {
+  console.log(posts);
+  renderCards(posts);
+
+  const free = document.querySelector("#free_btn");
+  const paid = document.querySelector("#paid_btn");
+  const most_recent = document.querySelector("#most_recent_btn");
+  const show_all = document.querySelector("#show_all_btn");
+  const region = document.querySelector("#region_select");
+
+  free.addEventListener('click', () => {
+    const posts_free = posts.filter((post) => {
+      return post.free_or_not === "free"
+    });
+    renderCards(posts_free);
+  });
+
+  paid.addEventListener('click', () => {
+    const posts_paid = posts.filter((post) => {
+      return post.free_or_not === "paid"
+    });
+    renderCards(posts_paid);
+  })
+
+  most_recent.addEventListener('click', () => {
+    const posts_most_recent = posts.filter((post) => {
+
+    });
+    renderCards(posts_most_recent);
+  })
+
+  show_all.addEventListener('click', () => {
+    renderCards(posts);
+  })
+
+  region.addEventListener('change', () => {
+    const posts_region = posts.filter((post) => {
+      return post.region_id === region.value
+    });
+    renderCards(posts_region);
+  })
+
+
+};
+
+function renderCards(posts) {
   cards.innerHTML = '';
-  for (let i = 0; i < posts.length; i++) {
+  posts.forEach((post) => {
     const card_item = document.createElement('div');
-    card_item.className = 'cards_item filter1';
+    card_item.className = `cards_item`
 
     const card = document.createElement('div');
     card.className = 'card';
@@ -39,11 +84,11 @@ const createCards = (posts) => {
 
     const h2 = document.createElement('h2');
     h2.className = 'card_title';
-    h2.innerHTML = 'Title';
+    h2.innerHTML = post.title;
 
     const p = document.createElement('p');
     p.className = 'card_text';
-    p.innerHTML = 'Description';
+    p.innerHTML = post.content;
 
     const btn = document.createElement('button');
     btn.className = 'btn card_btn';
@@ -57,8 +102,8 @@ const createCards = (posts) => {
     card_content.appendChild(p);
     card_content.appendChild(btn);
     cards.appendChild(card_item);
-  }
-};
+  })
+}
 
 const getPost = async () => {
   try {
@@ -69,7 +114,6 @@ const getPost = async () => {
     };
     const response = await fetch(url + '/post', fetchOptions);
     const posts = await response.json();
-    //const spots = [1, 2, 3];
     createCards(posts);
   } catch (e) {
     console.log(e.message);
@@ -77,10 +121,13 @@ const getPost = async () => {
 };
 getPost();
 
+
+
+
 /*
     Placeholder script for filtering - copy paste from
     https://www.w3schools.com/howto/howto_js_portfolio_filter.asp
-*/
+
 
 filterSelection('all');
 function filterSelection(selected) {
@@ -116,6 +163,7 @@ function removeClass(element, name) {
   }
   element.className = arr1.join(' ');
 }
+*/
 
 // Add active class to the current button (highlighting it)
 let buttonContainer = document.getElementById('filtering');
@@ -127,7 +175,9 @@ for (let i = 0; i < buttons.length; i++) {
     this.className += ' active';
   });
 }
+
 // ------- Filtering end ------- //
+
 
 // NAVIGATION MENU
 const hamburger = document.querySelector('.hamburger');

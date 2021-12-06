@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Title</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body id="main-page-body">
 <!-- NAVBAR -->
@@ -49,12 +50,12 @@
 </div>
 
 <!-- GALLERY HEADER -->
-<div id="gallery-header">CAMPING SPOTS</div>
+<!-- <div id="gallery-header">CAMPING SPOTS</div> -->
 
 <!-- FILTERING BUTTONS -->
 <div id="filtering">
   <button id="show_all_btn" class="btn active">Show all</button>
-  <button id="most_recent_btn" class="btn">Most recent</button>
+  <button id="most_recent_btn" class="btn">Most popular</button>
   <button id="free_btn" class="btn">Free</button>
   <button id="paid_btn" class="btn">Paid</button>
   <select id="region_select" name="regions" class="dropdown-select">
@@ -83,87 +84,24 @@
 </div>
 
 <!-- CAMPING SPOTS GALLERY -->
-<div id="spot-gallery">
-  <div id="cards">
-    <!-- PLACE HOLDER CARDS TO TEST WITH -->
+<div id="camping-spots-grid">
+  <div id="grid">
     <!--
-    <div class="cards_item filter1">
-        <div class="card">
-            <div class="card_image">
-                <img src="https://picsum.photos/500/300/?grayscale&image=18" alt="">
-            </div>
-
-            <div class="card_content">
-                <h2 class="card_title">Title</h2>
-                <p class="card_text">Description</p>
-                <button class="btn card_btn">Read More</button>
-            </div>
+    <div class="grid_item">
+      <div class="card">
+        <div class="card-thumbnail">
+          <img class="card_img" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2250&amp;q=80" alt="Snowy Mountains">
+          <div class="card_info">
+            <span><i class="fa fa-thumbs-up"></i>42</span>
+            <span><i class="fa fa-thumbs-down"></i>2</span>
+          </div>
         </div>
-    </div>
-    <div class="cards_item filter1">
-        <div class="card">
-            <div class="card_image">
-                <img src="https://picsum.photos/500/300/?grayscale&image=19" alt="">
-            </div>
-
-            <div class="card_content">
-                <h2 class="card_title">Title</h2>
-                <p class="card_text">Description</p>
-                <button class="btn card_btn">Read More</button>
-            </div>
+        <div class="card_content">
+          <h1 class="card_header">A starry night</h1>
+          <p class="card_text">Look up at the night sky, and find yourself <strong>immersed</strong> in the amazing mountain range of Aspen. </p>
+          <button class="card_btn">Read more <span>→</span></button>
         </div>
-    </div>
-    <div class="cards_item filter2">
-        <div class="card">
-            <div class="card_image">
-                <img src="https://picsum.photos/500/300/?grayscale&image=23" alt="">
-            </div>
-
-            <div class="card_content">
-                <h2 class="card_title">Title</h2>
-                <p class="card_text">Description</p>
-                <button class="btn card_btn">Read More</button>
-            </div>
-        </div>
-    </div>
-    <div class="cards_item filter2">
-        <div class="card">
-            <div class="card_image">
-                <img src="https://picsum.photos/500/300/?grayscale&image=15" alt="">
-            </div>
-
-            <div class="card_content">
-                <h2 class="card_title">Title</h2>
-                <p class="card_text">Description</p>
-                <button class="btn card_btn">Read More</button>
-            </div>
-        </div>
-    </div>
-    <div class="cards_item filter3">
-        <div class="card">
-            <div class="card_image">
-                <img src="https://picsum.photos/500/300/?grayscale&image=17" alt="">
-            </div>
-
-            <div class="card_content">
-                <h2 class="card_title">Title</h2>
-                <p class="card_text">Description</p>
-                <button class="btn card_btn">Read More</button>
-            </div>
-        </div>
-    </div>
-    <div class="cards_item filter3">
-        <div class="card">
-            <div class="card_image">
-                <img src="https://picsum.photos/500/300/?grayscale&image=12" alt="">
-            </div>
-
-            <div class="card_content">
-                <h2 class="card_title">Title</h2>
-                <p class="card_text">Description</p>
-                <button class="btn card_btn">Read More</button>
-            </div>
-        </div>
+      </div>
     </div>
     -->
   </div>

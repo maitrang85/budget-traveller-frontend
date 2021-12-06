@@ -18,7 +18,7 @@ signup.style.display = 'inline-block';
     Script to create the cards for camping spots
 
 */
-const cards = document.querySelector('#cards');
+const cards = document.querySelector('#grid');
 const createCards = (posts) => {
   console.log(posts);
   renderCards(posts);
@@ -68,39 +68,55 @@ function renderCards(posts) {
   cards.innerHTML = '';
   posts.forEach((post) => {
     const card_item = document.createElement('div');
-    card_item.className = `cards_item`
+    card_item.className = `grid_item`
 
     const card = document.createElement('div');
     card.className = 'card';
 
-    const card_image = document.createElement('div');
-    card_image.className = 'card_image';
+    const thumbnail = document.createElement('div');
+    thumbnail.className = 'card-thumbnail';
 
     const img = document.createElement('img');
-    img.src = 'https://picsum.photos/500/300/?grayscale';
+    img.className = 'card_img';
+    img.src = 'https://picsum.photos/1000/500';
+
+    const info = document.createElement('div');
+    info.className = 'card_info';
+
+    const s1 = document.createElement('span');
+    const s2 = document.createElement('span');
+    s1.innerHTML += `<i class='fa fa-thumbs-up'></i> 47`;
+    s2.innerHTML += `<i class='fa fa-thumbs-down'></i> 3`;
 
     const card_content = document.createElement('div');
     card_content.className = 'card_content';
 
-    const h2 = document.createElement('h2');
-    h2.className = 'card_title';
-    h2.innerHTML = post.title;
+    const h1 = document.createElement('h1');
+    h1.className = 'card_header';
+    h1.innerHTML = post.title;
 
     const p = document.createElement('p');
     p.className = 'card_text';
     p.innerHTML = post.content;
 
     const btn = document.createElement('button');
-    btn.className = 'btn card_btn';
+    btn.className = 'card_btn';
     btn.innerHTML = 'Read more';
 
+    const span = document.createElement('span');
+    span.innerHTML = '→'
+
     card_item.appendChild(card);
-    card.appendChild(card_image);
-    card_image.appendChild(img);
+    card.appendChild(thumbnail);
+    thumbnail.appendChild(img);
+    thumbnail.appendChild(info);
+    info.appendChild(s1);
+    info.appendChild(s2);
     card.appendChild(card_content);
-    card_content.appendChild(h2);
+    card_content.appendChild(h1);
     card_content.appendChild(p);
     card_content.appendChild(btn);
+    btn.appendChild(span);
     cards.appendChild(card_item);
   })
 }

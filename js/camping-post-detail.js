@@ -63,7 +63,7 @@ function createDetailPost(post) {
     /*MODIFY THIS POST - For signed-in and userId = post.userId*/
     const modBtn = document.createElement('a');
     modBtn.innerHTML = 'Modify your post';
-    modBtn.href = `modify-post.html?id=${post.post_id}`; // Will change this later
+    modBtn.href = `modify-post.html#${post.post_id}`; // Will change this later
 
     /*DELETE THIS POST - For signed-in and userId = post.userId*/
     const delBtn = document.createElement('button');

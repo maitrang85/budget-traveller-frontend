@@ -21,7 +21,7 @@ addForm.addEventListener('submit', async (evt) => {
   console.log(response);
   const json = await response.json();
   alert(json.message);
-  location.href = 'main-page.html';
+  location.href = 'camping-post-detail.html';
 });
 
 /* ----- */

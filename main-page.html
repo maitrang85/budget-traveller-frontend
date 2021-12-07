@@ -114,10 +114,10 @@
   <div class="login-modal-close" onclick="closeLoginForm()">×</div>
   <div class="form">
     <div class="form-header">User login</div>
-    <form id="login-form" action="" method="post">
+    <form id="login-form" action="http://localhost:3000/auth/login" method="post">
       <div class="form-element">
         <label>Email:</label>
-        <input type="text" name="email" />
+        <input type="text" name="username" />
       </div>
       <div class="form-element">
         <label>Password:</label>
@@ -134,10 +134,9 @@
 <div id="signup-modal-overlay"></div>
 <div id="signup-modal">
   <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
-
   <div class="form-wrapper">
     <div class="form-header">Sign up</div>
-    <form action="" method="post" id="signup-form">
+    <form id="signup-form" action="http://localhost:3000/user/post" method="post" id="signup-form">
       <div class="form-element">
         <label>Username</label>
         <input type="text" name="username" placeholder="Username" />
@@ -157,6 +156,7 @@
   </div>
 </div>
 
+<script src="js/check-login.js"></script>
 <script src="js/main-page.js"></script>
 </body>
 </html>

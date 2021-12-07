@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body id="profile-body">
+
+<!-- NAVBAR -->
+<header class="header">
+    <nav class="navbar">
+        <a href="main-page.html" class="nav-logo">Budget Traveler</a>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Contact</a>
+            </li>
+            <li class="nav-item" id="profile">
+                <a class="nav-link" href="#" id="profile-btn">Profile</a>
+            </li>
+            <li class="nav-item" id="logout">
+                <a class="nav-link" href="#" id="logout-btn" onclick="">Logout</a>
+            </li>
+            <li class="nav-item" id="login">
+                <a class="nav-link" href="#" id="login-btn" onclick="openLoginForm()">Login</a>
+            </li>
+            <li class="nav-item" id="signup">
+                <a class="nav-link" href="#" id="signup-btn" onclick="openSignupForm()">Sign up</a>
+            </li>
+        </ul>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+</header>
+
+<div id="profile-container">
+    <div id="profile-info">
+        <p id="profile-avatar">
+            <i class="fa fa-user-circle" style="font-size:60px;color: #343434;"></i>
+            <br>
+            User
+        </p>
+        <p id="profile-stats">
+            <i class="fa fa-archive" style="font-size:20px;color: #343434;"></i>
+            POSTS<br>
+            <i class="fa fa-thumbs-up" style="font-size:20px;color: #0a540e;"></i>
+            LIKES
+            <i class="fa fa fa-thumbs-down" style="font-size:20px;color: #621818;"></i>
+            DISLIKES<br>
+            <i class="fa fa fa-users" style="font-size:20px;color: #343434;"></i>
+            FOLLOWERS<br>
+        </p>
+
+        <p id="profile-follow-btn">
+            <a href=""><i class="fa fa-user-plus" style="font-size:20px;color: #0a540e;"></i></a>
+            <a href=""><i class="fa fa-user-times" style="font-size:20px;color: #621818;"></i></a>
+        </p>
+    </div>
+</div>
+
+<div id="profile-posts">
+    <select id="profile-post-select" name="posts" class="profile-dropdown-select">
+        <option value="" disabled selected>Select post</option>
+        <option value="">Post 1</option>
+        <option value="">Post 2</option>
+        <option value="">Post 3</option>
+        <option value="">Post 4</option>
+        <option value="">Post 5</option>
+        <option value="">Post 6</option>
+        <option value="">Post 7</option>
+        <option value="">Post 8</option>
+    </select>
+</div>
+
+<!-- LOGIN MODAL POP UP -->
+<div id="login-modal-overlay"></div>
+<div id="login-modal">
+    <div class="login-modal-close" onclick="closeLoginForm()">×</div>
+    <div class="form">
+        <div class="form-header">User login</div>
+        <form id="login-form" action="" method="post">
+            <div class="form-element">
+                <label>Email:</label>
+                <input type="text" name="email" />
+            </div>
+            <div class="form-element">
+                <label>Password:</label>
+                <input type="password" name="password" />
+            </div>
+            <div class="form-element">
+                <button id="login-form-button" type="submit">Log In</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- SIGN UP MODAL POP UP -->
+<div id="signup-modal-overlay"></div>
+<div id="signup-modal">
+    <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
+
+    <div class="form-wrapper">
+        <div class="form-header">Sign up</div>
+        <form action="" method="post" id="signup-form">
+            <div class="form-element">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Username" />
+            </div>
+            <div class="form-element">
+                <label>Email</label>
+                <input type="text" name="email" placeholder="Email" />
+            </div>
+            <div class="form-element">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password" />
+            </div>
+            <div class="form-element">
+                <button id="signup-form-button" type="submit">Sign up</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/profile.js"></script>
+</body>
+</html>

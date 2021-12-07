@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Profile</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body id="profile-body">
+
 <!-- NAVBAR -->
 <header class="header">
     <nav class="navbar">
@@ -41,5 +43,59 @@
     </nav>
 </header>
 
+<div id="profile-container">
+
+</div>
+
+<!-- LOGIN MODAL POP UP -->
+<div id="login-modal-overlay"></div>
+<div id="login-modal">
+    <div class="login-modal-close" onclick="closeLoginForm()">×</div>
+    <div class="form">
+        <div class="form-header">User login</div>
+        <form id="login-form" action="" method="post">
+            <div class="form-element">
+                <label>Email:</label>
+                <input type="text" name="email" />
+            </div>
+            <div class="form-element">
+                <label>Password:</label>
+                <input type="password" name="password" />
+            </div>
+            <div class="form-element">
+                <button id="login-form-button" type="submit">Log In</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- SIGN UP MODAL POP UP -->
+<div id="signup-modal-overlay"></div>
+<div id="signup-modal">
+    <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
+
+    <div class="form-wrapper">
+        <div class="form-header">Sign up</div>
+        <form action="" method="post" id="signup-form">
+            <div class="form-element">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Username" />
+            </div>
+            <div class="form-element">
+                <label>Email</label>
+                <input type="text" name="email" placeholder="Email" />
+            </div>
+            <div class="form-element">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password" />
+            </div>
+            <div class="form-element">
+                <button id="signup-form-button" type="submit">Sign up</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/profile.js"></script>
 </body>
 </html>

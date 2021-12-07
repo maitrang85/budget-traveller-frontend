@@ -138,8 +138,6 @@ const getPost = async () => {
 getPost();
 
 
-
-
 /*
     Placeholder script for filtering - copy paste from
     https://www.w3schools.com/howto/howto_js_portfolio_filter.asp

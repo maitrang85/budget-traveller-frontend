@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Detail of a post</title>
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+
+  <body id="camping-post-body">
+    <!-- NAVBAR -->
+    <header class="header">
+      <nav class="navbar">
+        <a href="main-page.html" class="nav-logo">Budget Traveler</a>
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="main-page.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Contact</a>
+          </li>
+          <li class="nav-item" id="profile">
+            <a href="" id="profile-btn">Profile</a>
+          </li>
+          <li class="nav-item" id="logout">
+            <a href="#" id="logout-btn" onclick="">Logout</a>
+          </li>
+          <li class="nav-item" id="login">
+            <a href="#" id="login-btn" onclick="openLoginForm()">Login</a>
+          </li>
+          <li class="nav-item" id="signup">
+            <a href="#" id="signup-btn" onclick="openSignupForm()">Sign up</a>
+          </li>
+        </ul>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </header>
+
+    <div class="camping-detail-container">
+      <div id="detail">
+        <!-- js creates detail of a camping site here -->
+        <ul id="listOfComments"></ul>
+        <div id="comment"></div>
+      </div>
+
+      <div class="form">
+        <h4>Your comment</h4>
+        <form
+          novalidate
+          action="http://localhost:3000/post/"
+          method="post"
+          id="addCommentForm"
+        >
+          <input type="text" required name="content" placeholder="Content" />
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <!--<script src="js/check-login.js"></script>-->
+    <script src="js/camping-post-detail.js"></script>
+    <!--script src="js/add-comment.js"></script>-->
+  </body>
+</html>

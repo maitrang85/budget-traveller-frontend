@@ -7,14 +7,15 @@ const addForm = document.querySelector('#addPostForm');
 addForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
   const fd = new FormData(addForm);
-  const data = Object.fromEntries(fd);
+  //const data = Object.fromEntries(fd);
   const fetchOptions = {
     method: 'POST',
     headers: {
       Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-      'Content-Type': 'application/json',
+      //'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data),
+    //body: JSON.stringify(data),
+    body: fd,
   };
   const response = await fetch(url + '/post', fetchOptions);
   console.log(response);
@@ -31,24 +32,22 @@ login.style.display = 'none';
 signup.style.display = 'none';
 
 const priceSelect = document.querySelector('#price-select');
-priceSelect.addEventListener("change", () => {
-  if(priceSelect.selectedIndex === 0) {
+priceSelect.addEventListener('change', () => {
+  if (priceSelect.selectedIndex === 0) {
     hidePrice();
-  } else
-    showPrice();
-})
+  } else showPrice();
+});
 
 function showPrice() {
-  const priceInput = document.querySelector("#price-input");
+  const priceInput = document.querySelector('#price-input');
   priceInput.classList.add('showPriceInput');
 }
 function hidePrice() {
-  const priceInput = document.querySelector("#price-input");
+  const priceInput = document.querySelector('#price-input');
   priceInput.classList.remove('showPriceInput');
 }
 
 /* ----- */
-
 
 // NAVIGATION MENU
 const hamburger = document.querySelector('.hamburger');
@@ -62,8 +61,8 @@ hamburger.addEventListener('click', () => {
 const navLink = document.querySelectorAll('.nav-link');
 
 navLink.forEach((n) =>
-    n.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      navMenu.classList.remove('active');
-    })
+  n.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+  })
 );

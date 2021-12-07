@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Profile</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body id="profile-body">
@@ -44,7 +45,42 @@
 </header>
 
 <div id="profile-container">
+    <div id="profile-info">
+        <p id="profile-avatar">
+            <i class="fa fa-user-circle" style="font-size:60px;color: #343434;"></i>
+            <br>
+            User
+        </p>
+        <p id="profile-stats">
+            <i class="fa fa-archive" style="font-size:20px;color: #343434;"></i>
+            POSTS<br>
+            <i class="fa fa-thumbs-up" style="font-size:20px;color: #0a540e;"></i>
+            LIKES
+            <i class="fa fa fa-thumbs-down" style="font-size:20px;color: #621818;"></i>
+            DISLIKES<br>
+            <i class="fa fa fa-users" style="font-size:20px;color: #343434;"></i>
+            FOLLOWERS<br>
+        </p>
 
+        <p id="profile-follow-btn">
+            <a href=""><i class="fa fa-user-plus" style="font-size:20px;color: #0a540e;"></i></a>
+            <a href=""><i class="fa fa-user-times" style="font-size:20px;color: #621818;"></i></a>
+        </p>
+    </div>
+</div>
+
+<div id="profile-posts">
+    <select id="profile-post-select" name="posts" class="profile-dropdown-select">
+        <option value="" disabled selected>Select post</option>
+        <option value="">Post 1</option>
+        <option value="">Post 2</option>
+        <option value="">Post 3</option>
+        <option value="">Post 4</option>
+        <option value="">Post 5</option>
+        <option value="">Post 6</option>
+        <option value="">Post 7</option>
+        <option value="">Post 8</option>
+    </select>
 </div>
 
 <!-- LOGIN MODAL POP UP -->

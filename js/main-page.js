@@ -100,6 +100,10 @@ function renderCards(posts) {
     const btn = document.createElement('button');
     btn.className = 'card_btn';
     btn.innerHTML = 'Read more';
+    console.log('post_id', post.post_id);
+    btn.addEventListener('click', () => {
+      location.href = `camping-post-detail.html#${post.post_id}`;
+    });
 
     const span = document.createElement('span');
     span.innerHTML = '→'

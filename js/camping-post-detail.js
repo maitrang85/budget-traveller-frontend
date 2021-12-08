@@ -1,15 +1,6 @@
 'use strict';
 const url = 'http://localhost:3000';
 
-const profile = document.getElementById('profile');
-const logout = document.getElementById('logout');
-const login = document.getElementById('login');
-const signup = document.getElementById('signup');
-profile.style.display = 'none'; // For logged in users:
-logout.style.display = 'none'; // profile, logout -> display: inline-block
-login.style.display = 'inline-block'; // login, signup -> display: none
-signup.style.display = 'inline-block';
-
 const postId = window.location.hash.substr(1);
 console.log('postId here', postId);
 /* MOCK DATA for testing

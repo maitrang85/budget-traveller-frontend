@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <title>Detail of a post</title>
     <link href="css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 
 <body id="camping-post-body">
@@ -64,8 +66,59 @@
     </div>
 </div>
 
-<!--<script src="js/check-login.js"></script>-->
+<!-- LOGIN MODAL POP UP -->
+<div id="login-modal-overlay"></div>
+<div id="login-modal">
+    <div class="login-modal-close" onclick="closeLoginForm()">×</div>
+    <div class="form">
+        <div class="form-header">User login</div>
+        <form id="login-form" action="http://localhost:3000/auth/login" method="post">
+            <div class="form-element">
+                <label>Email:</label>
+                <input type="text" name="username" />
+            </div>
+            <div class="form-element">
+                <label>Password:</label>
+                <input type="password" name="password" />
+            </div>
+            <div class="form-element">
+                <button id="login-form-button" type="submit">Log In</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- SIGN UP MODAL POP UP -->
+<div id="signup-modal-overlay"></div>
+<div id="signup-modal">
+    <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
+    <div class="form-wrapper">
+        <div class="form-header">Sign up</div>
+        <form id="signup-form" action="http://localhost:3000/user/post" method="post" id="signup-form">
+            <div class="form-element">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Username" />
+            </div>
+            <div class="form-element">
+                <label>Email</label>
+                <input type="text" name="email" placeholder="Email" />
+            </div>
+            <div class="form-element">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password" />
+            </div>
+            <div class="form-element">
+                <button id="signup-form-button" type="submit">Sign up</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/navigation.js"></script>
 <script src="js/camping-post-detail.js"></script>
+<script src="js/login.js"></script>
+<script src="js/check-login.js"></script>
+<script src="js/logout.js"></script>
 <!--script src="js/add-comment.js"></script>-->
 </body>
 </html>

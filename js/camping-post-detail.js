@@ -105,7 +105,7 @@ const getPost = async (postId) => {
         const response = await fetch(url + '/post/' + postId, fetchOptions);
         const post = await response.json();
         console.log('post', post);
-        createDetailPost(post[0]);
+        createDetailPost(post);
     } catch (e) {
         console.log(e.message);
     }

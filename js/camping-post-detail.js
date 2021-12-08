@@ -37,19 +37,16 @@ function createDetailPost(post) {
         p2.innerHTML = `Location: ${post.address}`;
 
         const p3 = document.createElement('p');
-        p3.innerHTML = `Region: ${post.regionId}`;
+        p3.innerHTML = `Region: ${post.region_id}`;
 
         const p4 = document.createElement('p');
-        p4.innerHTML = `${post.freeOrNot}`;
+        p4.innerHTML = `${post.free_or_not}`;
 
         const p5 = document.createElement('p');
         p5.innerHTML = `Price: ${post.price}`;
 
         const p6 = document.createElement('p');
-        p6.innerHTML = `Price: ${post.price}`;
-
-        const p7 = document.createElement('p');
-        p7.innerHTML = `Author: ${post.username}`;
+        p6.innerHTML = `Author: ${post.username}`;
 
         /*MODIFY THIS POST - For signed-in and userId = post.userId*/
         const modBtn = document.createElement('a');
@@ -89,7 +86,6 @@ function createDetailPost(post) {
         detail.appendChild(p4);
         detail.appendChild(p5);
         detail.appendChild(p6);
-        detail.appendChild(p7);
         detail.appendChild(modBtn);
         detail.appendChild(delBtn);
     }

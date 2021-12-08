@@ -30,9 +30,7 @@ const getPost = async (postId) => {
     inputs[1].value = post.address;
     inputs[2].value = post.content;
     inputs[3].value = post.price;
-    //inputs[4].name = post.filename;
     inputs[4].filename = post.filename;
-    //inputs[3].querySelector('select').value = post.regionId;
     document.querySelector('#region-select').value = post.region_id;
     document.querySelector('#price-select').value = post.free_or_not;
     document.querySelector('#region-select').value = post.region_id;

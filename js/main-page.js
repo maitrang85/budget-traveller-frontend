@@ -83,7 +83,7 @@ function renderCards(posts) {
     btn.innerHTML = 'Read more';
     console.log('post_id', post.post_id);
     btn.addEventListener('click', () => {
-      location.href = `camping-post-detail.html#${post.post_id}`;
+      location.href = `camping-post-detail.html?id=${post.post_id}`;
     });
 
     const span = document.createElement('span');
@@ -105,7 +105,7 @@ function renderCards(posts) {
 }
 
 // GET POST
-const getPost = async () => {
+const getPosts = async () => {
   try {
     const fetchOptions = {
       headers: {
@@ -119,7 +119,7 @@ const getPost = async () => {
     console.log(e.message);
   }
 };
-getPost();
+getPosts();
 
 // ADDING ACTIVE CLASS TO THE CURRENT BUTTON (HIGHLIGHTING IT)
 let buttonContainer = document.getElementById('filtering');

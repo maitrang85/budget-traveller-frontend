@@ -49,22 +49,20 @@
     <div class="camping-detail-container">
       <div id="detail">
         <!-- js creates detail of a camping site here -->
-        <ul id="listOfComments"></ul>
-        <div id="comment"></div>
       </div>
-
-      <div class="form">
-        <h4>Your comment</h4>
-        <form
-          novalidate
-          action="http://localhost:3000/post/"
-          method="post"
-          id="addCommentForm"
-        >
-          <input type="text" required name="content" placeholder="Content" />
-
-          <button type="submit">Submit</button>
-        </form>
+      <div id="comments">
+        <div class="form">
+          <h4>Your comment</h4>
+          <form
+            novalidate
+            action="http://localhost:3000/post/"
+            method="post"
+            id="addCommentForm"
+          >
+            <input type="text" required name="content" placeholder="Content" />
+            <button id="addCommentBtn" type="submit">Add comment</button>
+          </form>
+        </div>
       </div>
     </div>
 

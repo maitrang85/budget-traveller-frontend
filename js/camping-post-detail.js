@@ -10,7 +10,14 @@ logout.style.display = 'none'; // profile, logout -> display: inline-block
 login.style.display = 'inline-block'; // login, signup -> display: none
 signup.style.display = 'inline-block';
 
-const postId = window.location.hash.substr(1);
+// get query parameter
+const getQParam = (param) => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get(param);
+};
+const postId = getQParam('id');
+
 console.log('postId here', postId);
 /* MOCK DATA for testing
   const post = {
@@ -117,3 +124,90 @@ const getPost = async (postId) => {
 };
 
 getPost(postId);
+
+///////////////////////////// COMMENT PART //////////////////
+
+const createCommentCards = (comments) => {
+  const commentsElement = document.querySelector('#comments');
+
+  comments.forEach((comment) => {
+    const contentComment = document.createElement('p');
+    contentComment.innerHTML = comment.content;
+
+    const authorComment = document.createElement('p');
+    authorComment.innerHTML = `User: ${comment.user_id}`;
+    commentsElement.appendChild(contentComment);
+    commentsElement.appendChild(authorComment);
+  });
+};
+
+const getComments = async (postId) => {
+  try {
+    const fetchOptions = {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      },
+    };
+
+    const response = await fetch(
+      url + '/post/' + postId + '/comment',
+      fetchOptions
+    );
+
+    const comments = await response.json();
+    console.log('comments', comments);
+    createCommentCards(comments);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+getComments(postId);
+
+const addForm = document.querySelector('#addCommentForm');
+addForm.addEventListener('submit', async (evt) => {
+  evt.preventDefault();
+  const fd = new FormData(addForm);
+  const data = Object.fromEntries(fd);
+  const fetchOptions = {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  };
+  const response = await fetch(
+    url + '/post/' + postId + '/comment',
+    fetchOptions
+  );
+  console.log(response);
+  const json = await response.json();
+  alert(json.message);
+  location.reload();
+});
+/*
+const addCommentForm = document.querySelector('#addCommentForm');
+addCommentForm.addEventListener('submit', async (evt) => {
+  evt.preventDefault();
+  const fd = new FormData(addCommentForm);
+  console.log('formdata', fd);
+  const fetchOptions = {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+    },
+    body: fd,
+  };
+  const response = await fetch(
+    url + '/post/' + postId + '/comment',
+    fetchOptions
+  );
+  console.log(response);
+  const json = await response.json();
+  alert(json.message);
+  //location.href = 'camping-post-detail.html';
+});
+*/
+/*
+
+  */

@@ -1,22 +1,7 @@
 'use strict';
 const url = 'http://localhost:3000';
-/*
-    For testing purposes
-    Hide/show buttons for different types of users
-    E.g. logged in, not logged in
-*/
-const profile = document.getElementById('profile');
-const logout = document.getElementById('logout');
-const login = document.getElementById('login');
-const signup = document.getElementById('signup');
-profile.style.display = 'inline-block'; // For logged in users:
-logout.style.display = 'inline-block'; // profile, logout -> display: inline-block
-login.style.display = 'inline-block'; // login, signup -> display: none
-signup.style.display = 'inline-block';
 
-/*
-    Script to create the cards for camping spots
-*/
+// SCRIPT TO CREATE CARDS FROM POSTS
 const cards = document.querySelector('#grid');
 const createCards = (posts) => {
   console.log(posts);
@@ -140,7 +125,7 @@ const getPost = async () => {
 };
 getPost();
 
-// Add active class to the current button (highlighting it)
+// ADDING ACTIVE CLASS TO THE CURRENT BUTTON (HIGHLIGHTING IT)
 let buttonContainer = document.getElementById('filtering');
 let buttons = buttonContainer.getElementsByClassName('btn');
 for (let i = 0; i < buttons.length; i++) {
@@ -150,80 +135,4 @@ for (let i = 0; i < buttons.length; i++) {
     this.className += ' active';
   });
 }
-
-// NAVIGATION MENU
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  navMenu.classList.toggle('active');
-});
-const navLink = document.querySelectorAll('.nav-link');
-navLink.forEach((n) => n.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
-  }));
-
-// OPEN/CLOSE LOGIN + SIGN UP FORMS
-function openLoginForm() {
-  document.body.classList.add('showLoginForm');
-}
-function closeLoginForm() {
-  document.body.classList.remove('showLoginForm');
-}
-
-function openSignupForm() {
-  document.body.classList.add('showSignupForm');
-}
-function closeSignupForm() {
-  document.body.classList.remove('showSignupForm');
-}
-
-const loginForm = document.querySelector('#login-form');
-const signupForm = document.querySelector('#signup-form');
-
-
-// login
-loginForm.addEventListener('submit', async (evt) => {
-  evt.preventDefault();
-  const login = new FormData(loginForm);
-  const data = Object.fromEntries(login);
-  const fetchOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  };
-
-  const response = await fetch(url + '/auth/login', fetchOptions);
-  const json = await response.json();
-  console.log('login response', json);
-  if (!json.user) {
-    alert(json.message);
-  } else {
-    // save token
-    sessionStorage.setItem('token', json.token);
-    sessionStorage.setItem('user', JSON.stringify(json.user));
-    alert(json.message);
-    location.href = 'main-page.html';
-  }
-});
-
-// submit register form
-signupForm.addEventListener('submit', async (evt) => {
-  evt.preventDefault();
-  const signup = new FormData(signupForm);
-  const data = Object.fromEntries(signup);
-  const fetchOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  };
-  const response = await fetch(url + '/user', fetchOptions);
-  const json = await response.json();
-  alert(json.message);
-});
 

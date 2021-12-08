@@ -84,7 +84,12 @@
 
             <div class="form-element">
               <label>Choose your region</label>
-              <select class="dropdown-select" name="regionId" required>
+              <select
+                class="dropdown-select"
+                name="region_id"
+                id="region-select"
+                required
+              >
                 <option value="Finland">Finland</option>
                 <option value="Ahvenanmaa">Ahvenanmaa</option>
                 <option value="Etelä-Karjala">Etelä-Karjala</option>
@@ -113,7 +118,7 @@
               <select
                 id="price-select"
                 class="dropdown-select"
-                name="freeOrNot"
+                name="free_or_not"
                 required
               >
                 <option value="free">Free</option>
@@ -125,24 +130,13 @@
               <label>Price</label>
               <input class="border" type="number" name="price" placeholder="" />
             </div>
-
-            <div class="form-element">
-              <label>User</label>
-              <input
-                class="border"
-                type="number"
-                name="userId"
-                placeholder=""
-              />
-            </div>
-
+            <!-- TODO REPLACE THIS INPUT BY IMAGE, when user click into button edit image, we will let him user input upload file-->
             <div class="form-element">
               <label>Image</label>
               <input
                 class="border"
                 type="file"
-                required
-                name="photo"
+                name="filename"
                 accept="image/*"
                 placeholder="Choose file"
                 multiple

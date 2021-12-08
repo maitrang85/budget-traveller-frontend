@@ -8,50 +8,57 @@ const getQParam = (param) => {
   return urlParams.get(param);
 };
 
-const postId = window.location.hash.substr(1);
+const postId = getQParam('id');
+
+console.log('postId', postId);
 
 const modForm = document.querySelector('#modPostForm');
 
 // Add existing camping post data to form
 const getPost = async (postId) => {
+  const fetchOptions = {
+    headers: {
+      Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+    },
+  };
   const response = await fetch(url + '/post/' + postId);
-  const posts = await response.json();
-  const post = posts[0];
+  const post = await response.json();
   const inputs = modForm.querySelectorAll('input');
   console.log('post data here: ', post);
-  inputs[0].value = post.title;
-  inputs[1].value = post.address;
-  inputs[2].value = post.content;
-  inputs[3].value = post.regionId;
-  inputs[4].value = post.freeOrNot;
-  inputs[5].value = post.price;
-  inputs[6].value = post.userId;
-  inputs[7].value = post.filename;
-  inputs[8].value = post.postId;
+  if (post) {
+    inputs[0].value = post.title;
+    inputs[1].value = post.address;
+    inputs[2].value = post.content;
+    inputs[3].value = post.price;
+    //inputs[4].name = post.filename;
+    inputs[4].filename = post.filename;
+    //inputs[3].querySelector('select').value = post.regionId;
+    document.querySelector('#region-select').value = post.region_id;
+    document.querySelector('#price-select').value = post.free_or_not;
+    document.querySelector('#region-select').value = post.region_id;
+    console.log('price', post.price);
+    console.group('inputs', inputs);
+  }
 };
 
 getPost(postId);
 // Submit modify form
 modForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
-  //const data = serializeJson(modForm);
   const data = new FormData(modForm);
-  /*const fetchOptions = {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  };*/
-
   const fetchOptions = {
+    headers: {
+      Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+    },
     method: 'PUT',
     body: data,
   };
 
   console.log(fetchOptions);
-  const response = await fetch(url + '/post', fetchOptions);
+  const response = await fetch(url + '/post/' + postId, fetchOptions);
   const json = await response.json();
   alert(json.message);
-  location.href = 'camping-post-detail.html'; //change later when we have created profile page
+  console.log('result edit post', json);
+
+  // location.href = 'camping-post-detail.html'; //change later when we have created profile page
 });

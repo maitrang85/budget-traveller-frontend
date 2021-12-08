@@ -1,18 +1,77 @@
 'use strict';
 const url = 'http://localhost:3000';
+
+const profile_btn = document.getElementById('profile');
+const logout_btn = document.getElementById('logout');
+const login_btn = document.getElementById('login');
+const signup_btn = document.getElementById('signup');
+
+
+// CHECK LOGIN
+let logged_in = false;
+const checkLogin = async () => {
+  'use strict';
+  const url = 'http://localhost:3000'; // change url when uploading to server
+
+  // check sessionStorage
+  if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user')) {
+    // location.href = 'login.html';
+    console.log('check sessionStorage: ', sessionStorage.getItem('token'))
+    logged_in = false;
+    return;
+  }
+  // check if token valid
+  try {
+    const fetchOptions = {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      },
+    };
+    const response = await fetch(url + '/user/token', fetchOptions);
+    console.log(response);
+    if (!response.ok) {
+      console.log('response not ok, logging out');
+      await logout();
+      location.href = 'main-page.html';
+    } else {
+      logged_in = true;
+      const json = await response.json();
+      sessionStorage.setItem('user', JSON.stringify(json.user));
+    }
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+checkLogin();
+
+// LOGOUT
 /*
-    For testing purposes
-    Hide/show buttons for different types of users
-    E.g. logged in, not logged in
+const logout = async () => {
+  try {
+    // const response = await fetch(url + '/auth/logout');
+    // const json = await response.json();
+    // console.log(json);
+    // remove token
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+    alert('You have logged out');
+    location.href = 'main-page.html';
+  } catch (e) {
+    console.log(e.message);
+  }
+};
 */
-const profile = document.getElementById('profile');
-const logout = document.getElementById('logout');
-const login = document.getElementById('login');
-const signup = document.getElementById('signup');
-profile.style.display = 'inline-block'; // For logged in users:
-logout.style.display = 'inline-block'; // profile, logout -> display: inline-block
-login.style.display = 'inline-block'; // login, signup -> display: none
-signup.style.display = 'inline-block';
+if(logged_in) {
+  profile_btn.style.display = 'inline-block'; // For logged in users:
+  logout_btn.style.display = 'inline-block'; // profile, logout -> display: inline-block
+  login_btn.style.display = 'none'; // login, signup -> display: none
+  signup_btn.style.display = 'none';
+} else {
+  profile_btn.style.display = 'none'; // For logged in users:
+  logout_btn.style.display = 'none'; // profile, logout -> display: inline-block
+  login_btn.style.display = 'inline-block'; // login, signup -> display: none
+  signup_btn.style.display = 'inline-block';
+}
 
 /*
     Script to create the cards for camping spots

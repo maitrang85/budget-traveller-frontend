@@ -1,43 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Add a post</title>
-    <link href="css/style.css" rel="stylesheet" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <title>Add a post</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="css/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  <body id="add-post-body">
-    <!-- NAVBAR -->
-    <header class="header">
-      <nav class="navbar">
-        <a href="main-page.html" class="nav-logo">Budget Traveler</a>
-        <ul class="nav-menu">
-          <li class="nav-item">
-            <a href="main-page.html" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">Contact</a>
-          </li>
-          <li class="nav-item" id="profile">
-            <a href="" id="profile-btn">Profile</a>
-          </li>
-          <li class="nav-item" id="logout">
-            <a href="#" id="logout-btn" onclick="">Logout</a>
-          </li>
-          <li class="nav-item" id="login">
-            <a href="#" id="login-btn" onclick="openLoginForm()">Login</a>
-          </li>
-          <li class="nav-item" id="signup">
-            <a href="#" id="signup-btn" onclick="openSignupForm()">Sign up</a>
-          </li>
-        </ul>
-        <div class="hamburger">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
+</head>
+<body id="add-post-body">
+<!-- NAVBAR -->
+<header class="header">
+  <nav class="navbar">
+    <a href="main-page.html" class="nav-logo">Budget Traveler</a>
+    <ul class="nav-menu">
+      <li class="nav-item">
+        <a href="main-page.html" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">About</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Contact</a>
+      </li>
+      <li class="nav-item" id="profile">
+        <a href="" id="profile-btn">Profile</a>
+      </li>
+      <li class="nav-item" id="logout">
+        <a href="#" id="logout-btn" onclick="">Logout</a>
+      </li>
+      <li class="nav-item" id="login">
+        <a href="#" id="login-btn" onclick="openLoginForm()">Login</a>
+      </li>
+      <li class="nav-item" id="signup">
+        <a href="#" id="signup-btn" onclick="openSignupForm()">Sign up</a>
+      </li>
+    </ul>
+    <div class="hamburger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  </nav>
+</header>
+
+<!-- FORM to add a camping post -->
+<div class="post-form-container">
+  <div class="post-form">
+    <div class="post-form-wrapper">
+      <div class="post-form-header">Camping location details</div>
+      <form action="http://localhost:3000/post" method="post" class="border" id="addPostForm">
+        <div class="post-form-element">
+          <label>Title</label>
+          <input
+                  class="border"
+                  type="text"
+                  name="title"
+                  required
+                  placeholder=""
+          />
         </div>
       </nav>
     </header>
@@ -120,20 +141,17 @@
               </select>
             </div>
 
-            <div class="post-form-element" id="price-input">
-              <label>Price</label>
-              <input class="border" type="number" name="price" placeholder="" />
-            </div>
-
-            <div class="post-form-element">
-              <label>User</label>
-              <input
-                class="border"
-                type="number"
-                name="userId"
-                placeholder=""
-              />
-            </div>
+        <div class="post-form-element">
+          <label>Image</label>
+          <input
+                  class="border"
+                  type="file"
+                  name="photo"
+                  accept="image/*"
+                  placeholder="Choose file"
+                  multiple
+          />
+        </div>
 
             <div class="post-form-element">
               <label>Image</label>
@@ -155,7 +173,59 @@
       </div>
     </div>
 
-    <!--<script src="js/check-login.js"></script>-->
-    <script src="js/add-post.js"></script>
-  </body>
+<!-- LOGIN MODAL POP UP -->
+<div id="login-modal-overlay"></div>
+<div id="login-modal">
+  <div class="login-modal-close" onclick="closeLoginForm()">×</div>
+  <div class="form">
+    <div class="form-header">User login</div>
+    <form id="login-form" action="http://localhost:3000/auth/login" method="post">
+      <div class="form-element">
+        <label>Email:</label>
+        <input type="text" name="username" />
+      </div>
+      <div class="form-element">
+        <label>Password:</label>
+        <input type="password" name="password" />
+      </div>
+      <div class="form-element">
+        <button id="login-form-button" type="submit">Log In</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- SIGN UP MODAL POP UP -->
+<div id="signup-modal-overlay"></div>
+<div id="signup-modal">
+  <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
+  <div class="form-wrapper">
+    <div class="form-header">Sign up</div>
+    <form id="signup-form" action="http://localhost:3000/user/post" method="post" id="signup-form">
+      <div class="form-element">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Username" />
+      </div>
+      <div class="form-element">
+        <label>Email</label>
+        <input type="text" name="email" placeholder="Email" />
+      </div>
+      <div class="form-element">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Password" />
+      </div>
+      <div class="form-element">
+        <button id="signup-form-button" type="submit">Sign up</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/navigation.js"></script>
+<script src="js/add-post.js"></script>
+<script src="js/login.js"></script>
+<script src="js/check-login.js"></script>
+<script src="js/logout.js"></script>
+
+</body>
 </html>

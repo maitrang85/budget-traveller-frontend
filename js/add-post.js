@@ -14,8 +14,8 @@ addForm.addEventListener('submit', async (evt) => {
       Authorization: 'Bearer ' + sessionStorage.getItem('token'),
       //'Content-Type': 'application/json',
     },
-    //body: JSON.stringify(data),
     body: fd,
+    //body: JSON.stringify(data),
   };
   const response = await fetch(url + '/post', fetchOptions);
   console.log(response);
@@ -23,13 +23,6 @@ addForm.addEventListener('submit', async (evt) => {
   alert(json.message);
   location.href = 'camping-post-detail.html';
 });
-
-/* ----- */
-
-const login = document.getElementById('login');
-const signup = document.getElementById('signup');
-login.style.display = 'none';
-signup.style.display = 'none';
 
 const priceSelect = document.querySelector('#price-select');
 priceSelect.addEventListener('change', () => {

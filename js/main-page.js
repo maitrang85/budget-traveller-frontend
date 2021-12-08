@@ -61,7 +61,7 @@ function renderCards(posts) {
 
     const img = document.createElement('img');
     img.className = 'card_img';
-    img.src = 'https://picsum.photos/1000/500';
+    img.src = url + '/' + post.filename;
 
     const info = document.createElement('div');
     info.className = 'card_info';

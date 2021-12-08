@@ -34,13 +34,19 @@ getPost(postId);
 // Submit modify form
 modForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
-  const data = serializeJson(modForm);
-  const fetchOptions = {
+  //const data = serializeJson(modForm);
+  const data = new FormData(modForm);
+  /*const fetchOptions = {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
+  };*/
+
+  const fetchOptions = {
+    method: 'PUT',
+    body: data,
   };
 
   console.log(fetchOptions);

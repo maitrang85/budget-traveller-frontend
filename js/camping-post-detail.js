@@ -82,10 +82,10 @@ function createDetailPost(post) {
     content.appendChild(address);
     content.appendChild(price);
     content.appendChild(author);
+    initMap(post);
   }
 }
 
-/*
 function _createDetailPost(post) {
   console.log('post', post);
   if (post) {
@@ -119,14 +119,11 @@ function _createDetailPost(post) {
     const p6 = document.createElement('p');
     p6.innerHTML = `Author: ${post.username}`;
 
-
     const modBtn = document.createElement('a');
     modBtn.innerHTML = 'Modify your post';
     modBtn.href = `modify-post.html?id=${post.post_id}`; // Will change this later
 
-
-
-    const delBtn = document.createElement('button');
+    const delBtn = document.createElement('#delBtn');
     delBtn.innerHTML = 'Delete your post';
     delBtn.addEventListener('click', async () => {
       try {
@@ -138,8 +135,8 @@ function _createDetailPost(post) {
         };
 
         const response = await fetch(
-            url + '/post/' + post.post_id,
-            fetchOptions
+          url + '/post/' + post.post_id,
+          fetchOptions
         );
         const json = await response.json();
         console.log('delete response', json);
@@ -150,7 +147,6 @@ function _createDetailPost(post) {
       }
     });
 
-
     detail.appendChild(h2);
     detail.appendChild(figure);
     detail.appendChild(p1);
@@ -159,9 +155,10 @@ function _createDetailPost(post) {
     detail.appendChild(p4);
     detail.appendChild(p5);
     detail.appendChild(p6);
+    detail.appendChild(modBtn);
+    detail.appendChild(delBtn);
   }
 }
-*/
 
 const getPost = async (postId) => {
   try {
@@ -175,6 +172,7 @@ const getPost = async (postId) => {
     console.log('post', post);
     createDetailPost(post);
   } catch (e) {
+    console.log('************error', e);
     console.log(e.message);
   }
 };
@@ -182,7 +180,7 @@ const getPost = async (postId) => {
 getPost(postId);
 
 // COMMENT PART //
-/*
+
 const createCommentCards = (comments) => {
   const commentsElement = document.querySelector('#comments');
 
@@ -206,8 +204,8 @@ const getComments = async (postId) => {
     };
 
     const response = await fetch(
-        url + '/post/' + postId + '/comment',
-        fetchOptions
+      url + '/post/' + postId + '/comment',
+      fetchOptions
     );
 
     const comments = await response.json();
@@ -219,6 +217,7 @@ const getComments = async (postId) => {
 };
 getComments(postId);
 
+/* Will bring back when we have comment from
 const addForm = document.querySelector('#addCommentForm');
 addForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
@@ -233,8 +232,8 @@ addForm.addEventListener('submit', async (evt) => {
     body: JSON.stringify(data),
   };
   const response = await fetch(
-      url + '/post/' + postId + '/comment',
-      fetchOptions
+    url + '/post/' + postId + '/comment',
+    fetchOptions
   );
   console.log(response);
   const json = await response.json();
@@ -242,27 +241,24 @@ addForm.addEventListener('submit', async (evt) => {
   location.reload();
 });
 */
-/*
-const addCommentForm = document.querySelector('#addCommentForm');
-addCommentForm.addEventListener('submit', async (evt) => {
-  evt.preventDefault();
-  const fd = new FormData(addCommentForm);
-  console.log('formdata', fd);
-  const fetchOptions = {
-    method: 'POST',
-    headers: {
-      Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-    },
-    body: fd,
-  };
-  const response = await fetch(
-    url + '/post/' + postId + '/comment',
-    fetchOptions
-  );
-  console.log(response);
-  const json = await response.json();
-  alert(json.message);
-  //location.href = 'camping-post-detail.html';
-});
-*/
 
+function initMap(post) {
+  if (post) {
+    // The location of Uluru
+    console.log('coor', post.coords);
+    console.log('coor', post.coords[0], post.coords[1]);
+    console.log('coor', post.coords[1]);
+    // TODO parsing cooors here
+    const uluru = { lat: 60.293611, lng: 24.555893 };
+    // The map, centered at Uluru
+    const map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 16,
+      center: uluru,
+    });
+    // The marker, positioned at Uluru
+    const marker = new google.maps.Marker({
+      position: uluru,
+      map: map,
+    });
+  }
+}

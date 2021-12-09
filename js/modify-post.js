@@ -1,5 +1,5 @@
 'use strict';
-const url = '10.114.32.115:3000/app';
+const url = '10.114.32.115/app';
 
 // get query parameter
 const getQParam = (param) => {

@@ -1,15 +1,6 @@
 'use strict';
 const url = 'http://localhost:3000';
 
-const profile = document.getElementById('profile');
-//const logout = document.getElementById('logout');
-const login = document.getElementById('login');
-const signup = document.getElementById('signup');
-profile.style.display = 'none'; // For logged in users:
-//logout.style.display = 'none'; // profile, logout -> display: inline-block
-login.style.display = 'inline-block'; // login, signup -> display: none
-signup.style.display = 'inline-block';
-
 // get query parameter
 const getQParam = (param) => {
   const queryString = window.location.search;
@@ -94,6 +85,7 @@ function createDetailPost(post) {
   }
 }
 
+/*
 function _createDetailPost(post) {
   console.log('post', post);
   if (post) {
@@ -127,39 +119,37 @@ function _createDetailPost(post) {
     const p6 = document.createElement('p');
     p6.innerHTML = `Author: ${post.username}`;
 
-    /*MODIFY THIS POST - For signed-in and userId = post.userId*/
-    /*
-        const modBtn = document.createElement('a');
-        modBtn.innerHTML = 'Modify your post';
-        modBtn.href = `modify-post.html?id=${post.post_id}`; // Will change this later
-        */
 
-    /*DELETE THIS POST - For signed-in and userId = post.userId*/
-    /*
-        const delBtn = document.createElement('button');
-        delBtn.innerHTML = 'Delete your post';
-        delBtn.addEventListener('click', async () => {
-            try {
-                const fetchOptions = {
-                    headers: {
-                        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-                    },
-                    method: 'DELETE',
-                };
+    const modBtn = document.createElement('a');
+    modBtn.innerHTML = 'Modify your post';
+    modBtn.href = `modify-post.html?id=${post.post_id}`; // Will change this later
 
-                const response = await fetch(
-                    url + '/post/' + post.post_id,
-                    fetchOptions
-                );
-                const json = await response.json();
-                console.log('delete response', json);
-                alert('Your post was deleted successfully.');
-                location.href = `main-page.html`;
-            } catch (e) {
-                console.log(e.message);
-            }
-        });
-        */
+
+
+    const delBtn = document.createElement('button');
+    delBtn.innerHTML = 'Delete your post';
+    delBtn.addEventListener('click', async () => {
+      try {
+        const fetchOptions = {
+          headers: {
+            Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+          },
+          method: 'DELETE',
+        };
+
+        const response = await fetch(
+            url + '/post/' + post.post_id,
+            fetchOptions
+        );
+        const json = await response.json();
+        console.log('delete response', json);
+        alert('Your post was deleted successfully.');
+        location.href = `main-page.html`;
+      } catch (e) {
+        console.log(e.message);
+      }
+    });
+
 
     detail.appendChild(h2);
     detail.appendChild(figure);
@@ -171,6 +161,7 @@ function _createDetailPost(post) {
     detail.appendChild(p6);
   }
 }
+*/
 
 const getPost = async (postId) => {
   try {
@@ -190,8 +181,8 @@ const getPost = async (postId) => {
 
 getPost(postId);
 
-///////////////////////////// COMMENT PART //////////////////
-
+// COMMENT PART //
+/*
 const createCommentCards = (comments) => {
   const commentsElement = document.querySelector('#comments');
 
@@ -215,8 +206,8 @@ const getComments = async (postId) => {
     };
 
     const response = await fetch(
-      url + '/post/' + postId + '/comment',
-      fetchOptions
+        url + '/post/' + postId + '/comment',
+        fetchOptions
     );
 
     const comments = await response.json();
@@ -242,14 +233,15 @@ addForm.addEventListener('submit', async (evt) => {
     body: JSON.stringify(data),
   };
   const response = await fetch(
-    url + '/post/' + postId + '/comment',
-    fetchOptions
+      url + '/post/' + postId + '/comment',
+      fetchOptions
   );
   console.log(response);
   const json = await response.json();
   alert(json.message);
   location.reload();
 });
+*/
 /*
 const addCommentForm = document.querySelector('#addCommentForm');
 addCommentForm.addEventListener('submit', async (evt) => {
@@ -273,6 +265,4 @@ addCommentForm.addEventListener('submit', async (evt) => {
   //location.href = 'camping-post-detail.html';
 });
 */
-/*
 
-  */

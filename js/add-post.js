@@ -1,5 +1,5 @@
 'use strict';
-const url = '10.114.32.115:3000/app';
+const url = '10.114.32.115/app';
 
 const addForm = document.querySelector('#addPostForm');
 console.log('addForm', addPostForm);

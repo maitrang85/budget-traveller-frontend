@@ -2,7 +2,7 @@
 
 const url = 'http://localhost:3000';
 const addForm = document.querySelector('#addPostForm');
-
+console.log('addForm', addPostForm);
 /* Submit and post camping site form */
 addForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
@@ -22,10 +22,9 @@ addForm.addEventListener('submit', async (evt) => {
     //body: JSON.stringify(data),
   };
   const response = await fetch(url + '/post', fetchOptions);
-  console.log(response);
   const json = await response.json();
   alert(json.message);
-  location.href = 'camping-post-detail.html';
+  location.href = `camping-post-detail.html?id=${json.post_id}`;
 });
 
 const priceSelect = document.querySelector('#price-select');
@@ -47,6 +46,7 @@ function hidePrice() {
 /* ----- */
 
 // NAVIGATION MENU
+/*
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
@@ -63,3 +63,4 @@ navLink.forEach((n) =>
     navMenu.classList.remove('active');
   })
 );
+*/

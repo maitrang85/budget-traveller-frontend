@@ -1,5 +1,5 @@
 'use strict';
-const url = 'http://localhost:3000';
+const url = '10.114.32.115:3000';
 
 // SCRIPT TO CREATE CARDS FROM POSTS
 const cards = document.querySelector('#grid');

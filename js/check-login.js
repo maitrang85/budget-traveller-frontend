@@ -57,6 +57,7 @@ const checkLogin = async () => {
             // console.log('logged in: ', logged_in)
             const json = await response.json();
             profile_btn_a.innerHTML = `<i class="fa fa-user-circle"></i>  ${json.user.username}`
+            profile_btn_a.href = 'user-profile.html';
             console.log(json.user);
             sessionStorage.setItem('user', JSON.stringify(json.user));
         }

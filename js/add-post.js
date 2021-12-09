@@ -8,6 +8,10 @@ addForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
   const fd = new FormData(addForm);
   //const data = Object.fromEntries(fd);
+  if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user')) {
+    alert('You need to log in before posting!');
+    openLoginForm();
+  }
   const fetchOptions = {
     method: 'POST',
     headers: {

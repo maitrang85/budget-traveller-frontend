@@ -1,5 +1,5 @@
 'use strict';
-const url = '10.114.32.115:3000';
+const url = '10.114.32.115:3000/app';
 
 // OPEN/CLOSE LOGIN + SIGN UP FORMS
 function openLoginForm() {

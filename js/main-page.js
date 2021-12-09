@@ -3,6 +3,17 @@ const url = 'http://localhost:3000';
 
 // SCRIPT TO CREATE CARDS FROM POSTS
 const cards = document.querySelector('#grid');
+
+// CHECK IF VIEWER IS NOT LOGGIN YET, CAN NOT SEE POST A NEW SITE button
+
+const addPostButton = document.getElementById('#addPost');
+const token = sessionStorage.getItem('token');
+if (!token) {
+  addPostButton.style.display = 'none';
+} else {
+  addPostButton.style.display = 'inline-block';
+}
+
 const createCards = (posts) => {
   console.log(posts);
   renderCards(posts);

@@ -1,148 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>Detail of a post</title>
     <link href="css/style.css" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
 
-<body id="camping-post-body">
-<!-- NAVBAR -->
-<header class="header">
-    <nav class="navbar">
+  <body id="camping-post-body">
+    <!-- NAVBAR -->
+    <header class="header">
+      <nav class="navbar">
         <a href="main-page.html" class="nav-logo">Budget Traveler</a>
         <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="main-page.html" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">About</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Contact</a>
-            </li>
-            <li class="nav-item" id="profile">
-                <a href="" id="profile-btn">Profile</a>
-            </li>
-            <li class="nav-item" id="logout">
-                <a href="#" id="logout-btn" onclick="">Logout</a>
-            </li>
-            <li class="nav-item" id="login">
-                <a href="#" id="login-btn" onclick="openLoginForm()">Login</a>
-            </li>
-            <li class="nav-item" id="signup">
-                <a href="#" id="signup-btn" onclick="openSignupForm()">Sign up</a>
-            </li>
+          <li class="nav-item">
+            <a href="main-page.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Contact</a>
+          </li>
+          <li class="nav-item" id="profile">
+            <a href="" id="profile-btn">Profile</a>
+          </li>
+          <li class="nav-item" id="logout">
+            <a href="#" id="logout-btn" onclick="">Logout</a>
+          </li>
+          <li class="nav-item" id="login">
+            <a href="#" id="login-btn" onclick="openLoginForm()">Login</a>
+          </li>
+          <li class="nav-item" id="signup">
+            <a href="#" id="signup-btn" onclick="openSignupForm()">Sign up</a>
+          </li>
         </ul>
         <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
         </div>
-    </nav>
-</header>
+      </nav>
+    </header>
 
-<div class="camping-detail-container">
-    <div id="detail">
+    <div class="camping-detail-container">
+      <div id="detail">
         <!-- js creates detail of a camping site here -->
-        <ul id="listOfComments"></ul>
-        <div id="comment"></div>
-    </div>
-
-    <!--
-    <div class="form">
-        <h4>Your comment</h4>
-        <form novalidate action="http://localhost:3000/post/" method="post" id="addCommentForm">
+      </div>
+      <div id="comments">
+        <div class="form">
+          <h4>Your comment</h4>
+          <form
+            novalidate
+            action="http://localhost:3000/post/"
+            method="post"
+            id="addCommentForm"
+          >
             <input type="text" required name="content" placeholder="Content" />
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-    -->
-</div>
-
-<div id="detailed-post-container">
-    <!--
-    <div class="detailed-post">
-        <div class="post-img">
-            <img src="img/banner2.jpg" alt="">
+            <button id="addCommentBtn" type="submit">Add comment</button>
+          </form>
         </div>
-        <div class="post-info">
-            <div class="content">
-                <h1 class="title">Title of the camping spot</h1>
-                <p class="content">Description</p>
-                <p class="region">Region</p>
-                <p class="address">Address</p>
-                <p class="author">Author</p>
-                <p class="price">Price</p>
-
-                <div class="btn-and-rating-box">
-                    <div class="rating">
-
-                    </div>
-                    <button class="btn">buy now</button>
-                </div>
-
-            </div>
-        </div>
+      </div>
     </div>
-    -->
-</div>
 
-<!-- LOGIN MODAL POP UP -->
-<div id="login-modal-overlay"></div>
-<div id="login-modal">
-    <div class="login-modal-close" onclick="closeLoginForm()">×</div>
-    <div class="form">
+    <!-- LOGIN MODAL POP UP -->
+    <div id="login-modal-overlay"></div>
+    <div id="login-modal">
+      <div class="login-modal-close" onclick="closeLoginForm()">×</div>
+      <div class="form">
         <div class="form-header">User login</div>
-        <form id="login-form" action="http://localhost:3000/auth/login" method="post">
-            <div class="form-element">
-                <label>Email:</label>
-                <input type="text" name="username" />
-            </div>
-            <div class="form-element">
-                <label>Password:</label>
-                <input type="password" name="password" />
-            </div>
-            <div class="form-element">
-                <button id="login-form-button" type="submit">Log In</button>
-            </div>
+        <form
+          id="login-form"
+          action="http://localhost:3000/auth/login"
+          method="post"
+        >
+          <div class="form-element">
+            <label>Email:</label>
+            <input type="text" name="username" />
+          </div>
+          <div class="form-element">
+            <label>Password:</label>
+            <input type="password" name="password" />
+          </div>
+          <div class="form-element">
+            <button id="login-form-button" type="submit">Log In</button>
+          </div>
         </form>
+      </div>
     </div>
-</div>
 
-<!-- SIGN UP MODAL POP UP -->
-<div id="signup-modal-overlay"></div>
-<div id="signup-modal">
-    <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
-    <div class="form-wrapper">
+    <!-- SIGN UP MODAL POP UP -->
+    <div id="signup-modal-overlay"></div>
+    <div id="signup-modal">
+      <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
+      <div class="form-wrapper">
         <div class="form-header">Sign up</div>
-        <form id="signup-form" action="http://localhost:3000/user/post" method="post" id="signup-form">
-            <div class="form-element">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="Username" />
-            </div>
-            <div class="form-element">
-                <label>Email</label>
-                <input type="text" name="email" placeholder="Email" />
-            </div>
-            <div class="form-element">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Password" />
-            </div>
-            <div class="form-element">
-                <button id="signup-form-button" type="submit">Sign up</button>
-            </div>
+        <form
+          id="signup-form"
+          action="http://localhost:3000/user/post"
+          method="post"
+          id="signup-form"
+        >
+          <div class="form-element">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Username" />
+          </div>
+          <div class="form-element">
+            <label>Email</label>
+            <input type="text" name="email" placeholder="Email" />
+          </div>
+          <div class="form-element">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Password" />
+          </div>
+          <div class="form-element">
+            <button id="signup-form-button" type="submit">Sign up</button>
+          </div>
         </form>
+      </div>
     </div>
-</div>
 
-<script src="js/navigation.js"></script>
-<script src="js/camping-post-detail.js"></script>
-<script src="js/login.js"></script>
-<script src="js/check-login.js"></script>
-<script src="js/logout.js"></script>
-<!--script src="js/add-comment.js"></script>-->
-</body>
+    <script src="js/navigation.js"></script>
+    <script src="js/camping-post-detail.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/check-login.js"></script>
+    <script src="js/logout.js"></script>
+    <!--script src="js/add-comment.js"></script>-->
+  </body>
 </html>

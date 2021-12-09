@@ -2,15 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Add a post</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Modify a post</title>
     <link href="css/style.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
   </head>
-  <body id="add-post-body">
+
+  <body>
     <!-- NAVBAR -->
     <header class="header">
       <nav class="navbar">
@@ -46,19 +42,20 @@
       </nav>
     </header>
 
-    <!-- FORM to add a camping post -->
+    <!-- FORM to modify a camping post -->
     <div class="post-form-container">
       <div class="post-form">
         <div class="post-form-wrapper">
-          <div class="post-form-header">Camping location details</div>
+          <div class="form-header">Modify a camping spot</div>
+
           <form
             action="http://localhost:3000/post"
             method="post"
             class="border"
-            id="addPostForm"
+            id="modPostForm"
             enctype="multipart/form-data"
           >
-            <div class="post-form-element">
+            <div class="form-element">
               <label>Title</label>
               <input
                 class="border"
@@ -69,12 +66,12 @@
               />
             </div>
 
-            <div class="post-form-element">
+            <div class="form-element">
               <label>Address</label>
               <input class="border" type="text" name="address" placeholder="" />
             </div>
 
-            <div class="post-form-element">
+            <div class="form-element">
               <label>Content</label>
               <input
                 class="border"
@@ -85,9 +82,14 @@
               />
             </div>
 
-            <div class="post-form-element">
+            <div class="form-element">
               <label>Choose your region</label>
-              <select class="post-form-dropdown" name="regionId" required>
+              <select
+                class="dropdown-select"
+                name="region_id"
+                id="region-select"
+                required
+              >
                 <option value="Finland">Finland</option>
                 <option value="Ahvenanmaa">Ahvenanmaa</option>
                 <option value="Etelä-Karjala">Etelä-Karjala</option>
@@ -111,12 +113,12 @@
               </select>
             </div>
 
-            <div class="post-form-element">
+            <div class="form-element">
               <label>Choose pricing</label>
               <select
                 id="price-select"
-                class="post-form-dropdown"
-                name="freeOrNot"
+                class="dropdown-select"
+                name="free_or_not"
                 required
               >
                 <option value="free">Free</option>
@@ -124,99 +126,32 @@
               </select>
             </div>
 
-            <div class="post-form-element">
+            <div class="form-element" id="price-input">
+              <label>Price</label>
+              <input class="border" type="number" name="price" placeholder="" />
+            </div>
+            <!-- TODO REPLACE THIS INPUT BY IMAGE, when user click into button edit image, we will let him user input upload file-->
+            <div class="form-element">
               <label>Image</label>
               <input
                 class="border"
                 type="file"
-                name="photo"
+                name="filename"
                 accept="image/*"
                 placeholder="Choose file"
                 multiple
               />
             </div>
 
-            <div class="post-form-element">
-              <label>Image</label>
-              <input
-                class="border"
-                type="file"
-                name="photo"
-                accept="image/*"
-                placeholder="Choose file"
-                multiple
-              />
-            </div>
-
-            <div class="post-form-element">
-              <button class="border" type="submit">Upload your post</button>
+            <div class="form-element">
+              <button class="border" type="submit">Modify your post</button>
             </div>
           </form>
         </div>
       </div>
     </div>
 
-    <!-- LOGIN MODAL POP UP -->
-    <div id="login-modal-overlay"></div>
-    <div id="login-modal">
-      <div class="login-modal-close" onclick="closeLoginForm()">×</div>
-      <div class="form">
-        <div class="form-header">User login</div>
-        <form
-          id="login-form"
-          action="http://localhost:3000/auth/login"
-          method="post"
-        >
-          <div class="form-element">
-            <label>Email:</label>
-            <input type="text" name="username" />
-          </div>
-          <div class="form-element">
-            <label>Password:</label>
-            <input type="password" name="password" />
-          </div>
-          <div class="form-element">
-            <button id="login-form-button" type="submit">Log In</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- SIGN UP MODAL POP UP -->
-    <div id="signup-modal-overlay"></div>
-    <div id="signup-modal">
-      <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
-      <div class="form-wrapper">
-        <div class="form-header">Sign up</div>
-        <form
-          id="signup-form"
-          action="http://localhost:3000/user/post"
-          method="post"
-          id="signup-form"
-        >
-          <div class="form-element">
-            <label>Username</label>
-            <input type="text" name="username" placeholder="Username" />
-          </div>
-          <div class="form-element">
-            <label>Email</label>
-            <input type="text" name="email" placeholder="Email" />
-          </div>
-          <div class="form-element">
-            <label>Password</label>
-            <input type="password" name="password" placeholder="Password" />
-          </div>
-          <div class="form-element">
-            <button id="signup-form-button" type="submit">Sign up</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <script src="js/navigation.js"></script>
-    <script src="js/add-post.js"></script>
-    <script src="js/login.js"></script>
-    <script src="js/check-login.js"></script>
-    <script src="js/logout.js"></script>
+    <!--<script src="js/check-login.js"></script>-->
+    <script src="js/modify-post.js"></script>
   </body>
 </html>

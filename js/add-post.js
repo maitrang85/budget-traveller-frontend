@@ -25,23 +25,41 @@ addForm.addEventListener('submit', async (evt) => {
   console.log(response);
   const json = await response.json();
   alert(json.message);
-  location.href = 'main-page.html';
+  location.href = 'camping-post-detail.html';
 });
 
 const priceSelect = document.querySelector('#price-select');
-priceSelect.addEventListener("change", () => {
-  if(priceSelect.selectedIndex === 0) {
+priceSelect.addEventListener('change', () => {
+  if (priceSelect.selectedIndex === 0) {
     hidePrice();
-  } else
-    showPrice();
-})
+  } else showPrice();
+});
 
 function showPrice() {
-  const priceInput = document.querySelector("#price-input");
+  const priceInput = document.querySelector('#price-input');
   priceInput.classList.add('showPriceInput');
 }
 function hidePrice() {
-  const priceInput = document.querySelector("#price-input");
+  const priceInput = document.querySelector('#price-input');
   priceInput.classList.remove('showPriceInput');
 }
 
+/* ----- */
+
+// NAVIGATION MENU
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  navMenu.classList.toggle('active');
+});
+
+const navLink = document.querySelectorAll('.nav-link');
+
+navLink.forEach((n) =>
+  n.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+  })
+);

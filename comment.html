@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Comment</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body id="add-post-body">
+    <!-- NAVBAR -->
+    <header class="header">
+      <nav class="navbar">
+        <a href="main-page.html" class="nav-logo">Budget Traveler</a>
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="main-page.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Contact</a>
+          </li>
+          <li class="nav-item" id="profile">
+            <a href="" id="profile-btn">Profile</a>
+          </li>
+          <li class="nav-item" id="logout">
+            <a href="#" id="logout-btn" onclick="">Logout</a>
+          </li>
+          <li class="nav-item" id="login">
+            <a href="#" id="login-btn" onclick="openLoginForm()">Login</a>
+          </li>
+          <li class="nav-item" id="signup">
+            <a href="#" id="signup-btn" onclick="openSignupForm()">Sign up</a>
+          </li>
+        </ul>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </header>
+    <!-- FORM to add a comment -->
+
+    <div id="comment"></div>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/camping-post-detail.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/check-login.js"></script>
+    <script src="js/logout.js"></script>
+  </body>
+</html>

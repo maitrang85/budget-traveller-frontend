@@ -25,8 +25,6 @@ const log_in_status = (status) => {
 // CHECK LOGIN
 let logged_in = false;
 const checkLogin = async () => {
-    'use strict';
-    const url = '10.114.32.115'; // change url when uploading to server
 
     // check sessionStorage
     if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user')) {

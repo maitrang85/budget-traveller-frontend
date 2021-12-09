@@ -6,8 +6,9 @@ const cards = document.querySelector('#grid');
 
 // CHECK IF VIEWER IS NOT LOGGIN YET, CAN NOT SEE POST A NEW SITE button
 
-const addPostButton = document.getElementById('#addPost');
+const addPostButton = document.getElementById('addPost');
 const token = sessionStorage.getItem('token');
+console.log(document.getElementById('addPost'));
 if (!token) {
   addPostButton.style.display = 'none';
 } else {

@@ -249,15 +249,15 @@ function initMap(post) {
     console.log('coor', post.coords[0], post.coords[1]);
     console.log('coor', post.coords[1]);
     // TODO parsing cooors here
-    const uluru = { lat: 60.293611, lng: 24.555893 };
+    const campLocation = { lat: 60.293611, lng: 24.555893 };
     // The map, centered at Uluru
     const map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 16,
-      center: uluru,
+      zoom: 10,
+      center: campLocation,
     });
-    // The marker, positioned at Uluru
+    // The marker, positioned at the camping 's location
     const marker = new google.maps.Marker({
-      position: uluru,
+      position: campLocation,
       map: map,
     });
   }

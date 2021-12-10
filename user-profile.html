@@ -1,57 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Profile</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <link rel="stylesheet" href="css/style.css" />
-</head>
-<body id="profile-body">
-
-<!-- NAVBAR -->
-<header class="header">
-    <nav class="navbar">
+  </head>
+  <body id="profile-body">
+    <!-- NAVBAR -->
+    <header class="header">
+      <nav class="navbar">
         <a href="main-page.html" class="nav-logo">Budget Traveler</a>
         <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="main-page.html" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">About</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Contact</a>
-            </li>
-            <li class="nav-item" id="profile">
-                <a class="nav-link" href="#" id="profile-btn">Profile</a>
-            </li>
-            <li class="nav-item" id="logout">
-                <a class="nav-link" href="#" id="logout-btn" onclick="">Logout</a>
-            </li>
-            <li class="nav-item" id="login">
-                <a class="nav-link" href="#" id="login-btn" onclick="openLoginForm()">Login</a>
-            </li>
-            <li class="nav-item" id="signup">
-                <a class="nav-link" href="#" id="signup-btn" onclick="openSignupForm()">Sign up</a>
-            </li>
+          <li class="nav-item">
+            <a href="main-page.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Contact</a>
+          </li>
+          <li class="nav-item" id="profile">
+            <a class="nav-link" href="#" id="profile-btn">Profile</a>
+          </li>
+          <li class="nav-item" id="logout">
+            <a class="nav-link" href="#" id="logout-btn" onclick="">Logout</a>
+          </li>
+          <li class="nav-item" id="login">
+            <a
+              class="nav-link"
+              href="#"
+              id="login-btn"
+              onclick="openLoginForm()"
+              >Login</a
+            >
+          </li>
+          <li class="nav-item" id="signup">
+            <a
+              class="nav-link"
+              href="#"
+              id="signup-btn"
+              onclick="openSignupForm()"
+              >Sign up</a
+            >
+          </li>
         </ul>
         <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
         </div>
-    </nav>
-</header>
+      </nav>
+    </header>
 
-<div id="maintenance">
-    <p style="padding: 5px;"><i class="fa fa-wrench" style="font-size: 40px; color: #000000;"></i>Under maintenance</p>
-    <br>
-    <a href="main-page.html" style="text-decoration: none; color: #154a07; padding: 5px; font-size: 20px;"><i class="fa fa-home"></i>  Return to home</a>
-</div>
+    <div id="maintenance">
+      <p style="padding: 5px">
+        <i class="fa fa-wrench" style="font-size: 40px; color: #000000"></i
+        >Under maintenance
+      </p>
+      <br />
+      <a
+        href="main-page.html"
+        style="
+          text-decoration: none;
+          color: #154a07;
+          padding: 5px;
+          font-size: 20px;
+        "
+        ><i class="fa fa-home"></i> Return to home</a
+      >
+    </div>
 
-<!-- PROFILE CONTAINER -->
-<!--
+    <!-- PROFILE CONTAINER -->
+    <!--
 <div id="profile-container">
     <div id="profile-info">
         <p id="profile-avatar">
@@ -91,60 +117,81 @@
 </div>
 -->
 
-<!-- LOGIN MODAL POP UP -->
-<div id="login-modal-overlay"></div>
-<div id="login-modal">
-    <div class="login-modal-close" onclick="closeLoginForm()">×</div>
-    <div class="form">
+    <!-- LOGIN MODAL POP UP -->
+    <div id="login-modal-overlay"></div>
+    <div id="login-modal">
+      <div class="login-modal-close" onclick="closeLoginForm()">×</div>
+      <div class="form">
         <div class="form-header">User login</div>
         <form id="login-form" action="" method="post">
-            <div class="form-element">
-                <label>Email:</label>
-                <input type="text" name="email" />
-            </div>
-            <div class="form-element">
-                <label>Password:</label>
-                <input type="password" name="password" />
-            </div>
-            <div class="form-element">
-                <button id="login-form-button" type="submit">Log In</button>
-            </div>
+          <div class="form-element">
+            <label>Email:</label>
+            <input type="email" name="email" required="required" />
+          </div>
+          <div class="form-element">
+            <label>Password:</label>
+            <input
+              type="password"
+              name="password"
+              required="required"
+              pattern="(?=.*[A-Z]).{8,}"
+            />
+          </div>
+          <div class="form-element">
+            <button id="login-form-button" type="submit">Log In</button>
+          </div>
         </form>
+      </div>
     </div>
-</div>
 
-<!-- SIGN UP MODAL POP UP -->
-<div id="signup-modal-overlay"></div>
-<div id="signup-modal">
-    <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
+    <!-- SIGN UP MODAL POP UP -->
+    <div id="signup-modal-overlay"></div>
+    <div id="signup-modal">
+      <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
 
-    <div class="form-wrapper">
+      <div class="form-wrapper">
         <div class="form-header">Sign up</div>
         <form action="" method="post" id="signup-form">
-            <div class="form-element">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="Username" />
-            </div>
-            <div class="form-element">
-                <label>Email</label>
-                <input type="text" name="email" placeholder="Email" />
-            </div>
-            <div class="form-element">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Password" />
-            </div>
-            <div class="form-element">
-                <button id="signup-form-button" type="submit">Sign up</button>
-            </div>
+          <div class="form-element">
+            <label>Username</label>
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              required="required"
+              minlength="3"
+            />
+          </div>
+          <div class="form-element">
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              required="required"
+            />
+          </div>
+          <div class="form-element">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required="required"
+              pattern="(?=.*[A-Z]).{8,}"
+            />
+          </div>
+          <div class="form-element">
+            <button id="signup-form-button" type="submit">Sign up</button>
+          </div>
         </form>
+      </div>
     </div>
-</div>
 
-<script src="js/navigation.js"></script>
-<script src="js/profile.js"></script>
-<script src="js/login.js"></script>
-<script src="js/check-login.js"></script>
-<script src="js/logout.js"></script>
-
-</body>
+    <script src="js/navigation.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/check-login.js"></script>
+    <script src="js/logout.js"></script>
+  </body>
 </html>

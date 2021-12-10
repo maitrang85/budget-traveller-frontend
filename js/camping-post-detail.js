@@ -242,15 +242,11 @@ addForm.addEventListener('submit', async (evt) => {
 });
 */
 
+/* DISPLAY MAP */
 function initMap(post) {
   if (post) {
-    // The location of Uluru
-    console.log('coor', post.coords);
-    console.log('coor', post.coords[0], post.coords[1]);
-    console.log('coor', post.coords[1]);
-    // TODO parsing cooors here
-    const campLocation = { lat: 60.293611, lng: 24.555893 };
-    // The map, centered at Uluru
+    const campLocation = { lat: post.coords[0], lng: post.coords[1] };
+    // The map, centered at location of camping site
     const map = new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
       center: campLocation,

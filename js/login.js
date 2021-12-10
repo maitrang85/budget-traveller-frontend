@@ -20,26 +20,9 @@ const signupForm = document.querySelector('#signup-form');
 // SUBMIT LOGIN FORM
 loginForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
-  const login = new FormData(loginForm);
-  const data = Object.fromEntries(login);
-  const fetchOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  };
-
-  const response = await fetch(url + '/auth/login', fetchOptions);
-  const json = await response.json();
-  console.log('login response', json);
-  if (!json.user) {
-    alert(json.message);
-  } else {
-    // save token
-    sessionStorage.setItem('token', json.token);
-    sessionStorage.setItem('user', JSON.stringify(json.user));
-    alert('Logged in successfully');
+  const data = Object.fromEntries(new FormData(loginForm));
+  const loginSuccess = await login(data);
+  if (loginSuccess) {
     location.href = 'main-page.html';
   }
 });
@@ -47,8 +30,7 @@ loginForm.addEventListener('submit', async (evt) => {
 // SUBMIT SIGNUP FORM
 signupForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
-  const signup = new FormData(signupForm);
-  const data = Object.fromEntries(signup);
+  const data = Object.fromEntries(new FormData(signupForm));
   const fetchOptions = {
     method: 'POST',
     headers: {
@@ -58,20 +40,37 @@ signupForm.addEventListener('submit', async (evt) => {
   };
   const response = await fetch(url + '/auth/register', fetchOptions);
   const json = await response.json();
-  alert(json.message);
-
-  // TODO REMOVE COMMENT LATER WHEN BACKEND CAN RETURN PAYLOAD SAME AS LOGIN.
-  /*
-    if (!json.user) {
-        alert(json.message);
-    } else {
-        // save token
-        sessionStorage.setItem('token', json.token);
-        sessionStorage.setItem('user', JSON.stringify(json.user));
-        alert('Logged in successfully');
-        location.href = 'main-page.html';
+  if (json && json.user_id) {
+    const loginSuccess = await login(data);
+    if (loginSuccess) {
+      location.href = 'main-page.html';
     }
-    */
-
+  }
+  alert(json.message);
   location.href = 'main-page.html';
 });
+
+const login = async (jsonData) => {
+  if (jsonData.email) jsonData.username = jsonData.email;
+  const fetchOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(jsonData),
+  };
+  const loginResponse = await fetch(url + '/auth/login', fetchOptions);
+  const json = await loginResponse.json();
+  console.log('login response', json);
+  if (!json.user) {
+    alert(json.message);
+  } else {
+    // save token
+    console.log('successful here');
+    sessionStorage.setItem('token', json.token);
+    sessionStorage.setItem('user', JSON.stringify(json.user));
+    alert('Logged in successfully');
+    return true;
+  }
+  return false;
+};

@@ -65,6 +65,15 @@ a {
   color: #0c0c0c;
 }
 
+/* MAP */
+/* Set the size of the div element that contains the map */
+#map {
+  height: 200px;
+  /* The height is 200px pixels */
+  width: 50%;
+  /* The width is the width of the web page */
+}
+
 /* ADD POST FORM */
 #add-post-body {
   background: url(../img/banner2.jpg) no-repeat center center fixed;
@@ -201,9 +210,9 @@ a {
   max-width: 600px;
   margin: 15px auto;
   border-radius: 3px;
-  overflow-y:hidden;
+  overflow-y: hidden;
   background: rgba(255, 255, 255, 0.8);
-  box-shadow: 5px 5px 30px rgba(0,0,0,.3);
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* LOGIN AND SIGN UP FORMS */
@@ -586,33 +595,38 @@ body.showSignupForm #signup-modal {
   max-width: 1200px;
   margin: 15px auto;
   border-radius: 3px;
-  overflow-y:hidden;
+  overflow-y: hidden;
   background: rgba(255, 255, 255, 0.8);
-  box-shadow: 5px 5px 30px rgba(0,0,0,.3);
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
 }
 
 #camping-post-body {
   background-color: #4e4e4e;
 }
-#detailed-post-container{
+#detailed-post-container {
   width: 100%;
   min-height: 100vh;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(185,185,185);
-  background: linear-gradient(41deg, rgba(185,185,185,1) 0%, rgba(156,156,156,1) 45%, rgba(221,221,221,1) 82%);
+  background: rgb(185, 185, 185);
+  background: linear-gradient(
+    41deg,
+    rgba(185, 185, 185, 1) 0%,
+    rgba(156, 156, 156, 1) 45%,
+    rgba(221, 221, 221, 1) 82%
+  );
   font-family: 'roboto', sans-serif;
 }
 
-@keyframes slide-in{
-  100%{
+@keyframes slide-in {
+  100% {
     opacity: 1;
     left: 50%;
   }
 }
-.detailed-post{
+.detailed-post {
   position: relative;
   width: 1000px;
   min-width: 350px;
@@ -622,7 +636,7 @@ body.showSignupForm #signup-modal {
   justify-content: center;
   align-items: center;
 }
-.post-img{
+.post-img {
   width: 100%;
   height: 600px;
   background: rgba(255, 255, 255, 0);
@@ -631,13 +645,13 @@ body.showSignupForm #signup-modal {
   transform: translateY(-50px);
   animation: fade-in 1s forwards 1;
 }
-.post-img img{
+.post-img img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   user-select: none;
 }
-.tag{
+.tag {
   position: absolute;
   top: 100px;
   left: -10px;
@@ -652,15 +666,15 @@ body.showSignupForm #signup-modal {
   text-align: center;
   background: #292929;
   user-select: none;
-  animation: tag .5s 1s forwards 1;
+  animation: tag 0.5s 1s forwards 1;
 }
-@keyframes tag{
-  100%{
+@keyframes tag {
+  100% {
     opacity: 1;
     transform: rotate(-20deg);
   }
 }
-.post-info{
+.post-info {
   width: 60%;
   min-height: 500px;
   height: auto;
@@ -673,17 +687,17 @@ body.showSignupForm #signup-modal {
   transform: translateY(50px);
   animation: fade-in 1s forwards 1;
 }
-@keyframes fade-in{
-  100%{
+@keyframes fade-in {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
-.title{
+.title {
   font-size: 40px;
   text-transform: capitalize;
 }
-.description{
+.description {
   font-size: 18px;
   line-height: 30px;
   margin: 50px 0;
@@ -700,7 +714,7 @@ body.showSignupForm #signup-modal {
   font-size: 18px;
   line-height: 30px;
 }
-.price{
+.price {
   font-size: 18px;
   line-height: 30px;
 }
@@ -736,37 +750,42 @@ body.showSignupForm #signup-modal {
 }
 */
 
-@media (max-width: 1100px){
-  #detailed-post-container{
+@media (max-width: 1100px) {
+  #detailed-post-container {
     width: 100%;
     height: 100%;
     display: flex;
     background: #4e4e4e;
     font-family: 'roboto', sans-serif;
   }
-  .detailed-post{
+  .detailed-post {
     flex-direction: column;
     width: 100%;
-
   }
-  .post-img{
+  .post-img {
     margin: 0;
     width: 100%;
     height: 100%;
   }
-  .post-info{
+  .post-info {
     width: 100%;
     height: 100%;
   }
-  .title{
+  .title {
     font-size: 30px;
   }
-  .description, .region, .address, .author, .price{
+  .description,
+  .region,
+  .address,
+  .author,
+  .price {
     font-size: 16px;
   }
 }
 @media (max-width: 902px) {
-  #banner-background { height: 300px; }
+  #banner-background {
+    height: 300px;
+  }
   .nav-menu {
     z-index: 1000;
     position: absolute;
@@ -779,12 +798,10 @@ body.showSignupForm #signup-modal {
     height: 100%;
     text-align: center;
     transition: 0.3s;
-    box-shadow:
-            0 10px 27px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
   }
   .nav-menu.active {
     left: 0;
-
   }
   .nav-item {
     margin: 2.5rem 0;
@@ -802,7 +819,6 @@ body.showSignupForm #signup-modal {
   .hamburger.active .bar:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
   }
-
 }
 @media (max-width: 535px) {
   #banner-background {
@@ -829,15 +845,15 @@ body.showSignupForm #signup-modal {
   }
   .grid_item {
     background-color: #fff;
-    border-radius: .4rem;
+    border-radius: 0.4rem;
     overflow: hidden;
-    box-shadow: 0 3rem 6rem rgba(0, 0, 0, .1);
+    box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: 0.4s;
   }
   .grid_item:hover {
-    transform: translateY(-.5%);
-    box-shadow: 0 4rem 8rem rgba(0, 0, 0, .2);
+    transform: translateY(-0.5%);
+    box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.2);
   }
   .card_img {
     display: block;
@@ -861,7 +877,6 @@ body.showSignupForm #signup-modal {
     margin-left: 15px;
     margin-bottom: 15px;
     font-weight: bold;
-
   }
   .card_info span {
     margin-right: 20px;
@@ -885,7 +900,7 @@ body.showSignupForm #signup-modal {
   }
   .card_text {
     font-size: 1rem;
-    letter-spacing: .1rem;
+    letter-spacing: 0.1rem;
     color: #000000;
     margin-bottom: 2.5rem;
   }

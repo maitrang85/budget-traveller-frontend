@@ -74,3 +74,27 @@ const login = async (jsonData) => {
   }
   return false;
 };
+
+/* FORM VALIDATION for SIGN UP*/
+/* Validation for email */
+const email = document.getElementById('email');
+
+email.addEventListener('input', function (event) {
+  if (email.validity.typeMismatch) {
+    email.setCustomValidity('Please put a real email with an @ character');
+  } else {
+    email.setCustomValidity('');
+  }
+});
+
+/* Validation for password */
+const password = document.getElementById('password');
+password.addEventListener('input', function (event) {
+  if (password.validity.patternMismatch) {
+    password.setCustomValidity(
+      'Please put a password with at least a capital letter with minimum length of 8 characters!'
+    );
+  } else {
+    password.setCustomValidity('');
+  }
+});

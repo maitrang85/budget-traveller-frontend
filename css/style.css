@@ -135,6 +135,21 @@ a {
   box-shadow: 1px 1px 8px #333;
   background: rgba(3, 3, 3, 0.18);
 }
+.post-form-element textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  outline: none;
+  border: 1px solid #aaa;
+  background: rgba(3, 3, 3, 0.1);
+  border-radius: 5px;
+}
+.post-form-element textarea:focus {
+  outline: none;
+  box-shadow: 1px 1px 8px #333;
+  background: rgba(3, 3, 3, 0.18);
+}
 .post-form-dropdown {
   border: none;
   outline: none;

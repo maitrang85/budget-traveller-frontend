@@ -98,6 +98,10 @@ function renderCards(posts) {
       location.href = `camping-post-detail.html?id=${post.post_id}`;
     });
 
+    card_item.addEventListener('click', () => {
+      location.href = `camping-post-detail.html?id=${post.post_id}`;
+    });
+
     const span = document.createElement('span');
     span.innerHTML = '→';
 

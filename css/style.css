@@ -503,22 +503,36 @@ body.showSignupForm #signup-modal {
 #banner-background a:hover {
   background: #c4c4c4;
 }
+#banner-background p {
+  position: absolute;
+  display: inline-block;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+}
 
 /* GALLERY */
 #camping-spots-grid {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  padding: 2rem;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 1rem;
+  line-height: 1.5;
   background-color: #ffffff;
   font-family: 'Inter', sans-serif;
 }
 #grid {
+  list-style: none;
+  margin: 0;
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1.5rem;
+  max-width: 100vw;
   width: 1200px;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 1rem;
-  align-items: start;
+  padding: 0 1rem;
 }
 .grid_item {
   background-color: #fff;
@@ -533,16 +547,17 @@ body.showSignupForm #signup-modal {
   box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.2);
 }
 .card_img {
-  display: block;
   width: 100%;
-  height: 15rem;
   object-fit: cover;
+  max-height: max(10rem, 30vh);
+  aspect-ratio: 4/3;
   -webkit-filter: grayscale(1);
   filter: grayscale(1);
+
 }
 .card-thumbnail {
   position: relative;
-  display: inline-block;
+
 }
 .card_info {
   position: absolute;
@@ -567,15 +582,27 @@ body.showSignupForm #signup-modal {
   filter: none;
 }
 .card_content {
-  padding: 3rem 3rem;
+  padding: 1rem 2rem;
 }
 .card_header {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
   font-size: 2rem;
   font-weight: 500;
   color: #000000;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .card_text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
   font-size: 1rem;
   letter-spacing: 0.1rem;
   color: #000000;
@@ -583,12 +610,12 @@ body.showSignupForm #signup-modal {
 }
 .card_btn {
   display: block;
-  width: 100%;
-  padding: 1.5rem;
+  width: 80%;
+  padding: 1rem;
   font-size: 1.5rem;
   text-align: center;
   color: #292929;
-  background-color: #faebd7;
+  background-color: #f6f6f6;
   border: none;
   border-radius: 0.4rem;
   transition: 0.4s;
@@ -600,7 +627,7 @@ body.showSignupForm #signup-modal {
 }
 .card_btn:hover,
 .card_btn:active {
-  background-color: #b7aa85;
+  background-color: #dbdbdb;
 }
 
 /* DETAILED POST */
@@ -938,71 +965,39 @@ footer{
     padding: 1rem;
   }
   #grid {
-    display: grid;
-    width: 1200px;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 1rem;
-    align-items: start;
+
   }
   .grid_item {
-    background-color: #fff;
-    border-radius: 0.4rem;
-    overflow: hidden;
-    box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: 0.4s;
+
   }
   .grid_item:hover {
-    transform: translateY(-0.5%);
-    box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.2);
+
   }
   .card_img {
-    display: block;
-    width: 100%;
-    height: 15rem;
-    object-fit: cover;
-    -webkit-filter: grayscale(1);
-    filter: grayscale(1);
+
   }
   .card-thumbnail {
-    position: relative;
-    display: inline-block;
+
   }
   .card_info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-radius: 5px;
-    text-align: center;
-    color: white;
-    margin-left: 15px;
-    margin-bottom: 15px;
-    font-weight: bold;
+
   }
   .card_info span {
-    margin-right: 20px;
+
   }
   .card_info i {
-    margin-right: 10px;
+
   }
   .grid_item:hover .card_img {
-    transition: 1s;
-    -webkit-filter: grayscale(0);
-    filter: none;
+
   }
   .card_content {
-    padding: 3rem 3rem;
+
   }
   .card_header {
-    font-size: 2rem;
-    font-weight: 500;
-    color: #000000;
-    margin-bottom: 1.5rem;
+
   }
   .card_text {
-    font-size: 1rem;
-    letter-spacing: 0.1rem;
-    color: #000000;
-    margin-bottom: 2.5rem;
+
   }
 }

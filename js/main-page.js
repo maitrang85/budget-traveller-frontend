@@ -15,46 +15,127 @@ if (!token) {
   addPostButton.style.display = 'inline-block';
 }
 
-const createCards = (posts) => {
+let pageNumber;
+let maxPageNumber;
+const createFiltering = (posts) => {
   console.log(posts);
-  renderCards(posts);
+  pageNumber = 1;
 
+  const paginationContainer = document.getElementById('pagination')
   const free = document.querySelector('#free_btn');
   const paid = document.querySelector('#paid_btn');
-  const most_recent = document.querySelector('#most_recent_btn');
+  const most_popular = document.querySelector('#most_popular_btn');
   const show_all = document.querySelector('#show_all_btn');
   const region = document.querySelector('#region_select');
+  const prev = document.querySelector('#btn_prev');
+  const next = document.querySelector('#btn_next');
+  const page_display = document.querySelector('#current_page');
 
+  page_display.innerHTML = `${pageNumber} / ${maxPageNumber}`;
   free.addEventListener('click', () => {
-    const posts_free = posts.filter((post) => {
-      return post.free_or_not === 'free';
+    console.log("free click");
+    paginationContainer.style.display = 'none';
+    getAllPosts().then(function(posts) {
+      console.log(posts);
+      if(!region[0].selected) {
+        console.log("free and region")
+        let posts_free_region = posts.filter((post) => {
+          return post.free_or_not === 'free' && post.region_id === region.value;
+        });
+        renderCards(posts_free_region);
+      } else {
+        console.log("just free");
+        let posts_free = posts.filter((post) => {
+          return post.free_or_not === 'free';
+        });
+        console.log("posts free");
+        renderCards(posts_free);
+      }
     });
-    renderCards(posts_free);
   });
 
   paid.addEventListener('click', () => {
-    const posts_paid = posts.filter((post) => {
-      return post.free_or_not === 'paid';
+    paginationContainer.style.display = 'none';
+    getAllPosts().then(function(posts) {
+      console.log(posts);
+      if(!region[0].selected) {
+        console.log("paid and region")
+        let posts_paid_region = posts.filter((post) => {
+          return post.free_or_not === 'paid' && post.region_id === region.value;
+        });
+        renderCards(posts_paid_region);
+      } else {
+        console.log("just paid");
+        let posts_paid = posts.filter((post) => {
+          return post.free_or_not === 'paid';
+        });
+        console.log("posts paid: ");
+        renderCards(posts_paid);
+      }
     });
-    renderCards(posts_paid);
   });
 
-  most_recent.addEventListener('click', () => {
-    const posts_most_recent = posts.filter((post) => {});
-    renderCards(posts_most_recent);
+  most_popular.addEventListener('click', () => {
+    console.log("most popular click");
+    paginationContainer.style.display = 'none';
+    getAllPosts().then(function(posts) {
+      console.log(posts);
+      if(!region[0].selected) {
+        console.log("popular and region")
+        let posts_popular_region = posts.filter((post) => {
+          return post.region_id === region.value;
+        });
+        renderCards(posts_popular_region);
+      } else {
+        console.log("just popular");
+        let posts_popular = posts.filter((post) => {
+
+        });
+        console.log("posts popular");
+        renderCards(posts_popular);
+      }
+    });
+
   });
 
   show_all.addEventListener('click', () => {
-    renderCards(posts);
+    console.log("show all click");
+    region[0].selected = true;
+    paginationContainer.style.display = 'flex';
+    getPosts(pageNumber)
   });
 
   region.addEventListener('change', () => {
-    const posts_region = posts.filter((post) => {
-      return post.region_id === region.value;
+    console.log("region change", region.value);
+    paginationContainer.style.display = 'none';
+    getAllPosts().then(function(posts) {
+      console.log(posts);
+      let posts_region = posts.filter((post) => {
+          return post.region_id === region.value;
+      });
+      renderCards(posts_region);
     });
-    renderCards(posts_region);
   });
+
+  prev.addEventListener('click', () => {
+    if(pageNumber-1 > 0) {
+      pageNumber-= 1;
+      page_display.innerHTML = `${pageNumber} / ${maxPageNumber}`;
+      console.log("pagenumber:" + pageNumber);
+      getPosts(pageNumber);
+    }
+  });
+
+  next.addEventListener('click', () => {
+    if(pageNumber+1 <= maxPageNumber) {
+      pageNumber+= 1;
+      page_display.innerHTML = `${pageNumber} / ${maxPageNumber}`;
+      console.log("pagenumber:" + pageNumber);
+      getPosts(pageNumber);
+    }
+  })
 };
+
 function renderCards(posts) {
   cards.innerHTML = '';
   posts.forEach((post) => {
@@ -120,30 +201,82 @@ function renderCards(posts) {
   });
 }
 
-// GET POST
-const getPosts = async () => {
+// GET POSTS FOR FILTERING
+const getPostsFiltering = async () => {
   try {
     const fetchOptions = {
       headers: {
         Authorization: 'Bearer ' + sessionStorage.getItem('token'),
       },
     };
-    const response = await fetch(url + '/post?page=1', fetchOptions);
-    const posts = await response.json();
-    createCards(posts.posts);
+
+    const response_filtering = await fetch(url + `/post?page=`, fetchOptions);
+    const posts_filtering = await response_filtering.json();
+    maxPageNumber = Math.ceil(posts_filtering.total_posts_count / 9);
+
+    console.log("total pages: " + maxPageNumber);
+    createFiltering(posts_filtering.posts);
+
   } catch (e) {
     console.log(e.message);
   }
 };
-getPosts();
+
+// GET ALL POSTS
+const getAllPosts = async () => {
+  try {
+    const fetchOptions = {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      },
+    };
+
+    const response_all = await fetch(url + `/post?page=`, fetchOptions);
+    const posts_all = await response_all.json();
+    return posts_all.posts;
+
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+
+// GET POST PAGINATION
+const getPosts = async (pageNumber) => {
+  try {
+    const fetchOptions = {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      },
+    };
+    console.log(`/post?page=${pageNumber}`);
+    const response = await fetch(url + `/post?page=${pageNumber}`, fetchOptions);
+    const posts = await response.json();
+    renderCards(posts.posts)
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+getPostsFiltering();
+getPosts(1);
 
 // ADDING ACTIVE CLASS TO THE CURRENT BUTTON (HIGHLIGHTING IT)
 let buttonContainer = document.getElementById('filtering');
+let buttonContainer2 = document.getElementById('pagination')
 let buttons = buttonContainer.getElementsByClassName('btn');
-for (let i = 0; i < buttons.length; i++) {
-  buttons[i].addEventListener('click', function () {
-    let current = document.getElementsByClassName('active');
-    current[0].className = current[0].className.replace(' active', '');
-    this.className += ' active';
-  });
+let buttons2 = buttonContainer2.getElementsByClassName('btn');
+const setButtons = (buttonContainer, buttons) => {
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', function () {
+      let current = buttonContainer.getElementsByClassName('active');
+      current[0].className = current[0].className.replace(' active', '');
+      this.className += ' active';
+    });
+  }
 }
+setButtons(buttonContainer, buttons);
+setButtons(buttonContainer2, buttons2);
+
+
+
+

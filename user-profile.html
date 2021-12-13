@@ -33,20 +33,20 @@
           </li>
           <li class="nav-item" id="login">
             <a
-                    class="nav-link"
-                    href="#"
-                    id="login-btn"
-                    onclick="openLoginForm()"
-            >Login</a
+              class="nav-link"
+              href="#"
+              id="login-btn"
+              onclick="openLoginForm()"
+              >Login</a
             >
           </li>
           <li class="nav-item" id="signup">
             <a
-                    class="nav-link"
-                    href="#"
-                    id="signup-btn"
-                    onclick="openSignupForm()"
-            >Sign up</a
+              class="nav-link"
+              href="#"
+              id="signup-btn"
+              onclick="openSignupForm()"
+              >Sign up</a
             >
           </li>
         </ul>
@@ -57,8 +57,7 @@
         </div>
       </nav>
     </header>
-
-    <div id="maintenance">
+    <!--<div id="maintenance">
       <p style="padding: 5px">
         <i class="fa fa-wrench" style="font-size: 40px; color: #000000"></i
         >Under maintenance
@@ -74,6 +73,55 @@
         "
         ><i class="fa fa-home"></i> Return to home</a
       >
+    </div>-->
+
+    <div class="profile-container">
+      <div class="form-wrapper">
+        <div class="form-header">Modify user</div>
+        <form class="light-border" id="modUserForm">
+          <div class="form-element">
+            <label>Username</label>
+            <input
+              class="light-border"
+              type="text"
+              name="username"
+              required
+              minlength="3"
+              placeholder="Username"
+            />
+          </div>
+          <div class="form-element">
+            <label>Email</label>
+            <input
+              class="light-border"
+              type="email"
+              name="email"
+              placeholder="email"
+              disabled
+            />
+          </div>
+          <div class="form-element">
+            <label>Password</label>
+            <input
+              class="light-border"
+              type="password"
+              name="password"
+              required
+              pattern="(?=.*[A-Z]).{8,}"
+              placeholder="Password"
+            />
+          </div>
+          <div class="form-element">
+            <button
+              id="edit-profile-form-button"
+              class="light-border"
+              type="submit"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- PROFILE CONTAINER -->
@@ -123,19 +171,18 @@
       <div class="login-modal-close" onclick="closeLoginForm()">×</div>
       <div class="form">
         <div class="form-header">User login</div>
-        <form id="login-form" action="" method="post">
+        <form
+          id="login-form"
+          action="http://localhost:3000/auth/login"
+          method="post"
+        >
           <div class="form-element">
             <label>Email:</label>
-            <input type="email" name="email" required="required" />
+            <input type="email" name="username" required="required" />
           </div>
           <div class="form-element">
             <label>Password:</label>
-            <input
-              type="password"
-              name="password"
-              required="required"
-              pattern="(?=.*[A-Z]).{8,}"
-            />
+            <input type="password" name="password" required="required" />
           </div>
           <div class="form-element">
             <button id="login-form-button" type="submit">Log In</button>
@@ -148,13 +195,18 @@
     <div id="signup-modal-overlay"></div>
     <div id="signup-modal">
       <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
-
       <div class="form-wrapper">
         <div class="form-header">Sign up</div>
-        <form action="" method="post" id="signup-form">
+        <form
+          id="signup-form"
+          action="http://localhost:3000/user/post"
+          method="post"
+          id="signup-form"
+        >
           <div class="form-element">
             <label>Username</label>
             <input
+              id="username"
               type="text"
               name="username"
               placeholder="Username"
@@ -165,6 +217,7 @@
           <div class="form-element">
             <label>Email</label>
             <input
+              id="email"
               type="email"
               name="email"
               placeholder="Email"
@@ -174,10 +227,11 @@
           <div class="form-element">
             <label>Password</label>
             <input
+              id="password"
               type="password"
               name="password"
               placeholder="Password"
-              required="required"
+              required
               pattern="(?=.*[A-Z]).{8,}"
             />
           </div>
@@ -187,11 +241,12 @@
         </form>
       </div>
     </div>
-
+    <script src="js/utils/backend.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/profile.js"></script>
     <script src="js/login.js"></script>
     <script src="js/check-login.js"></script>
     <script src="js/logout.js"></script>
+    <script src="js/utils/serialize.js"></script>
   </body>
 </html>

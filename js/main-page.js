@@ -128,9 +128,9 @@ const getPosts = async () => {
         Authorization: 'Bearer ' + sessionStorage.getItem('token'),
       },
     };
-    const response = await fetch(url + '/post', fetchOptions);
+    const response = await fetch(url + '/post?page=1', fetchOptions);
     const posts = await response.json();
-    createCards(posts);
+    createCards(posts.posts);
   } catch (e) {
     console.log(e.message);
   }

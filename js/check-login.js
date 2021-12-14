@@ -23,6 +23,7 @@ const log_in_status = (status) => {
 
 // CHECK LOGIN
 let logged_in = false;
+let checkLoginUserId;
 const checkLogin = async () => {
   'use strict';
   const url = 'http://localhost:3000'; // change url when uploading to server
@@ -58,6 +59,7 @@ const checkLogin = async () => {
       profile_btn_a.innerHTML = `<i class="fa fa-user-circle"></i>  ${json.user.username}`;
       profile_btn_a.href = 'user-profile.html';
       console.log(json.user);
+      checkLoginUserId = json.user.user_id;
       sessionStorage.setItem('user', JSON.stringify(json.user));
     }
   } catch (e) {

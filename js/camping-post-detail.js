@@ -302,6 +302,7 @@ const createCommentCards = (comments) => {
     const comment_delete = document.createElement('a');
     comment_delete.className = "comment-delete-btn";
     comment_delete.innerHTML = `<i class='fa fa-trash' style="color: #c0392b"></i>`
+    console.log("comment user: " + comment.user_id + "checklogin: " + checkLoginUserId);
     if(comment.user_id !== checkLoginUserId) {
       comment_delete.style.display = "none";
     }

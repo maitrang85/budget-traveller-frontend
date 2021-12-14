@@ -1,209 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Budget Traveler</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-  </head>
-  <body id="main-page-body">
-    <!-- NAVBAR -->
-    <header class="header">
-      <nav class="navbar">
-        <a href="main-page.html" class="nav-logo">Budget Traveler</a>
-        <ul class="nav-menu">
-          <li class="nav-item">
-            <a href="#" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">Contact</a>
-          </li>
-          <li class="nav-item" id="profile">
-            <a class="nav-link" href="#" id="profile-btn">Profile</a>
-          </li>
-          <li class="nav-item" id="logout">
-            <a class="nav-link" href="#" id="logout-btn" onclick="">Logout</a>
-          </li>
-          <li class="nav-item" id="login">
-            <a
-              class="nav-link"
-              href="#"
-              id="login-btn"
-              onclick="openLoginForm()"
-              >Login</a
-            >
-          </li>
-          <li class="nav-item" id="signup">
-            <a
-              class="nav-link"
-              href="#"
-              id="signup-btn"
-              onclick="openSignupForm()"
-              >Sign up</a
-            >
-          </li>
-        </ul>
-        <div class="hamburger">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </div>
-      </nav>
-    </header>
-
-    <!-- BANNER PICTURE + POST BUTTON -->
-    <div id="main-banner">
-      <div id="banner-background">
-        <a id="addPost" href="add-post.html">post a camping spot</a>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>Budget Traveler</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body id="main-page-body">
+<!-- NAVBAR -->
+<header class="header">
+  <nav class="navbar">
+    <a href="main-page.html" class="nav-logo">Budget Traveler</a>
+    <ul class="nav-menu">
+      <li class="nav-item">
+        <a href="main-page.html" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="main-page.html#footer" class="nav-link">About</a>
+      </li>
+      <li class="nav-item">
+        <a href="main-page.html#footer" class="nav-link">Contact</a>
+      </li>
+      <li class="nav-item" id="profile">
+        <a class="nav-link" href="#" id="profile-btn">Profile</a>
+      </li>
+      <li class="nav-item" id="logout">
+        <a class="nav-link" href="#" id="logout-btn" onclick="">Logout</a>
+      </li>
+      <li class="nav-item" id="login">
+        <a
+                class="nav-link"
+                href="#"
+                id="login-btn"
+                onclick="openLoginForm()"
+        >Login</a
+        >
+      </li>
+      <li class="nav-item" id="signup">
+        <a
+                class="nav-link"
+                href="#"
+                id="signup-btn"
+                onclick="openSignupForm()"
+        >Sign up</a
+        >
+      </li>
+    </ul>
+    <div class="hamburger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
     </div>
+  </nav>
+</header>
 
-    <!-- GALLERY HEADER -->
-    <!-- <div id="gallery-header">CAMPING SPOTS</div> -->
-
-    <!-- FILTERING BUTTONS -->
-    <div id="filtering">
-      <button id="show_all_btn" class="btn active">Show all</button>
-      <button id="most_recent_btn" class="btn">Most popular</button>
-      <button id="free_btn" class="btn">Free</button>
-      <button id="paid_btn" class="btn">Paid</button>
-      <select id="region_select" name="regions" class="dropdown-select">
-        <option value="" disabled selected>Select your region</option>
-        <!--<option value="Finland">Finland</option>-->
-        <option value="Ahvenanmaa">Ahvenanmaa</option>
-        <option value="Etelä-Karjala">Etelä-Karjala</option>
-        <option value="Etelä-Pohjanmaa">Etelä-Pohjanmaa</option>
-        <option value="Etelä-Savo">Etelä-Savo</option>
-        <option value="Kainuu">Kainuu</option>
-        <option value="Kanta-Häme">Kanta-Häme</option>
-        <option value="Keski-Pohjanmaa">Keski-Pohjanmaa</option>
-        <option value="Keski-Suomi">Keski-Suomi</option>
-        <option value="Kymenlaakso">Kymenlaakso</option>
-        <option value="Lappi">Lappi</option>
-        <option value="Pirkanmaa">Pirkanmaa</option>
-        <option value="Pohjanmaa">Pohjanmaa</option>
-        <option value="Pohjois-Karjala">Pohjois-Karjala</option>
-        <option value="Pohjois-Pohjanmaa">Pohjois-Pohjanmaa</option>
-        <option value="Pohjois-Savo">Pohjois-Savo</option>
-        <option value="Päijät-Häme">Päijät-Häme</option>
-        <option value="Satakunta">Satakunta</option>
-        <option value="Uusimaa">Uusimaa</option>
-        <option value="Varsinais-Suomi">Varsinais-Suomi</option>
-      </select>
+<!-- BANNER PICTURE + POST BUTTON -->
+<div id="main-banner">
+  <div id="banner-background">
+    <div class="banner-title">
+      <h1 class="main-title" id="main-title">
+        Find the perfect camping spot for <i>you</i>.
+      </h1>
     </div>
-
-    <!-- CAMPING SPOTS GALLERY -->
-    <div id="camping-spots-grid">
-      <div id="grid">
-        <!--
-<div class="grid_item">
-  <div class="card">
-    <div class="card-thumbnail">
-      <img class="card_img" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2250&amp;q=80" alt="Snowy Mountains">
-      <div class="card_info">
-        <span><i class="fa fa-thumbs-up"></i>42</span>
-        <span><i class="fa fa-thumbs-down"></i>2</span>
-      </div>
-    </div>
-    <div class="card_content">
-      <h1 class="card_header">A starry night</h1>
-      <p class="card_text">Look up at the night sky, and find yourself <strong>immersed</strong> in the amazing mountain range of Aspen. </p>
-      <button class="card_btn">Read more <span>→</span></button>
-    </div>
+    <a id="addPost" href="add-post.html">post a camping spot</a>
   </div>
 </div>
--->
+
+<!-- GALLERY HEADER -->
+<!-- <div id="gallery-header">CAMPING SPOTS</div> -->
+
+<!-- FILTERING BUTTONS -->
+<div id="filtering">
+  <button id="show_all_btn" class="btn active">Show all</button>
+  <button id="most_popular_btn" class="btn">Most popular</button>
+  <button id="free_btn" class="btn">Free</button>
+  <button id="paid_btn" class="btn">Paid</button>
+  <select id="region_select" name="regions" class="dropdown-select">
+    <option value="" disabled selected>Select your region</option>
+    <!--<option value="Finland">Finland</option>-->
+    <option value="Ahvenanmaa">Ahvenanmaa</option>
+    <option value="Etelä-Karjala">Etelä-Karjala</option>
+    <option value="Etelä-Pohjanmaa">Etelä-Pohjanmaa</option>
+    <option value="Etelä-Savo">Etelä-Savo</option>
+    <option value="Kainuu">Kainuu</option>
+    <option value="Kanta-Häme">Kanta-Häme</option>
+    <option value="Keski-Pohjanmaa">Keski-Pohjanmaa</option>
+    <option value="Keski-Suomi">Keski-Suomi</option>
+    <option value="Kymenlaakso">Kymenlaakso</option>
+    <option value="Lappi">Lappi</option>
+    <option value="Pirkanmaa">Pirkanmaa</option>
+    <option value="Pohjanmaa">Pohjanmaa</option>
+    <option value="Pohjois-Karjala">Pohjois-Karjala</option>
+    <option value="Pohjois-Pohjanmaa">Pohjois-Pohjanmaa</option>
+    <option value="Pohjois-Savo">Pohjois-Savo</option>
+    <option value="Päijät-Häme">Päijät-Häme</option>
+    <option value="Satakunta">Satakunta</option>
+    <option value="Uusimaa">Uusimaa</option>
+    <option value="Varsinais-Suomi">Varsinais-Suomi</option>
+  </select>
+</div>
+
+<!-- PAGINATION -->
+<div id="pagination">
+  <button id="btn_prev" class="btn active">< Previous</button>
+  <div id="page-number">
+    <p id="current_page"></p>
+  </div>
+  <button id="btn_next" class="btn">Next ></button>
+</div>
+
+<!-- CAMPING SPOTS GALLERY -->
+<div id="camping-spots-grid">
+  <div id="grid">
+    <!--
+    <div class="grid_item">
+      <div class="card">
+        <div class="card-thumbnail">
+          <img class="card_img" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2250&amp;q=80" alt="Snowy Mountains">
+          <div class="card_info">
+            <span><i class="fa fa-thumbs-up"></i>42</span>
+            <span><i class="fa fa-thumbs-down"></i>2</span>
+          </div>
+        </div>
+        <div class="card_content">
+          <h1 class="card_header">A starry night</h1>
+          <p class="card_text">Look up at the night sky, and find yourself <strong>immersed</strong> in the amazing mountain range of Aspen. </p>
+          <button class="card_btn">Read more <span>→</span></button>
+        </div>
       </div>
     </div>
+    -->
+  </div>
+</div>
 
-    <!-- LOGIN MODAL POP UP -->
-    <div id="login-modal-overlay"></div>
-    <div id="login-modal">
-      <div class="login-modal-close" onclick="closeLoginForm()">×</div>
-      <div class="form">
-        <div class="form-header">User login</div>
-        <form
-          id="login-form"
-          action="http://localhost:3000/auth/login"
-          method="post"
-        >
-          <div class="form-element">
-            <label>Email:</label>
-            <input type="email" name="username" required="required" />
-          </div>
-          <div class="form-element">
-            <label>Password:</label>
-            <input type="password" name="password" required="required" />
-          </div>
-          <div class="form-element">
-            <button id="login-form-button" type="submit">Log In</button>
-          </div>
-        </form>
+<!-- LOGIN MODAL POP UP -->
+<div id="login-modal-overlay"></div>
+<div id="login-modal">
+  <div class="login-modal-close" onclick="closeLoginForm()">×</div>
+  <div class="form">
+    <div class="form-header">User login</div>
+    <form
+            id="login-form"
+            action="http://localhost:3000/auth/login"
+            method="post"
+    >
+      <div class="form-element">
+        <label>Email:</label>
+        <input type="email" name="username" required="required" />
       </div>
+      <div class="form-element">
+        <label>Password:</label>
+        <input type="password" name="password" required="required" />
+      </div>
+      <div class="form-element">
+        <button id="login-form-button" type="submit">Log In</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- SIGN UP MODAL POP UP -->
+<div id="signup-modal-overlay"></div>
+<div id="signup-modal">
+  <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
+  <div class="form-wrapper">
+    <div class="form-header">Sign up</div>
+    <form
+            id="signup-form"
+            action="http://localhost:3000/user/post"
+            method="post"
+            id="signup-form"
+    >
+      <div class="form-element">
+        <label>Username</label>
+        <input
+                id="username"
+                type="text"
+                name="username"
+                placeholder="Username"
+                required="required"
+                minlength="3"
+        />
+      </div>
+      <div class="form-element">
+        <label>Email</label>
+        <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Email"
+                required="required"
+        />
+      </div>
+      <div class="form-element">
+        <label>Password</label>
+        <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+                pattern="(?=.*[A-Z]).{8,}"
+        />
+      </div>
+      <div class="form-element">
+        <button id="signup-form-button" type="submit">Sign up</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer id="footer">
+  <div class="footer-content">
+    <h3>Budget Traveler</h3>
+
+    <p>Budget Traveler is aimed at camping enthusiasts where they can share their favorite camping spots and thrilling activities while camping. They can also find and make friends with people that share same interests.</p>
+    <p><i class="fa fa-phone"></i>  +358123456<br>
+      <i class="fa fa-envelope"></i>  naturae@yahoo.com</p>
+    <ul class="socials">
+      <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+      <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+      <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+      <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+      <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+    </ul>
+
+    <div class="footer-bottom">
+      <p>copyright &copy;2021 <a href="#">Naturae</a>  </p>
     </div>
 
-    <!-- SIGN UP MODAL POP UP -->
-    <div id="signup-modal-overlay"></div>
-    <div id="signup-modal">
-      <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
-      <div class="form-wrapper">
-        <div class="form-header">Sign up</div>
-        <form
-          id="signup-form"
-          action="http://localhost:3000/user/post"
-          method="post"
-          id="signup-form"
-        >
-          <div class="form-element">
-            <label>Username</label>
-            <input
-              id="username"
-              type="text"
-              name="username"
-              placeholder="Username"
-              required="required"
-              minlength="3"
-            />
-          </div>
-          <div class="form-element">
-            <label>Email</label>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="Email"
-              required="required"
-            />
-          </div>
-          <div class="form-element">
-            <label>Password</label>
-            <input
-              id="password"
-              type="password"
-              name="password"
-              placeholder="Password"
-              required
-              pattern="(?=.*[A-Z]).{8,}"
-            />
-          </div>
-          <div class="form-element">
-            <button id="signup-form-button" type="submit">Sign up</button>
-          </div>
-        </form>
-      </div>
-    </div>
+  </div>
+</footer>
 
-    <script src="js/navigation.js"></script>
-    <script src="js/main-page.js"></script>
-    <script src="js/login.js"></script>
-    <script src="js/check-login.js"></script>
-    <script src="js/logout.js"></script>
-  </body>
+<script src="js/utils/backend.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/main-page.js"></script>
+<script src="js/login.js"></script>
+<script src="js/check-login.js"></script>
+<script src="js/logout.js"></script>
+</body>
 </html>

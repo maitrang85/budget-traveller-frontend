@@ -21,22 +21,34 @@
             <a href="main-page.html" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">About</a>
+            <a href="main-page.html#footer" class="nav-link">About</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Contact</a>
+            <a href="main-page.html#footer" class="nav-link">Contact</a>
           </li>
           <li class="nav-item" id="profile">
-            <a href="" id="profile-btn">Profile</a>
+            <a class="nav-link" href="#" id="profile-btn">Profile</a>
           </li>
           <li class="nav-item" id="logout">
-            <a href="#" id="logout-btn" onclick="">Logout</a>
+            <a class="nav-link" href="#" id="logout-btn" onclick="">Logout</a>
           </li>
           <li class="nav-item" id="login">
-            <a href="#" id="login-btn" onclick="openLoginForm()">Login</a>
+            <a
+                    class="nav-link"
+                    href="#"
+                    id="login-btn"
+                    onclick="openLoginForm()"
+            >Login</a
+            >
           </li>
           <li class="nav-item" id="signup">
-            <a href="#" id="signup-btn" onclick="openSignupForm()">Sign up</a>
+            <a
+                    class="nav-link"
+                    href="#"
+                    id="signup-btn"
+                    onclick="openSignupForm()"
+            >Sign up</a
+            >
           </li>
         </ul>
         <div class="hamburger">
@@ -71,31 +83,30 @@
 
     <div id="detailed-post-container">
       <!--
-  <div class="detailed-post">
+      <div class="detailed-post">
       <div class="post-img">
-          <img src="img/banner2.jpg" alt="">
+      <img src="img/banner2.jpg" alt="">
       </div>
       <div class="post-info">
-          <div class="content">
-              <h1 class="title">Title of the camping spot</h1>
-              <p class="content">Description</p>
-              <p class="region">Region</p>
-              <p class="address">Address</p>
-              <p class="author">Author</p>
-              <p class="price">Price</p>
-
-              <div class="btn-and-rating-box">
-                  <div class="rating">
-
-                  </div>
-                  <button class="btn">buy now</button>
-              </div>
-
-          </div>
+      <div class="content">
+      <h1 class="title">Title of the camping spot</h1>
+      <p class="content">Description</p>
+      <p class="region">Region</p>
+      <p class="address">Address</p>
+      <p class="author">Author</p>
+      <p class="price">Price</p>
+      <div class="btn-and-rating-box">
+      <div class="rating">
       </div>
-  </div>
-  -->
+      <button class="btn">buy now</button>
+      </div>
+      </div>
+      </div>
+      </div>
+      -->
+
     </div>
+
     <div id="map"></div>
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script
@@ -146,11 +157,11 @@
           </div>
           <div class="form-element">
             <label>Email</label>
-            <input type="text" name="email" placeholder="Email" />
+            <input id="email" type="text" name="email" placeholder="Email" />
           </div>
           <div class="form-element">
             <label>Password</label>
-            <input type="password" name="password" placeholder="Password" />
+            <input id="password" type="password" name="password" placeholder="Password" />
           </div>
           <div class="form-element">
             <button id="signup-form-button" type="submit">Sign up</button>
@@ -159,10 +170,11 @@
       </div>
     </div>
 
+    <script src="js/utils/backend.js"></script>
     <script src="js/navigation.js"></script>
+    <script src="js/check-login.js"></script>
     <script src="js/camping-post-detail.js"></script>
     <script src="js/login.js"></script>
-    <script src="js/check-login.js"></script>
     <script src="js/logout.js"></script>
     <!--script src="js/add-comment.js"></script>-->
   </body>

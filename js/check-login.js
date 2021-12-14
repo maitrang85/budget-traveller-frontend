@@ -23,17 +23,15 @@ const log_in_status = (status) => {
 
 // CHECK LOGIN
 let logged_in = false;
+let checkLoginUserId;
 const checkLogin = async () => {
   'use strict';
   const url = 'http://localhost:3000'; // change url when uploading to server
 
   // check sessionStorage
   if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user')) {
-    // location.href = 'login.html';
-    // console.log('check sessionStorage: ', sessionStorage.getItem('token'))
     logged_in = false;
     log_in_status(logged_in);
-    // console.log('logged in: ', logged_in)
     return;
   }
   // check if token valid
@@ -43,25 +41,26 @@ const checkLogin = async () => {
         Authorization: 'Bearer ' + sessionStorage.getItem('token'),
       },
     };
-    // console.log(sessionStorage.getItem('token'))
     const response = await fetch(url + '/user/token', fetchOptions);
-    // console.log(response);
     if (!response.ok) {
-      // console.log('response not ok, logging out');
       await logout();
       location.href = 'main-page.html';
     } else {
       logged_in = true;
       log_in_status(logged_in);
-      // console.log('logged in: ', logged_in)
       const json = await response.json();
-      profile_btn_a.innerHTML = `<i class="fa fa-user-circle"></i>  ${json.user.username}`;
-      profile_btn_a.href = 'user-profile.html';
-      console.log(json.user);
       sessionStorage.setItem('user', JSON.stringify(json.user));
+
+      const profileResponse = await getUserProfile();
+      const profile = await profileResponse.json();
+      profile_btn_a.innerHTML = `<i class="fa fa-user-circle"></i>  ${profile.username}`;
+      profile_btn_a.href = 'user-profile.html';
+
+      checkLoginUserId = json.user.user_id;
     }
   } catch (e) {
     console.log(e.message);
   }
 };
+
 checkLogin();

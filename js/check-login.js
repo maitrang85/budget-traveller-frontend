@@ -50,7 +50,7 @@ const checkLogin = async () => {
       const json = await response.json();
       sessionStorage.setItem('user', JSON.stringify(json.user));
 
-      const profileResponse = await getProfile(json.user.user_id);
+      const profileResponse = await getUserProfile();
       const profile = await profileResponse.json();
       profile_btn_a.innerHTML = `<i class="fa fa-user-circle"></i>  ${profile.username}`;
       profile_btn_a.href = 'user-profile.html';
@@ -58,10 +58,6 @@ const checkLogin = async () => {
   } catch (e) {
     console.log(e.message);
   }
-};
-
-const getProfile = async (user_id) => {
-  return await apiCall('/user/' + user_id);
 };
 
 checkLogin();

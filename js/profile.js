@@ -21,19 +21,7 @@ const modUserForm = document.querySelector('#modUserForm');
 // Submit modify user form
 modUserForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
-  const data = serializeJson(modUserForm);
-  //  Remove empty properties
-  for (const [prop, value] of Object.entries(data)) {
-    if (value === '') {
-      delete data[prop];
-    }
-  }
-  const response = await apiCall(
-    '/user',
-    JSON.stringify(data),
-    'PUT',
-    'application/json'
-  );
+  const response = await updateUserProfile(modUserForm);
   const json = await response.json();
   if (json.error) {
     alert(json.error.message);
@@ -43,28 +31,18 @@ modUserForm.addEventListener('submit', async (evt) => {
   location.href = 'main-page.html';
 });
 
-const getProfile = async () => {
+const parsingProfile = async () => {
   try {
-    const user = JSON.parse(sessionStorage.getItem('user'));
-    if (user) {
-      const response = await apiCall('/user/' + user.user_id);
-      if (response.ok) {
-        const profile = await response.json();
-        parsingProfile(profile);
-        console.log('user', user);
-      }
+    const response = await getUserProfile();
+    if (response.ok) {
+      const profile = await response.json();
+      const inputs = modUserForm.querySelectorAll('input');
+      inputs[0].value = profile.username;
+      inputs[1].value = profile.email;
+      console.log('user', user);
     }
   } catch (e) {
     console.log(e.message);
   }
 };
-getProfile();
-
-const parsingProfile = (profile) => {
-  const inputs = modUserForm.querySelectorAll('input');
-  console.log('profile data: ', profile);
-  if (profile) {
-    inputs[0].value = profile.username;
-    inputs[1].value = profile.email;
-  }
-};
+parsingProfile();

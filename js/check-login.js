@@ -49,6 +49,7 @@ const checkLogin = async () => {
       logged_in = true;
       log_in_status(logged_in);
       const json = await response.json();
+      checkLoginUserId = json.user.user_id;
       sessionStorage.setItem('user', JSON.stringify(json.user));
 
       const profileResponse = await getUserProfile();
@@ -56,7 +57,6 @@ const checkLogin = async () => {
       profile_btn_a.innerHTML = `<i class="fa fa-user-circle"></i>  ${profile.username}`;
       profile_btn_a.href = 'user-profile.html';
 
-      checkLoginUserId = json.user.user_id;
     }
   } catch (e) {
     console.log(e.message);

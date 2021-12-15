@@ -136,9 +136,37 @@ const createFiltering = (posts) => {
   })
 };
 
-function renderCards(posts) {
+const getReactions = async (postId, type) => {
+  try {
+    const fetchOptions = {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      },
+    };
+
+    const response = await fetch(url + '/post/' + postId + '/reaction/' + type, fetchOptions);
+    const json = await response.json();
+    console.log(json);
+    return json;
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+async function renderCards(posts) {
   cards.innerHTML = '';
-  posts.forEach((post) => {
+  for (const post of posts) {
+
+    // GET AMOUNT OF LIKES & DISLIKES
+    let dislikes;
+    await getReactions(post.post_id, 0).then(r => {
+      dislikes = r.count_reaction;
+    });
+    let likes;
+    await getReactions(post.post_id, 1).then(r => {
+      likes = r.count_reaction;
+    });
+
     const card_item = document.createElement('div');
     card_item.className = `grid_item`;
 
@@ -157,8 +185,8 @@ function renderCards(posts) {
 
     const s1 = document.createElement('span');
     const s2 = document.createElement('span');
-    s1.innerHTML += `<i class='fa fa-thumbs-up'></i> 47`;
-    s2.innerHTML += `<i class='fa fa-thumbs-down'></i> 3`;
+    s1.innerHTML += `<i class='fa fa-thumbs-up' style="color: #004a03;"></i> ${likes}`;
+    s2.innerHTML += `<i class='fa fa-thumbs-down' style="color: #bc0000;"></i> ${dislikes}`;
 
     const card_content = document.createElement('div');
     card_content.className = 'card_content';
@@ -198,7 +226,7 @@ function renderCards(posts) {
     card_content.appendChild(btn);
     btn.appendChild(span);
     cards.appendChild(card_item);
-  });
+  }
 }
 
 // GET POSTS FOR FILTERING

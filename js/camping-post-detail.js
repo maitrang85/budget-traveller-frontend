@@ -73,6 +73,8 @@ const createDetailPost = async () => {
     const delBtn = document.createElement('a');
     delBtn.className = 'delete-btn';
     delBtn.addEventListener('click', async () => {
+      if (window.confirm('Are you sure you want to delete this post?')) {} else return;
+
       try {
         const fetchOptions = {
           headers: {

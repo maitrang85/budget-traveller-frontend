@@ -47,7 +47,6 @@ signupForm.addEventListener('submit', async (evt) => {
     }
   }
   alert(json.message);
-  location.href = 'main-page.html';
 });
 
 const login = async (jsonData) => {

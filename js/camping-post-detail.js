@@ -10,8 +10,12 @@ const getQParam = (param) => {
 const postId = getQParam('id');
 
 // CREATE A DETAILED VIEW OF POST
-function createDetailPost(post) {
-  console.log('post', post);
+const createDetailPost = async () => {
+  const response = await getPost(postId);
+  let post;
+  if (response && response.ok)
+    post = await response.json();
+
   if (post) {
     const container = document.querySelector('#detailed-post-container');
     container.innerHTML = '';
@@ -226,7 +230,7 @@ function createDetailPost(post) {
     form.appendChild(comment_button);
     initMap(post);
   }
-}
+};
 
 // GET LIKE & DISLIKE COUNT
 const getReactions = async (postId, type) => {
@@ -355,6 +359,8 @@ const reaction = async (postId, type) => {
 
 };
 
+// FUNCTION COMES FROM UTILS BACKEND.JS
+/*
 // GET POST DATA
 const getPost = async (postId) => {
   try {
@@ -372,6 +378,7 @@ const getPost = async (postId) => {
     console.log(e.message);
   }
 };
+*/
 
 // GET COMMENTS
 const getComments = async (postId) => {
@@ -480,7 +487,7 @@ function initMap(post) {
 }
 
 window.onload = () => {
-  getPost(postId);
+  createDetailPost();
   getComments(postId);
 }
 

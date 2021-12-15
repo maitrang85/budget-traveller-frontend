@@ -173,6 +173,14 @@ function createDetailPost(post) {
 
     });
 
+    // MAP
+    const map_btn = document.createElement('a');
+    map_btn.innerHTML = `<i class="fa fa-external-link"></i> Show on map`;
+    map_btn.className = "map-btn";
+    map_btn.addEventListener('click', () => {
+      openMap();
+    });
+
     container.appendChild(detailed_post);
     detailed_post.appendChild(post_img);
     post_img.appendChild(img);
@@ -186,6 +194,7 @@ function createDetailPost(post) {
     modBtn.appendChild(mod_span);
     modBtn.appendChild(mod_icon);
     content.appendChild(region);
+    content.appendChild(map_btn);
     content.appendChild(author);
     content.appendChild(like_container);
     content.appendChild(dislike_container);
@@ -339,6 +348,14 @@ const createCommentCards = (comments) => {
 
   });
 };
+
+// OPEN/CLOSE LOGIN + SIGN UP FORMS
+function openMap() {
+  document.body.classList.add('showMap');
+}
+function closeMap() {
+  document.body.classList.remove('showMap');
+}
 
 // DISPLAY MAP
 function initMap(post) {

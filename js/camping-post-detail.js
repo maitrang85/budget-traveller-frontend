@@ -103,12 +103,30 @@ function createDetailPost(post) {
     const dislike_btn = document.createElement('a');
     like_btn.className = "like-btn";
     dislike_btn.className = "dislike-btn";
+
     like_btn.addEventListener('click', async () => {
-      reaction(postId, 1);
+      await deleteOldReaction(postId);
+      await reaction(postId, 1);
     });
+
+    if(reaction_status === 1) {
+      like_btn.style.pointerEvents = "none";
+      like_btn.style.filter = "grayscale(1)";
+      dislike_btn.style.pointerEvents = "";
+      dislike_btn.style.filter = "";
+    }
+
     dislike_btn.addEventListener('click', async () => {
-      reaction(postId, 0);
+      await deleteOldReaction(postId);
+      await reaction(postId, 0);
     });
+
+    if(reaction_status === 0) {
+      dislike_btn.style.pointerEvents = "none";
+      dislike_btn.style.filter = "grayscale(1)";
+      like_btn.style.pointerEvents = "";
+      like_btn.style.filter = "";
+    }
 
     like_btn.innerHTML = `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer"></i> ${likes}   `
     dislike_btn.innerHTML = `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer"></i> ${dislikes}`
@@ -230,14 +248,57 @@ const getReactions = async (postId, type) => {
 
 let dislikes = 0;
 getReactions(postId, 0).then(function(r) {
+
   dislikes = r.count_reaction;
 });
 let likes = 0;
-getReactions(postId, 1).then(function(r) {
+getReactions(postId, 1).then(r => {
   likes = r.count_reaction;
 });
 
+
+
 // REACTION
+const checkReaction = async (postId) => {
+  try {
+    const fetchOptions = {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      },
+    };
+    const response = await fetch(url + '/post/' + postId + '/reaction', fetchOptions);
+    const json = await response.json();
+    console.log(json);
+    return json;
+  } catch (e) {
+    console.log(e);
+  }
+}
+let reaction_status;
+checkReaction(postId).then(r => {
+  if(!r) {
+    reaction_status = null;
+    console.log("reaction status: ", reaction_status);
+    return;
+  }
+  reaction_status = r[0].isLiked;
+  console.log("reaction status: ", reaction_status);
+});
+const deleteOldReaction = async (postId) => {
+  try {
+    const fetchOptions = {
+      method: 'DELETE',
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      },
+    };
+    const response = await fetch(url + '/post/' + postId + '/reaction', fetchOptions);
+    const json = await response.json();
+    console.log(json);
+  } catch (e) {
+      console.log(e);
+  }
+};
 const reaction = async (postId, type) => {
   const token = sessionStorage.getItem('token');
   if (!token) {
@@ -246,8 +307,52 @@ const reaction = async (postId, type) => {
     }
     return;
   }
+  try {
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      },
+    };
+    const response = await fetch(url + '/post/' + postId + '/reaction/' + type, fetchOptions);
+    const json = await response.json();
+    console.log(json);
 
-  alert(`Reaction on ${postId} type ${type}`);
+    let like_btn = document.querySelector('.like-btn');
+    let dislike_btn = document.querySelector('.dislike-btn');
+
+    if(type===1) {
+      likes+=1;
+      dislikes-=1;
+      dislikes = Math.max(0, dislikes);
+      like_btn.innerHTML =
+          `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer"></i> ${likes}   `
+      like_btn.style.pointerEvents = "none";
+      like_btn.style.filter = "grayscale(1)";
+      dislike_btn.innerHTML =
+          `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer"></i> ${dislikes}   `
+      dislike_btn.style.pointerEvents = "";
+      dislike_btn.style.filter = "";
+    }
+
+    else if(type===0) {
+      dislikes+=1;
+      likes-=1;
+      likes = Math.max(0, likes);
+      dislike_btn.innerHTML =
+          `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer"></i> ${dislikes}   `
+      dislike_btn.style.pointerEvents = "none";
+      dislike_btn.style.filter = "grayscale(1)";
+      like_btn.innerHTML =
+          `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer"></i> ${likes}   `
+      like_btn.style.pointerEvents = "";
+      like_btn.style.filter = "";
+    }
+
+  } catch (e) {
+    console.log(e.message);
+  }
+
 };
 
 // GET POST DATA

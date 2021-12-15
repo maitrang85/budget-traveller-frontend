@@ -361,3 +361,4 @@ window.onload = () => {
   getPost(postId);
   getComments(postId);
 }
+

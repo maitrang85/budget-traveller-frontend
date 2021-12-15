@@ -281,7 +281,10 @@ const getComments = async (postId) => {
     console.log(e.message);
   }
 };
-getComments(postId);
+
+window.onload = () => {
+  getComments(postId);
+}
 
 // DISPLAY COMMENTS
 const createCommentCards = (comments) => {

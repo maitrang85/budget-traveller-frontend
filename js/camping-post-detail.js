@@ -1,5 +1,7 @@
 'use strict';
 const url = 'http://localhost:3000';
+let dislikes = 0;
+let likes = 0;
 
 // GET QUERY PARAMETER
 const getQParam = (param) => {
@@ -156,6 +158,13 @@ const createDetailPost = async () => {
     // COMMENT FORM
     form.addEventListener('submit', async (evt) => {
       evt.preventDefault();
+      const token = sessionStorage.getItem('token');
+      if (!token) {
+        if (window.confirm('Unauthorized. Sign in first.')) {
+          openLoginForm();
+        }
+        return;
+      }
       const fd = new FormData(form);
       const data = Object.fromEntries(fd);
       const fetchOptions = {
@@ -170,29 +179,7 @@ const createDetailPost = async () => {
       console.log(response);
       const json = await response.json();
       const user = JSON.parse(sessionStorage.user);
-      const commentsElement = document.querySelector('#comments');
-
-      const comment_container = document.createElement('div');
-      comment_container.className = "comment";
-      const comment_body = document.createElement('div');
-      comment_body.className = "comment-body";
-      comment_body.innerHTML += `<i class='fa fa-user-circle'></i> ${user.username}`;
-      const message = document.createElement('div');
-      message.className = "message";
-      const message_text = document.createElement('span');
-      message_text.className = "comment-text";
-      message_text.innerHTML = data.content;
-
-      const comment_delete = document.createElement('a');
-      comment_delete.className = "comment-delete-btn";
-      comment_delete.innerHTML = `<i class='fa fa-trash' style="color: #c0392b"></i>`
-
-      commentsElement.appendChild(comment_container);
-      comment_container.appendChild(comment_body);
-      comment_body.appendChild(message);
-      message.appendChild(message_text);
-      comment_body.appendChild(comment_delete);
-
+      createComment(data, user, json);
     });
 
     // MAP
@@ -228,11 +215,11 @@ const createDetailPost = async () => {
     comment_form.appendChild(form);
     form.appendChild(comment_input);
     form.appendChild(comment_button);
-    initMap(post);
+    await initMap(post);
   }
 };
 
-// GET LIKE & DISLIKE COUNT
+// GET REACTION COUNT
 const getReactions = async (postId, type) => {
   try {
     const fetchOptions = {
@@ -250,19 +237,7 @@ const getReactions = async (postId, type) => {
   }
 };
 
-let dislikes = 0;
-getReactions(postId, 0).then(function(r) {
-
-  dislikes = r.count_reaction;
-});
-let likes = 0;
-getReactions(postId, 1).then(r => {
-  likes = r.count_reaction;
-});
-
-
-
-// REACTION
+// CHECK FOR PREVIOUS REACTIONS FROM THIS USER
 const checkReaction = async (postId) => {
   try {
     const fetchOptions = {
@@ -288,6 +263,8 @@ checkReaction(postId).then(r => {
   reaction_status = r[0].isLiked;
   console.log("reaction status: ", reaction_status);
 });
+
+// REACTION HANDLER
 const deleteOldReaction = async (postId) => {
   try {
     const fetchOptions = {
@@ -396,70 +373,73 @@ const getComments = async (postId) => {
 
     const comments = await response.json();
     console.log('comments', comments);
-    createCommentCards(comments);
+    await createCommentCards(comments);
   } catch (e) {
     console.log(e.message);
   }
 };
 
-// DISPLAY COMMENTS
-const createCommentCards = (comments) => {
+// CREATE A COMMENT
+const createComment = (comment, user, json) => {
   const commentsElement = document.querySelector('#comments');
+  console.log(commentsElement);
+  const comment_container = document.createElement('div');
+  comment_container.className = "comment";
+  const comment_body = document.createElement('div');
+  comment_body.className = "comment-body";
+  if(!user) comment_body.innerHTML += `<i class='fa fa-user-circle'></i> ${comment.username}`;
+  else comment_body.innerHTML += `<i class='fa fa-user-circle'></i> ${user.username}`;
+  const message = document.createElement('div');
+  message.className = "message";
+  const message_text = document.createElement('span');
+  message_text.className = "comment-text";
+  message_text.innerHTML = comment.content;
 
-  comments.forEach((comment) => {
-    const comment_container = document.createElement('div');
-    comment_container.className = "comment";
-    const comment_body = document.createElement('div');
-    comment_body.className = "comment-body";
-    comment_body.innerHTML += `<i class='fa fa-user-circle'></i> ${comment.username}`;
-    const message = document.createElement('div');
-    message.className = "message";
-    const message_text = document.createElement('span');
-    message_text.className = "comment-text";
-    message_text.innerHTML = comment.content;
+  const comment_delete = document.createElement('a');
+  comment_delete.className = "comment-delete-btn";
+  comment_delete.innerHTML = `<i class='fa fa-trash' style="color: #c0392b"></i>`
+  console.log("comment user: " + comment.user_id + "checklogin: " + checkLoginUserId);
+  if(!user && comment.user_id !== checkLoginUserId) {
+    comment_delete.style.display = "none";
+  }
 
-    const comment_delete = document.createElement('a');
-    comment_delete.className = "comment-delete-btn";
-    comment_delete.innerHTML = `<i class='fa fa-trash' style="color: #c0392b"></i>`
-    console.log("comment user: " + comment.user_id + "checklogin: " + checkLoginUserId);
-    if(comment.user_id !== checkLoginUserId) {
-      comment_delete.style.display = "none";
-    }
+  comment_delete.addEventListener('click', async () => {
+    try {
+      const fetchOptions = {
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+        },
+        method: 'DELETE',
+      };
+      let id;
+      if(!user) id = comment.comment_id;
+      else id = json.comment_id;
+      const response = await fetch(
+          url + '/post/' + postId + '/comment/' + id,
+          fetchOptions
+      );
 
-    comment_delete.addEventListener('click', async () => {
-      try {
-        const fetchOptions = {
-          headers: {
-            Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-          },
-          method: 'DELETE',
-        };
-
-        const response = await fetch(
-            url + '/post/' + postId + '/comment/' + comment.comment_id,
-            fetchOptions
-        );
-
-        if (window.confirm('Are you sure you want to delete your comment?')) {
-          const json = await response.json();
-          console.log('delete response', json);
-          alert('Your comment was deleted successfully.');
-          location.reload();
-        }
-
-      } catch (e) {
-        console.log(e.message);
+      if (window.confirm('Are you sure you want to delete your comment?')) {
+        const json = await response.json();
+        console.log('delete response', json);
+        alert('Your comment was deleted successfully.');
+        location.reload();
+        return false;
       }
-    });
 
-    commentsElement.appendChild(comment_container);
-    comment_container.appendChild(comment_body);
-    comment_body.appendChild(message);
-    message.appendChild(message_text);
-    comment_body.appendChild(comment_delete);
-
+    } catch (e) {
+      console.log(e.message);
+    }
   });
+
+  commentsElement.appendChild(comment_container);
+  comment_container.appendChild(comment_body);
+  comment_body.appendChild(message);
+  message.appendChild(message_text);
+  comment_body.appendChild(comment_delete);
 };
+// DISPLAY COMMENTS
+const createCommentCards = (comments) => comments.forEach((comment) => createComment(comment));
 
 // OPEN/CLOSE LOGIN + SIGN UP FORMS
 function openMap() {
@@ -485,9 +465,17 @@ function initMap(post) {
     });
   }
 }
+window.addEventListener('load', function () {
+  getReactions(postId, 0).then(function(r) {
 
-window.onload = () => {
-  createDetailPost();
-  getComments(postId);
-}
+    dislikes = r.count_reaction;
+  });
+  getReactions(postId, 1).then(r => {
+    likes = r.count_reaction;
+  });
+  createDetailPost().then(r => {
+    getComments(postId);
+  })
+})
+
 

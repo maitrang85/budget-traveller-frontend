@@ -258,7 +258,6 @@ const getPost = async (postId) => {
     console.log(e.message);
   }
 };
-getPost(postId);
 
 // GET COMMENTS
 const getComments = async (postId) => {
@@ -281,10 +280,6 @@ const getComments = async (postId) => {
     console.log(e.message);
   }
 };
-
-window.onload = () => {
-  getComments(postId);
-}
 
 // DISPLAY COMMENTS
 const createCommentCards = (comments) => {
@@ -360,4 +355,9 @@ function initMap(post) {
       map: map,
     });
   }
+}
+
+window.onload = () => {
+  getPost(postId);
+  getComments(postId);
 }

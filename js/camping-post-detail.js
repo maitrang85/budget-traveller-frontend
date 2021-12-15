@@ -10,8 +10,10 @@ const getQParam = (param) => {
 const postId = getQParam('id');
 
 // CREATE A DETAILED VIEW OF POST
-function createDetailPost(post) {
-  console.log('post', post);
+const createDetailPost = async () => {
+  const response = await getPost(postId);
+  let post;
+  if (response && response.ok) post = await response.json();
   if (post) {
     const container = document.querySelector('#detailed-post-container');
     container.innerHTML = '';
@@ -56,12 +58,12 @@ function createDetailPost(post) {
     modBtn.className = 'modify-btn';
 
     const mod_span = document.createElement('span');
-    mod_span.innerHTML = "modify";
+    mod_span.innerHTML = 'modify';
     const mod_icon = document.createElement('div');
-    mod_icon.className = "icon";
-    mod_icon.innerHTML = `<i class='fa fa-edit'></i>`
-    if(post.user_id !== checkLoginUserId) {
-      modBtn.style.display = "none";
+    mod_icon.className = 'icon';
+    mod_icon.innerHTML = `<i class='fa fa-edit'></i>`;
+    if (post.user_id !== checkLoginUserId) {
+      modBtn.style.display = 'none';
     }
 
     const delBtn = document.createElement('a');
@@ -76,8 +78,8 @@ function createDetailPost(post) {
         };
 
         const response = await fetch(
-            url + '/post/' + post.post_id,
-            fetchOptions
+          url + '/post/' + post.post_id,
+          fetchOptions
         );
         const json = await response.json();
         console.log('delete response', json);
@@ -89,20 +91,20 @@ function createDetailPost(post) {
     });
 
     const del_span = document.createElement('span');
-    del_span.innerHTML = "delete";
+    del_span.innerHTML = 'delete';
     const del_icon = document.createElement('div');
-    del_icon.className = "icon";
-    del_icon.innerHTML = `<i class='fa fa-trash'></i>`
-    if(post.user_id !== checkLoginUserId) {
-      delBtn.style.display = "none";
+    del_icon.className = 'icon';
+    del_icon.innerHTML = `<i class='fa fa-trash'></i>`;
+    if (post.user_id !== checkLoginUserId) {
+      delBtn.style.display = 'none';
     }
     const like_container = document.createElement('span');
     const dislike_container = document.createElement('span');
 
     const like_btn = document.createElement('a');
     const dislike_btn = document.createElement('a');
-    like_btn.className = "like-btn";
-    dislike_btn.className = "dislike-btn";
+    like_btn.className = 'like-btn';
+    dislike_btn.className = 'dislike-btn';
     like_btn.addEventListener('click', async () => {
       reaction(postId, 1);
     });
@@ -110,26 +112,26 @@ function createDetailPost(post) {
       reaction(postId, 0);
     });
 
-    like_btn.innerHTML = `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer"></i> ${likes}   `
-    dislike_btn.innerHTML = `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer"></i> ${dislikes}`
+    like_btn.innerHTML = `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer"></i> ${likes}   `;
+    dislike_btn.innerHTML = `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer"></i> ${dislikes}`;
 
     const comments = document.createElement('div');
-    comments.id = "comments";
+    comments.id = 'comments';
     const comment_form = document.createElement('div');
-    comment_form.className = "comment-form";
+    comment_form.className = 'comment-form';
     const form = document.createElement('form');
-    form.id = "addCommentForm";
-    form.method = "post";
+    form.id = 'addCommentForm';
+    form.method = 'post';
     form.noValidate;
     const comment_input = document.createElement('input');
-    comment_input.type = "text";
+    comment_input.type = 'text';
     comment_input.required = true;
-    comment_input.name = "content";
-    comment_input.placeholder = "Write a comment";
+    comment_input.name = 'content';
+    comment_input.placeholder = 'Write a comment';
     const comment_button = document.createElement('button');
-    comment_button.id = "addCommentBtn";
-    comment_button.type = "submit";
-    comment_button.innerHTML = "Submit";
+    comment_button.id = 'addCommentBtn';
+    comment_button.type = 'submit';
+    comment_button.innerHTML = 'Submit';
 
     // COMMENT FORM
     form.addEventListener('submit', async (evt) => {
@@ -144,33 +146,35 @@ function createDetailPost(post) {
         },
         body: JSON.stringify(data),
       };
-      const response = await fetch(url + '/post/' + postId + '/comment', fetchOptions);
+      const response = await fetch(
+        url + '/post/' + postId + '/comment',
+        fetchOptions
+      );
       console.log(response);
       const json = await response.json();
       const user = JSON.parse(sessionStorage.user);
       const commentsElement = document.querySelector('#comments');
 
       const comment_container = document.createElement('div');
-      comment_container.className = "comment";
+      comment_container.className = 'comment';
       const comment_body = document.createElement('div');
-      comment_body.className = "comment-body";
+      comment_body.className = 'comment-body';
       comment_body.innerHTML += `<i class='fa fa-user-circle'></i> ${user.username}`;
       const message = document.createElement('div');
-      message.className = "message";
+      message.className = 'message';
       const message_text = document.createElement('span');
-      message_text.className = "comment-text";
+      message_text.className = 'comment-text';
       message_text.innerHTML = data.content;
 
       const comment_delete = document.createElement('a');
-      comment_delete.className = "comment-delete-btn";
-      comment_delete.innerHTML = `<i class='fa fa-trash' style="color: #c0392b"></i>`
+      comment_delete.className = 'comment-delete-btn';
+      comment_delete.innerHTML = `<i class='fa fa-trash' style="color: #c0392b"></i>`;
 
       commentsElement.appendChild(comment_container);
       comment_container.appendChild(comment_body);
       comment_body.appendChild(message);
       message.appendChild(message_text);
       comment_body.appendChild(comment_delete);
-
     });
 
     container.appendChild(detailed_post);
@@ -199,7 +203,7 @@ function createDetailPost(post) {
     form.appendChild(comment_button);
     initMap(post);
   }
-}
+};
 
 // GET LIKE & DISLIKE COUNT
 const getReactions = async (postId, type) => {
@@ -210,21 +214,24 @@ const getReactions = async (postId, type) => {
       },
     };
 
-    const response = await fetch(url + '/post/' + postId + '/reaction/' + type, fetchOptions);
+    const response = await fetch(
+      url + '/post/' + postId + '/reaction/' + type,
+      fetchOptions
+    );
     const json = await response.json();
     console.log(json);
     return json;
-  } catch(e) {
+  } catch (e) {
     console.log(e.message);
   }
 };
 
 let dislikes = 0;
-getReactions(postId, 0).then(function(r) {
+getReactions(postId, 0).then(function (r) {
   dislikes = r.count_reaction;
 });
 let likes = 0;
-getReactions(postId, 1).then(function(r) {
+getReactions(postId, 1).then(function (r) {
   likes = r.count_reaction;
 });
 
@@ -239,24 +246,6 @@ const reaction = async (postId, type) => {
   }
 
   alert(`Reaction on ${postId} type ${type}`);
-};
-
-// GET POST DATA
-const getPost = async (postId) => {
-  try {
-    const fetchOptions = {
-      headers: {
-        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-      },
-    };
-    const response = await fetch(url + '/post/' + postId, fetchOptions);
-    const post = await response.json();
-    console.log('post', post);
-    createDetailPost(post);
-  } catch (e) {
-    console.log('error', e);
-    console.log(e.message);
-  }
 };
 
 // GET COMMENTS
@@ -287,22 +276,24 @@ const createCommentCards = (comments) => {
 
   comments.forEach((comment) => {
     const comment_container = document.createElement('div');
-    comment_container.className = "comment";
+    comment_container.className = 'comment';
     const comment_body = document.createElement('div');
-    comment_body.className = "comment-body";
+    comment_body.className = 'comment-body';
     comment_body.innerHTML += `<i class='fa fa-user-circle'></i> ${comment.username}`;
     const message = document.createElement('div');
-    message.className = "message";
+    message.className = 'message';
     const message_text = document.createElement('span');
-    message_text.className = "comment-text";
+    message_text.className = 'comment-text';
     message_text.innerHTML = comment.content;
 
     const comment_delete = document.createElement('a');
-    comment_delete.className = "comment-delete-btn";
-    comment_delete.innerHTML = `<i class='fa fa-trash' style="color: #c0392b"></i>`
-    console.log("comment user: " + comment.user_id + "checklogin: " + checkLoginUserId);
-    if(comment.user_id !== checkLoginUserId) {
-      comment_delete.style.display = "none";
+    comment_delete.className = 'comment-delete-btn';
+    comment_delete.innerHTML = `<i class='fa fa-trash' style="color: #c0392b"></i>`;
+    console.log(
+      'comment user: ' + comment.user_id + 'checklogin: ' + checkLoginUserId
+    );
+    if (comment.user_id !== checkLoginUserId) {
+      comment_delete.style.display = 'none';
     }
 
     comment_delete.addEventListener('click', async () => {
@@ -315,8 +306,8 @@ const createCommentCards = (comments) => {
         };
 
         const response = await fetch(
-            url + '/post/' + postId + '/comment/' + comment.comment_id,
-            fetchOptions
+          url + '/post/' + postId + '/comment/' + comment.comment_id,
+          fetchOptions
         );
 
         if (window.confirm('Are you sure you want to delete your comment?')) {
@@ -325,7 +316,6 @@ const createCommentCards = (comments) => {
           alert('Your comment was deleted successfully.');
           location.reload();
         }
-
       } catch (e) {
         console.log(e.message);
       }
@@ -336,7 +326,6 @@ const createCommentCards = (comments) => {
     comment_body.appendChild(message);
     message.appendChild(message_text);
     comment_body.appendChild(comment_delete);
-
   });
 };
 
@@ -358,6 +347,6 @@ function initMap(post) {
 }
 
 window.onload = () => {
-  getPost(postId);
+  createDetailPost();
   getComments(postId);
-}
+};

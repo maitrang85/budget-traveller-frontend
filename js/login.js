@@ -66,7 +66,6 @@ const login = async (jsonData) => {
     alert(json.message);
   } else {
     // save token
-    console.log('successful here');
     sessionStorage.setItem('token', json.token);
     sessionStorage.setItem('user', JSON.stringify(json.user));
     alert('Logged in successfully');

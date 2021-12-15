@@ -7,7 +7,6 @@ console.log('addForm', addPostForm);
 addForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
   const fd = new FormData(addForm);
-  //const data = Object.fromEntries(fd);
   if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user')) {
     alert('You need to log in before posting!');
     openLoginForm();
@@ -16,14 +15,12 @@ addForm.addEventListener('submit', async (evt) => {
     method: 'POST',
     headers: {
       Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-      //'Content-Type': 'application/json',
     },
     body: fd,
-    //body: JSON.stringify(data),
   };
   const response = await fetch(url + '/post', fetchOptions);
   const json = await response.json();
-  alert(json.message);
+  alert('You have created successfully a post!');
   location.href = `camping-post-detail.html?id=${json.post_id}`;
 });
 

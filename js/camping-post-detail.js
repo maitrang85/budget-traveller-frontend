@@ -101,7 +101,7 @@ const createDetailPost = async () => {
     const del_icon = document.createElement('div');
     del_icon.className = "icon";
     del_icon.innerHTML = `<i class='fa fa-trash'></i>`
-    if(post.user_id !== checkLoginUserId) {
+    if(post.user_id !== checkLoginUserId && checkLoginUserRole !== 0) {
       delBtn.style.display = "none";
     }
     const like_container = document.createElement('span');
@@ -117,11 +117,21 @@ const createDetailPost = async () => {
       await reaction(postId, 1);
     });
 
+    if(!reaction_status) {
+      like_btn.style.filter = "grayscale(1)";
+      dislike_btn.style.filter = "grayscale(1)";
+    }
     if(reaction_status === 1) {
       like_btn.style.pointerEvents = "none";
-      like_btn.style.filter = "grayscale(1)";
+      like_btn.style.filter = "";
       dislike_btn.style.pointerEvents = "";
+      dislike_btn.style.filter = "grayscale(1)";
+    }
+    if(reaction_status === 0) {
+      dislike_btn.style.pointerEvents = "none";
       dislike_btn.style.filter = "";
+      like_btn.style.pointerEvents = "";
+      like_btn.style.filter = "grayscale(1)";
     }
 
     dislike_btn.addEventListener('click', async () => {
@@ -129,15 +139,8 @@ const createDetailPost = async () => {
       await reaction(postId, 0);
     });
 
-    if(reaction_status === 0) {
-      dislike_btn.style.pointerEvents = "none";
-      dislike_btn.style.filter = "grayscale(1)";
-      like_btn.style.pointerEvents = "";
-      like_btn.style.filter = "";
-    }
-
-    like_btn.innerHTML = `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer"></i> ${likes}   `
-    dislike_btn.innerHTML = `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer"></i> ${dislikes}`
+    like_btn.innerHTML = `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer; font-size: 2rem; margin-right: 5px;"></i>Like`
+    dislike_btn.innerHTML = `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer; font-size: 2rem; margin-right: 5px;"></i>Dislike`
 
     const comments = document.createElement('div');
     comments.id = "comments";
@@ -182,6 +185,7 @@ const createDetailPost = async () => {
       const json = await response.json();
       const user = JSON.parse(sessionStorage.user);
       createComment(data, user, json);
+      form.reset();
     });
 
     // MAP
@@ -305,31 +309,17 @@ const reaction = async (postId, type) => {
     let dislike_btn = document.querySelector('.dislike-btn');
 
     if(type===1) {
-      likes+=1;
-      dislikes-=1;
-      dislikes = Math.max(0, dislikes);
-      like_btn.innerHTML =
-          `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer"></i> ${likes}   `
       like_btn.style.pointerEvents = "none";
-      like_btn.style.filter = "grayscale(1)";
-      dislike_btn.innerHTML =
-          `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer"></i> ${dislikes}   `
+      like_btn.style.filter = "";
       dislike_btn.style.pointerEvents = "";
-      dislike_btn.style.filter = "";
+      dislike_btn.style.filter = "grayscale(1)";
     }
 
     else if(type===0) {
-      dislikes+=1;
-      likes-=1;
-      likes = Math.max(0, likes);
-      dislike_btn.innerHTML =
-          `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer"></i> ${dislikes}   `
       dislike_btn.style.pointerEvents = "none";
-      dislike_btn.style.filter = "grayscale(1)";
-      like_btn.innerHTML =
-          `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer"></i> ${likes}   `
+      dislike_btn.style.filter = "";
       like_btn.style.pointerEvents = "";
-      like_btn.style.filter = "";
+      like_btn.style.filter = "grayscale(1)";
     }
 
   } catch (e) {
@@ -401,7 +391,7 @@ const createComment = (comment, user, json) => {
   comment_delete.className = "comment-delete-btn";
   comment_delete.innerHTML = `<i class='fa fa-trash' style="color: #c0392b"></i>`
   console.log("comment user: " + comment.user_id + "checklogin: " + checkLoginUserId);
-  if(!user && comment.user_id !== checkLoginUserId) {
+  if(!user && comment.user_id !== checkLoginUserId && checkLoginUserRole !== 0) {
     comment_delete.style.display = "none";
   }
 
@@ -414,8 +404,10 @@ const createComment = (comment, user, json) => {
         method: 'DELETE',
       };
       let id;
-      if(!user) id = comment.comment_id;
-      else id = json.comment_id;
+      if(!user)
+        id = comment.comment_id;
+      else
+        id = json.comment_id;
       const response = await fetch(
           url + '/post/' + postId + '/comment/' + id,
           fetchOptions
@@ -468,13 +460,6 @@ function initMap(post) {
   }
 }
 window.addEventListener('load', function () {
-  getReactions(postId, 0).then(function(r) {
-
-    dislikes = r.count_reaction;
-  });
-  getReactions(postId, 1).then(r => {
-    likes = r.count_reaction;
-  });
   createDetailPost().then(r => {
     getComments(postId);
   })

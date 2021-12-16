@@ -1,6 +1,7 @@
 'use strict';
 
 const url = 'http://localhost:3000';
+
 const addForm = document.querySelector('#addPostForm');
 console.log('addForm', addPostForm);
 /* Submit and post camping site form */

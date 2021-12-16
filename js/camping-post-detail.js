@@ -72,9 +72,7 @@ const createDetailPost = async () => {
     const mod_icon = document.createElement('div');
     mod_icon.className = "icon";
     mod_icon.innerHTML = `<i class='fa fa-edit'></i>`;
-    if(post.user_id !== checkLoginUserId && checkLoginUserRole !== 0) {
-      modBtn.style.display = "none";
-    }
+    if(post.user_id !== checkLoginUserId) modBtn.style.display = "none";
 
     // DELETE BUTTON
     const delBtn = document.createElement('a');
@@ -103,7 +101,7 @@ const createDetailPost = async () => {
     const del_icon = document.createElement('div');
     del_icon.className = "icon";
     del_icon.innerHTML = `<i class='fa fa-trash'></i>`;
-    if(post.user_id !== checkLoginUserId) delBtn.style.display = "none";
+    if(post.user_id !== checkLoginUserId && checkLoginUserRole !== 0) delBtn.style.display = "none";
 
     // LIKES & DISLIKES
     const like_container = document.createElement('span');

@@ -85,9 +85,9 @@ a {
   position: absolute;
   top: -150%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1.15);
-  width: 800px;
-  height: 800px;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
   background: rgba(0, 0, 0, 0);
   z-index: 100;
   opacity: 0;
@@ -118,7 +118,7 @@ body.showMap #map-modal {
 /* Set the size of the div element that contains the map */
 #map {
   display: block;
-  height: 800px;
+  height: 500px;
   /* The height is 200px pixels */
   width: 100%;
   /* The width is the width of the web page */

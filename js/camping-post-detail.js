@@ -1,5 +1,6 @@
 'use strict';
-const url = 'http://localhost:3000';
+const url = 'http://10.114.32.115/app';
+
 let dislikes = 0;
 let likes = 0;
 
@@ -19,32 +20,36 @@ const createDetailPost = async () => {
     post = await response.json();
 
   if (post) {
+    // CREATE ELEMENTS TO DISPLAY THE POST
     const container = document.querySelector('#detailed-post-container');
     container.innerHTML = '';
 
     const detailed_post = document.createElement('div');
     detailed_post.className = 'detailed-post';
 
+    // IMAGE
     const post_img = document.createElement('div');
     post_img.className = 'post-img';
-
     const img = document.createElement('img');
     img.src = url + '/' + post.filename;
 
+    // CONTENT CONTAINER
     const post_info = document.createElement('div');
     post_info.className = 'post-info';
-
     const content = document.createElement('div');
     content.className = 'content';
 
+    // HEADER
     const title = document.createElement('h1');
     title.className = 'title';
     title.innerHTML = `${post.title}`;
 
+    // DESCRIPTION
     const description = document.createElement('p');
     description.className = 'description';
     description.innerHTML = `${post.content}`;
 
+    // DETAILS - ADDRESS, REGION, PRICING
     const region = document.createElement('p');
     region.className = 'region';
     if (post.free_or_not === 'free') {
@@ -53,28 +58,29 @@ const createDetailPost = async () => {
       region.innerHTML = `${post.region_id} | ${post.address} | Paid | ${post.price}`;
     }
 
+    // AUTHOR OF THE POST
     const author = document.createElement('p');
     author.className = 'author';
     author.innerHTML = `By ${post.username}`;
 
+    // MODIFY BUTTON
     const modBtn = document.createElement('a');
-    modBtn.href = `modify-post.html?id=${post.post_id}`; // Will change this later
+    modBtn.href = `modify-post.html?id=${post.post_id}`;
     modBtn.className = 'modify-btn';
-
     const mod_span = document.createElement('span');
     mod_span.innerHTML = "modify";
     const mod_icon = document.createElement('div');
     mod_icon.className = "icon";
-    mod_icon.innerHTML = `<i class='fa fa-edit'></i>`
+    mod_icon.innerHTML = `<i class='fa fa-edit'></i>`;
     if(post.user_id !== checkLoginUserId) {
       modBtn.style.display = "none";
     }
 
+    // DELETE BUTTON
     const delBtn = document.createElement('a');
     delBtn.className = 'delete-btn';
     delBtn.addEventListener('click', async () => {
       if (window.confirm('Are you sure you want to delete this post?')) {} else return;
-
       try {
         const fetchOptions = {
           headers: {
@@ -82,14 +88,10 @@ const createDetailPost = async () => {
           },
           method: 'DELETE',
         };
-
-        const response = await fetch(
-            url + '/post/' + post.post_id,
-            fetchOptions
-        );
+        const response = await fetch(url + '/post/' + post.post_id, fetchOptions);
         const json = await response.json();
         console.log('delete response', json);
-        alert('Your post was deleted successfully.');
+        alert('Your post was deleted.');
         location.href = `main-page.html`;
       } catch (e) {
         console.log(e.message);
@@ -100,10 +102,10 @@ const createDetailPost = async () => {
     del_span.innerHTML = "delete";
     const del_icon = document.createElement('div');
     del_icon.className = "icon";
-    del_icon.innerHTML = `<i class='fa fa-trash'></i>`
-    if(post.user_id !== checkLoginUserId) {
-      delBtn.style.display = "none";
-    }
+    del_icon.innerHTML = `<i class='fa fa-trash'></i>`;
+    if(post.user_id !== checkLoginUserId) delBtn.style.display = "none";
+
+    // LIKES & DISLIKES
     const like_container = document.createElement('span');
     const dislike_container = document.createElement('span');
 
@@ -112,33 +114,31 @@ const createDetailPost = async () => {
     like_btn.className = "like-btn";
     dislike_btn.className = "dislike-btn";
 
+    // LIKE & DISLIKE ON CLICK EVENT
     like_btn.addEventListener('click', async () => {
       await deleteOldReaction(postId);
       await reaction(postId, 1);
     });
-
     if(reaction_status === 1) {
       like_btn.style.pointerEvents = "none";
       like_btn.style.filter = "grayscale(1)";
       dislike_btn.style.pointerEvents = "";
       dislike_btn.style.filter = "";
     }
-
     dislike_btn.addEventListener('click', async () => {
       await deleteOldReaction(postId);
       await reaction(postId, 0);
     });
-
     if(reaction_status === 0) {
       dislike_btn.style.pointerEvents = "none";
       dislike_btn.style.filter = "grayscale(1)";
       like_btn.style.pointerEvents = "";
       like_btn.style.filter = "";
     }
+    like_btn.innerHTML = `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer"></i> ${likes}   `;
+    dislike_btn.innerHTML = `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer"></i> ${dislikes}`;
 
-    like_btn.innerHTML = `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer"></i> ${likes}   `
-    dislike_btn.innerHTML = `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer"></i> ${dislikes}`
-
+    // DISPLAY COMMENTS
     const comments = document.createElement('div');
     comments.id = "comments";
     const comment_form = document.createElement('div');
@@ -184,7 +184,7 @@ const createDetailPost = async () => {
       createComment(data, user, json);
     });
 
-    // MAP
+    // BUTTON TO OPEN THE MAP MODAL
     const map_btn = document.createElement('a');
     map_btn.innerHTML = `<i class="fa fa-external-link"></i> Show on map`;
     map_btn.className = "map-btn";
@@ -217,11 +217,13 @@ const createDetailPost = async () => {
     comment_form.appendChild(form);
     form.appendChild(comment_input);
     form.appendChild(comment_button);
+
+    // RENDER MAP
     await initMap(post);
   }
 };
 
-// GET REACTION COUNT
+// GET LIKE/DISLIKE COUNT ON THE POST
 const getReactions = async (postId, type) => {
   try {
     const fetchOptions = {
@@ -239,7 +241,7 @@ const getReactions = async (postId, type) => {
   }
 };
 
-// CHECK FOR PREVIOUS REACTIONS FROM THIS USER
+// CHECK FOR PREVIOUS LIKES/DISLIKES FROM THIS USER
 const checkReaction = async (postId) => {
   try {
     const fetchOptions = {
@@ -254,7 +256,8 @@ const checkReaction = async (postId) => {
   } catch (e) {
     console.log(e);
   }
-}
+};
+
 let reaction_status;
 checkReaction(postId).then(r => {
   if(!r) {
@@ -266,7 +269,7 @@ checkReaction(postId).then(r => {
   console.log("reaction status: ", reaction_status);
 });
 
-// REACTION HANDLER
+// UPDATE LIKE/DISLIKE ON THE POST
 const deleteOldReaction = async (postId) => {
   try {
     const fetchOptions = {
@@ -309,11 +312,11 @@ const reaction = async (postId, type) => {
       dislikes-=1;
       dislikes = Math.max(0, dislikes);
       like_btn.innerHTML =
-          `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer"></i> ${likes}   `
+          `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer"></i> ${likes}   `;
       like_btn.style.pointerEvents = "none";
       like_btn.style.filter = "grayscale(1)";
       dislike_btn.innerHTML =
-          `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer"></i> ${dislikes}   `
+          `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer"></i> ${dislikes}   `;
       dislike_btn.style.pointerEvents = "";
       dislike_btn.style.filter = "";
     }
@@ -323,11 +326,11 @@ const reaction = async (postId, type) => {
       likes-=1;
       likes = Math.max(0, likes);
       dislike_btn.innerHTML =
-          `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer"></i> ${dislikes}   `
+          `<i class='fa fa-thumbs-down' style="color: #bc0000; cursor: pointer"></i> ${dislikes}   `;
       dislike_btn.style.pointerEvents = "none";
       dislike_btn.style.filter = "grayscale(1)";
       like_btn.innerHTML =
-          `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer"></i> ${likes}   `
+          `<i class='fa fa-thumbs-up' style="color: #004a03; cursor: pointer"></i> ${likes}   `;
       like_btn.style.pointerEvents = "";
       like_btn.style.filter = "";
     }
@@ -338,28 +341,7 @@ const reaction = async (postId, type) => {
 
 };
 
-// FUNCTION COMES FROM UTILS BACKEND.JS
-/*
-// GET POST DATA
-const getPost = async (postId) => {
-  try {
-    const fetchOptions = {
-      headers: {
-        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-      },
-    };
-    const response = await fetch(url + '/post/' + postId, fetchOptions);
-    const post = await response.json();
-    console.log('post', post);
-    createDetailPost(post);
-  } catch (e) {
-    console.log('error', e);
-    console.log(e.message);
-  }
-};
-*/
-
-// GET COMMENTS
+// GET ALL COMMENTS
 const getComments = async (postId) => {
   try {
     const fetchOptions = {
@@ -381,30 +363,31 @@ const getComments = async (postId) => {
   }
 };
 
-// CREATE A COMMENT
+// CREATE A COMMENT CARD
 const createComment = (comment, user, json) => {
   const commentsElement = document.querySelector('#comments');
-  console.log(commentsElement);
+
   const comment_container = document.createElement('div');
   comment_container.className = "comment";
+
   const comment_body = document.createElement('div');
   comment_body.className = "comment-body";
   if(!user) comment_body.innerHTML += `<i class='fa fa-user-circle'></i> ${comment.username}`;
   else comment_body.innerHTML += `<i class='fa fa-user-circle'></i> ${user.username}`;
+
   const message = document.createElement('div');
   message.className = "message";
+
   const message_text = document.createElement('span');
   message_text.className = "comment-text";
   message_text.innerHTML = comment.content;
 
+  // DELETE BUTTON
   const comment_delete = document.createElement('a');
   comment_delete.className = "comment-delete-btn";
-  comment_delete.innerHTML = `<i class='fa fa-trash' style="color: #c0392b"></i>`
+  comment_delete.innerHTML = `<i class='fa fa-trash' style="color: #c0392b"></i>`;
   console.log("comment user: " + comment.user_id + "checklogin: " + checkLoginUserId);
-  if(!user && comment.user_id !== checkLoginUserId) {
-    comment_delete.style.display = "none";
-  }
-
+  if(!user && comment.user_id !== checkLoginUserId) comment_delete.style.display = "none";
   comment_delete.addEventListener('click', async () => {
     try {
       const fetchOptions = {
@@ -440,10 +423,11 @@ const createComment = (comment, user, json) => {
   message.appendChild(message_text);
   comment_body.appendChild(comment_delete);
 };
-// DISPLAY COMMENTS
+
+// DISPLAY ALL COMMENTS
 const createCommentCards = (comments) => comments.forEach((comment) => createComment(comment));
 
-// OPEN/CLOSE LOGIN + SIGN UP FORMS
+// OPEN/CLOSE MAP MODAL
 function openMap() {
   document.body.classList.add('showMap');
 }
@@ -467,6 +451,8 @@ function initMap(post) {
     });
   }
 }
+
+// GET CORRECT CURRENT LIKE/DISLIKE AMOUNTS
 window.addEventListener('load', function () {
   getReactions(postId, 0).then(function(r) {
 

@@ -60,7 +60,6 @@ const login = async (jsonData) => {
   };
   const loginResponse = await fetch(url + '/auth/login', fetchOptions);
   const json = await loginResponse.json();
-  console.log('login response', json);
   if (!json.user) {
     alert(json.message);
   } else {
@@ -71,10 +70,9 @@ const login = async (jsonData) => {
   return false;
 };
 
-/* FORM VALIDATION for SIGN UP*/
-/* Validation for email */
+// FORM VALIDATION FOR SIGN UP
+// EMAIL
 const email = document.getElementById('email');
-
 email.addEventListener('input', function (event) {
   if (email.validity.typeMismatch) {
     email.setCustomValidity('Please put a real email with an @ character');
@@ -83,7 +81,7 @@ email.addEventListener('input', function (event) {
   }
 });
 
-/* Validation for password */
+// PASSWORD
 const password = document.getElementById('password');
 password.addEventListener('input', function (event) {
   if (password.validity.patternMismatch) {

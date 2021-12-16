@@ -1,24 +1,9 @@
 'use strict';
-const url = 'http://localhost:3000';
+const url = 'http://10.114.32.115/app';
 
-// OPEN/CLOSE LOGIN + SIGN UP FORMS
-function openLoginForm() {
-    document.body.classList.add('showLoginForm');
-}
-function closeLoginForm() {
-    document.body.classList.remove('showLoginForm');
-}
-
-function openSignupForm() {
-    document.body.classList.add('showSignupForm');
-}
-function closeSignupForm() {
-    document.body.classList.remove('showSignupForm');
-}
-
-// SELECT EXISTING MODIFY USER FORM
 const modUserForm = document.querySelector('#modUserForm');
-// Submit modify user form
+
+// SUBMIT MODIFY USER FORM
 modUserForm.addEventListener('submit', async (evt) => {
     evt.preventDefault();
     const response = await updateUserProfile(modUserForm);
@@ -31,6 +16,7 @@ modUserForm.addEventListener('submit', async (evt) => {
     location.href = 'main-page.html';
 });
 
+// ADD EXISTING DATA TO THE FORM
 const parsingProfile = async () => {
     try {
         const response = await getUserProfile();
@@ -39,7 +25,6 @@ const parsingProfile = async () => {
             const inputs = modUserForm.querySelectorAll('input');
             inputs[0].value = profile.username;
             inputs[1].value = profile.email;
-            console.log('user', user);
         }
     } catch (e) {
         console.log(e.message);

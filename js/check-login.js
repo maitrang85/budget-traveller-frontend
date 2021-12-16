@@ -1,12 +1,13 @@
 'use strict';
 
+// GET HEADER BUTTON ELEMENTS FOR PROFILE/SIGNUP/LOGIN
 const profile_btn = document.getElementById('profile');
 const profile_btn_a = document.getElementById('profile-btn');
 const logout_btn = document.getElementById('logout');
 const login_btn = document.getElementById('login');
 const signup_btn = document.getElementById('signup');
 
-// SHOW / HIDE LOGIN/SIGNUP/PROFILE/LOGOUT
+// SHOW / HIDE LOGIN/SIGNUP/PROFILE/LOGOUT DEPENDING ON LOGIN STATUS
 const log_in_status = (status) => {
   if (status) {
     profile_btn.style.display = 'inline-block';
@@ -25,16 +26,15 @@ const log_in_status = (status) => {
 let logged_in = false;
 let checkLoginUserId;
 const checkLogin = async () => {
-  'use strict';
-  const url = 'http://localhost:3000'; // change url when uploading to server
+  const url = '10.114.32.115/app';
 
-  // check sessionStorage
+  // CHECK SESSION STORAGE
   if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user')) {
     logged_in = false;
     log_in_status(logged_in);
     return;
   }
-  // check if token valid
+  // CHECK IF THE TOKEN IS VALID
   try {
     const fetchOptions = {
       headers: {
@@ -56,7 +56,6 @@ const checkLogin = async () => {
       const profile = await profileResponse.json();
       profile_btn_a.innerHTML = `<i class="fa fa-user-circle"></i>  ${profile.username}`;
       profile_btn_a.href = 'user-profile.html';
-
     }
   } catch (e) {
     console.log(e.message);

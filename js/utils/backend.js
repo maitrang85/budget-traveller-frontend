@@ -14,6 +14,7 @@ const apiCall = async (path, body, method, contentType) => {
     return await fetch(url + path, fetchOptions);
 };
 
+// GET USER DATA
 const getUserProfile = async () => {
     const user = JSON.parse(sessionStorage.getItem('user'));
     if (user) {
@@ -23,6 +24,7 @@ const getUserProfile = async () => {
     return null;
 };
 
+// UPDATE USER DATA
 const updateUserProfile = async (userDataFrom) => {
     const data = serializeJson(userDataFrom);
     //  Remove empty properties
@@ -39,11 +41,13 @@ const updateUserProfile = async (userDataFrom) => {
     );
 };
 
+// UPDATE POST DATA
 const updatePost = async (postDataFrom, postId) => {
     const body = new FormData(postDataFrom);
     return await apiCall('/post/' + postId, body, 'PUT');
 };
 
+// GET POST DATA
 const getPost = async (postId) => {
     return await apiCall('/post/' + postId);
 };

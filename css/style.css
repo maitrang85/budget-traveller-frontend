@@ -114,8 +114,6 @@ body.showMap #map-modal {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
-
-/* Set the size of the div element that contains the map */
 #map {
   display: block;
   height: 800px;
@@ -194,6 +192,7 @@ body.showMap #map-modal {
   border: 1px solid #aaa;
   background: rgba(3, 3, 3, 0.1);
   border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
 }
 .post-form-element textarea:focus {
   outline: none;
@@ -432,6 +431,7 @@ body.showSignupForm #signup-modal {
   transform: translate(-50%, -50%) scale(1);
 }
 
+/* GALLERY HEADER */
 #gallery-header {
   display: flex;
   justify-content: center;
@@ -780,6 +780,8 @@ body.showSignupForm #signup-modal {
   font-size: 18px;
   line-height: 30px;
 }
+
+/* DELETE BUTTON */
 .delete-btn {
   margin-left: 2px;
   padding: 8px 5px;
@@ -849,6 +851,7 @@ body.showSignupForm #signup-modal {
   height: 26px;
 }
 
+/* MODIFY BUTTON */
 .modify-btn {
   border: 1px solid #5a5a5a;
   margin-left: 2px;
@@ -918,6 +921,7 @@ body.showSignupForm #signup-modal {
   height: 26px;
 }
 
+/* COMMENTS */
 #comments {
   max-height: 404px;
   overflow-y: scroll;
@@ -993,6 +997,7 @@ body.showSignupForm #signup-modal {
   right: 0;
 }
 
+/* FOOTER */
 footer{
   width: 100%;
   position: relative;
@@ -1073,7 +1078,6 @@ footer{
 }
 
 /* PAGINATION */
-
 #pagination{
   padding: 30px 0;
   margin-top: 10px;
@@ -1305,5 +1309,3 @@ footer{
     width: 100%;
   }
 }
-
-

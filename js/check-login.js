@@ -26,7 +26,7 @@ const log_in_status = (status) => {
 let logged_in = false;
 let checkLoginUserId;
 const checkLogin = async () => {
-  const url = '10.114.32.115/app';
+  const url = 'http://10.114.32.115/app';
 
   // CHECK SESSION STORAGE
   if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user')) {

@@ -1,6 +1,9 @@
 'use strict';
 const url = 'https://10.114.32.115/app';
 
+// CHECK IF USER IS LOGGED IN, ELSE REDIRECT TO MAIN PAGE
+if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user')) location.href = 'main-page.html'
+
 const modUserForm = document.querySelector('#modUserForm');
 
 // SUBMIT MODIFY USER FORM

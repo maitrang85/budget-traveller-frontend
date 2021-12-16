@@ -86,8 +86,8 @@ a {
   top: -150%;
   left: 50%;
   transform: translate(-50%, -50%) scale(1.15);
-  width: 300px;
-  height: 300px;
+  width: 800px;
+  height: 800px;
   background: rgba(0, 0, 0, 0);
   z-index: 100;
   opacity: 0;
@@ -118,7 +118,7 @@ body.showMap #map-modal {
 /* Set the size of the div element that contains the map */
 #map {
   display: block;
-  height: 300px;
+  height: 800px;
   /* The height is 200px pixels */
   width: 100%;
   /* The width is the width of the web page */
@@ -521,13 +521,14 @@ body.showSignupForm #signup-modal {
 }
 .main-title {
   padding: .3em 1em .25em;
-  font-weight: 400;
-  font-size: 40px;
+  font-weight: 500;
+  font-size: 60px;
   color: white;
-  font-family: 'Bellefair', serif;
+  font-family: 'Amatic SC', cursive;
   position:relative;
   line-height:1.3;
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  letter-spacing: 0.2rem;
 }
 #banner-background:hover .main-title {
 
@@ -553,7 +554,8 @@ body.showSignupForm #signup-modal {
   grid-gap: 1.5rem;
   max-width: 100vw;
   width: 1200px;
-  padding: 0 1rem;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .grid_item {
   background-color: #fff;
@@ -632,9 +634,9 @@ body.showSignupForm #signup-modal {
 }
 .card_btn {
   display: block;
-  width: 80%;
+  width: 60%;
   padding: 1rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-align: center;
   color: #292929;
   background-color: #f6f6f6;
@@ -673,13 +675,7 @@ body.showSignupForm #signup-modal {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(185, 185, 185);
-  background: linear-gradient(
-    41deg,
-    rgba(185, 185, 185, 1) 0%,
-    rgba(156, 156, 156, 1) 45%,
-    rgba(221, 221, 221, 1) 82%
-  );
+  background-color: #d3d3d3;
   font-family: 'roboto', sans-serif;
 }
 @keyframes slide-in {
@@ -949,9 +945,9 @@ body.showSignupForm #signup-modal {
   height: auto;
   margin: 2px;
   padding: 2px;
-  background-color: #DADADA;
+  background-color: #eeeeee;
   border-radius: 3px;
-  border: 5px solid #ccc;
+  border: 2px solid #ccc;
   color: #000000;
   box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.2);
 }
@@ -996,37 +992,6 @@ body.showSignupForm #signup-modal {
   top: 0;
   right: 0;
 }
-
-/*
-.btn-and-rating-box{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-.rating{
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.rating img{
-    width: 20px;
-    height: 20px;
-    margin: 0 2px;
-}
-.btn{
-    background: #eae3d2;
-    color: #292929;
-    border: none;
-    text-transform: capitalize;
-    font-size: 16px;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-.btn:hover{
-    background-color: #eedbaf;
-}
-*/
 
 footer{
   width: 100%;
@@ -1182,13 +1147,13 @@ footer{
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 200px;
   }
   .main-title {
-    padding: .3em 1em .25em;
+    padding: .3em 0.1em .25em;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 30px;
     color: white;
-    font-family: 'Bellefair', serif;
     position:relative;
     line-height:1;
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
@@ -1228,6 +1193,16 @@ footer{
   }
   .hamburger.active .bar:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
+  }
+
+  #map-modal {
+    width: 500px;
+    height: 300px;
+  }
+  #map {
+    height: 500px;
+    /* The height is 200px pixels */
+    width: 100%;
   }
 }
 @media (max-width: 535px) {
@@ -1319,6 +1294,15 @@ footer{
     display: flex;
     margin-top: 10px;
     margin-bottom: 20px;
+  }
+  #map-modal {
+    width: 300px;
+    height: 300px;
+  }
+  #map {
+    height: 300px;
+    /* The height is 200px pixels */
+    width: 100%;
   }
 }
 

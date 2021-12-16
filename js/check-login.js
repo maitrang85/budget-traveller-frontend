@@ -25,6 +25,7 @@ const log_in_status = (status) => {
 // CHECK LOGIN
 let logged_in = false;
 let checkLoginUserId;
+let checkLoginUserRole;
 const checkLogin = async () => {
   const url = 'https://10.114.32.115/app';
 
@@ -50,6 +51,7 @@ const checkLogin = async () => {
       log_in_status(logged_in);
       const json = await response.json();
       checkLoginUserId = json.user.user_id;
+      checkLoginUserRole = json.user.role;
       sessionStorage.setItem('user', JSON.stringify(json.user));
 
       const profileResponse = await getUserProfile();

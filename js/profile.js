@@ -26,7 +26,7 @@ modUserForm.addEventListener('submit', async (evt) => {
     if (json.error) {
         alert(json.error.message);
     } else {
-        alert(json.message);
+        alert("Profile was updated.");
     }
     location.href = 'main-page.html';
 });

@@ -24,7 +24,6 @@ const createFiltering = (posts) => {
   const paginationContainer = document.getElementById('pagination')
   const free = document.querySelector('#free_btn');
   const paid = document.querySelector('#paid_btn');
-  const most_popular = document.querySelector('#most_popular_btn');
   const show_all = document.querySelector('#show_all_btn');
   const region = document.querySelector('#region_select');
   const prev = document.querySelector('#btn_prev');
@@ -75,29 +74,6 @@ const createFiltering = (posts) => {
     });
   });
 
-  most_popular.addEventListener('click', () => {
-    console.log("most popular click");
-    paginationContainer.style.display = 'none';
-    getAllPosts().then(function(posts) {
-      console.log(posts);
-      if(!region[0].selected) {
-        console.log("popular and region")
-        let posts_popular_region = posts.filter((post) => {
-          return post.region_id === region.value;
-        });
-        renderCards(posts_popular_region);
-      } else {
-        console.log("just popular");
-        let posts_popular = posts.filter((post) => {
-
-        });
-        console.log("posts popular");
-        renderCards(posts_popular);
-      }
-    });
-
-  });
-
   show_all.addEventListener('click', () => {
     console.log("show all click");
     region[0].selected = true;
@@ -122,6 +98,7 @@ const createFiltering = (posts) => {
       pageNumber-= 1;
       page_display.innerHTML = `${pageNumber} / ${maxPageNumber}`;
       console.log("pagenumber:" + pageNumber);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       getPosts(pageNumber);
     }
   });
@@ -131,9 +108,14 @@ const createFiltering = (posts) => {
       pageNumber+= 1;
       page_display.innerHTML = `${pageNumber} / ${maxPageNumber}`;
       console.log("pagenumber:" + pageNumber);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       getPosts(pageNumber);
     }
   })
+  if(maxPageNumber === 1) {
+    next.disabled = true;
+    prev.disabled = true;
+  }
 };
 
 const getReactions = async (postId, type) => {
@@ -185,8 +167,8 @@ async function renderCards(posts) {
 
     const s1 = document.createElement('span');
     const s2 = document.createElement('span');
-    s1.innerHTML += `<i class='fa fa-thumbs-up' style="color: #004a03;"></i> ${likes}`;
-    s2.innerHTML += `<i class='fa fa-thumbs-down' style="color: #bc0000;"></i> ${dislikes}`;
+    s1.innerHTML += `<i class='fa fa-thumbs-up' style="color: #DADADA;"></i> ${likes}`;
+    s2.innerHTML += `<i class='fa fa-thumbs-down' style="color: #DADADA;"></i> ${dislikes}`;
 
     const card_content = document.createElement('div');
     card_content.className = 'card_content';

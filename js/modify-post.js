@@ -30,11 +30,13 @@ modForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
   try {
     const response = await updatePost(modForm, postId);
+    const json = await response.json();
     if (response && response.ok) {
-      const json = await response.json();
-      alert('You have updated successfully your post!');
+      alert('Your post was updated.');
       location.href = `camping-post-detail.html?id=${postId}`;
+      return;
     }
+    alert(json.message);
   } catch (error) {
     console.log('error', error);
   }

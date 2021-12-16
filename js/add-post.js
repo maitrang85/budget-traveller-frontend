@@ -7,23 +7,26 @@ console.log('addForm', addPostForm);
 addForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
   const fd = new FormData(addForm);
-  //const data = Object.fromEntries(fd);
   if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user')) {
     alert('You need to log in before posting!');
     openLoginForm();
   }
+  console.log(fd);
   const fetchOptions = {
     method: 'POST',
     headers: {
       Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-      //'Content-Type': 'application/json',
     },
     body: fd,
-    //body: JSON.stringify(data),
   };
+
   const response = await fetch(url + '/post', fetchOptions);
   const json = await response.json();
-  alert(json.message);
+  if(!response.ok) {
+    alert(json.message);
+    return;
+  }
+  alert("Your post was created.");
   location.href = `camping-post-detail.html?id=${json.post_id}`;
 });
 

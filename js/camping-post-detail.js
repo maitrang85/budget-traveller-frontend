@@ -1,9 +1,6 @@
 'use strict';
 const url = 'https://10.114.32.115/app';
 
-let dislikes = 0;
-let likes = 0;
-
 // GET QUERY PARAMETER
 const getQParam = (param) => {
   const queryString = window.location.search;

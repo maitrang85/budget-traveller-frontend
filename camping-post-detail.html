@@ -1,163 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Detail of a post</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link href="css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <title>Detail of a post</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="css/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body id="camping-post-body">
 
-  <body id="camping-post-body">
-    <!-- NAVBAR -->
-    <header class="header">
-      <nav class="navbar">
-        <a href="main-page.html" class="nav-logo">Budget Traveler</a>
-        <ul class="nav-menu">
-          <li class="nav-item">
-            <a href="main-page.html" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="main-page.html#footer" class="nav-link">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="main-page.html#footer" class="nav-link">Contact</a>
-          </li>
-          <li class="nav-item" id="profile">
-            <a class="nav-link" href="#" id="profile-btn">Profile</a>
-          </li>
-          <li class="nav-item" id="logout">
-            <a class="nav-link" href="#" id="logout-btn" onclick="">Logout</a>
-          </li>
-          <li class="nav-item" id="login">
-            <a
-                    class="nav-link"
-                    href="#"
-                    id="login-btn"
-                    onclick="openLoginForm()"
-            >Login</a
-            >
-          </li>
-          <li class="nav-item" id="signup">
-            <a
-                    class="nav-link"
-                    href="#"
-                    id="signup-btn"
-                    onclick="openSignupForm()"
-            >Sign up</a
-            >
-          </li>
-        </ul>
-        <div class="hamburger">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </div>
-      </nav>
-    </header>
-
-    <div id="detailed-post-container">
-      <!--
-      <div class="detailed-post">
-      <div class="post-img">
-      <img src="img/banner2.jpg" alt="">
-      </div>
-      <div class="post-info">
-      <div class="content">
-      <h1 class="title">Title of the camping spot</h1>
-      <p class="content">Description</p>
-      <p class="region">Region</p>
-      <p class="address">Address</p>
-      <p class="author">Author</p>
-      <p class="price">Price</p>
-      <div class="btn-and-rating-box">
-      <div class="rating">
-      </div>
-      <button class="btn">buy now</button>
-      </div>
-      </div>
-      </div>
-      </div>
-      -->
-
-    </div>
-
-    <div id="map-modal-overlay"></div>
-    <div id="map-modal">
-      <div class="map-modal-close" onclick="closeMap()">×</div>
-      <div class="map-container">
-        <div id="map"></div> <!-- map -->
-      </div>
-    </div>
-
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUMojRQI9jx3-6zEPkiJMXCj3VA3IynB0&callback=initMap&libraries=&v=weekly"
-      async
-    ></script>
-
-    <!-- LOGIN MODAL POP UP -->
-    <div id="login-modal-overlay"></div>
-    <div id="login-modal">
-      <div class="login-modal-close" onclick="closeLoginForm()">×</div>
-      <div class="form">
-        <div class="form-header">User login</div>
-        <form
-          id="login-form"
-          action=""
-          method="post"
+<!-- NAVBAR -->
+<header class="header">
+  <nav class="navbar">
+    <a href="main-page.html" class="nav-logo">Budget Traveler</a>
+    <ul class="nav-menu">
+      <li class="nav-item">
+        <a href="main-page.html" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="main-page.html#footer" class="nav-link">About</a>
+      </li>
+      <li class="nav-item">
+        <a href="main-page.html#footer" class="nav-link">Contact</a>
+      </li>
+      <li class="nav-item" id="profile">
+        <a class="nav-link" href="#" id="profile-btn">Profile</a>
+      </li>
+      <li class="nav-item" id="logout">
+        <a class="nav-link" href="#" id="logout-btn" onclick="">Logout</a>
+      </li>
+      <li class="nav-item" id="login">
+        <a
+                class="nav-link"
+                href="#"
+                id="login-btn"
+                onclick="openLoginForm()"
+        >Login</a
         >
-          <div class="form-element">
-            <label>Email:</label>
-            <input type="text" name="username" />
-          </div>
-          <div class="form-element">
-            <label>Password:</label>
-            <input type="password" name="password" />
-          </div>
-          <div class="form-element">
-            <button id="login-form-button" type="submit">Log In</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- SIGN UP MODAL POP UP -->
-    <div id="signup-modal-overlay"></div>
-    <div id="signup-modal">
-      <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
-      <div class="form-wrapper">
-        <div class="form-header">Sign up</div>
-        <form
-          id="signup-form"
-          action=""
-          method="post"
+      </li>
+      <li class="nav-item" id="signup">
+        <a
+                class="nav-link"
+                href="#"
+                id="signup-btn"
+                onclick="openSignupForm()"
+        >Sign up</a
         >
-          <div class="form-element">
-            <label>Username</label>
-            <input type="text" name="username" placeholder="Username" />
-          </div>
-          <div class="form-element">
-            <label>Email</label>
-            <input id="email" type="text" name="email" placeholder="Email" />
-          </div>
-          <div class="form-element">
-            <label>Password</label>
-            <input id="password" type="password" name="password" placeholder="Password" />
-          </div>
-          <div class="form-element">
-            <button id="signup-form-button" type="submit">Sign up</button>
-          </div>
-        </form>
-      </div>
+      </li>
+    </ul>
+    <div class="hamburger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
     </div>
+  </nav>
+</header>
 
-    <script src="js/utils/backend.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/check-login.js"></script>
-    <script src="js/camping-post-detail.js"></script>
-    <script src="js/login.js"></script>
-    <script src="js/logout.js"></script>
-    <!--script src="js/add-comment.js"></script>-->
-  </body>
+<!-- CONTAINER FOR THE DETAILED POST -->
+<div id="detailed-post-container">
+  <!-- JS CREATES CONTENT HERE -->
+</div>
+
+<!-- MAP MODAL POP UP-->
+<div id="map-modal-overlay"></div>
+<div id="map-modal">
+  <div class="map-modal-close" onclick="closeMap()">×</div>
+  <div class="map-container">
+    <div id="map"></div> <!-- map -->
+  </div>
+</div>
+
+<!-- MAP SCRIPT - Async script executes immediately and must be after any DOM elements used in callback. -->
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUMojRQI9jx3-6zEPkiJMXCj3VA3IynB0&callback=initMap&libraries=&v=weekly"
+        async
+></script>
+
+<!-- LOGIN MODAL POP UP -->
+<div id="login-modal-overlay"></div>
+<div id="login-modal">
+  <div class="login-modal-close" onclick="closeLoginForm()">×</div>
+  <div class="form">
+    <div class="form-header">User login</div>
+    <form
+            id="login-form"
+            action=""
+            method="post"
+    >
+      <div class="form-element">
+        <label>Email:</label>
+        <input type="text" name="username" />
+      </div>
+      <div class="form-element">
+        <label>Password:</label>
+        <input type="password" name="password" />
+      </div>
+      <div class="form-element">
+        <button id="login-form-button" type="submit">Log In</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- SIGN UP MODAL POP UP -->
+<div id="signup-modal-overlay"></div>
+<div id="signup-modal">
+  <div class="signup-modal-close" onclick="closeSignupForm()">×</div>
+  <div class="form-wrapper">
+    <div class="form-header">Sign up</div>
+    <form
+            id="signup-form"
+            action=""
+            method="post"
+    >
+      <div class="form-element">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Username" />
+      </div>
+      <div class="form-element">
+        <label>Email</label>
+        <input id="email" type="text" name="email" placeholder="Email" />
+      </div>
+      <div class="form-element">
+        <label>Password</label>
+        <input id="password" type="password" name="password" placeholder="Password" />
+      </div>
+      <div class="form-element">
+        <button id="signup-form-button" type="submit">Sign up</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/utils/backend.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/check-login.js"></script>
+<script src="js/camping-post-detail.js"></script>
+<script src="js/login.js"></script>
+<script src="js/logout.js"></script>
+</body>
 </html>
